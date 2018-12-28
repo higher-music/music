@@ -4,51 +4,32 @@
  @ProjectName: high-material-music
  @title: sideNav
 -->
-
 <template>
-  <v-navigation-drawer app>
-    <!--<v-toolbar flat>-->
-    <!--<v-list>-->
-    <!--<v-list-tile>-->
-    <!--<v-list-tile-title class="title">-->
-    <!--Application-->
-    <!--</v-list-tile-title>-->
-    <!--</v-list-tile>-->
-    <!--</v-list>-->
-    <!--</v-toolbar>-->
-
-    <v-divider/>
-
-    <v-list dense class="pt-0">
-      <v-list-tile
-        v-for="item in topItems"
-        :key="item.title"
-        @click="listTileClick(item.icon)"
-      >
+  <v-navigation-drawer app clipped>
+    <v-list>
+      <v-list-tile v-for="i in topItems" :key="i.icon" :to="{name: i.title}">
         <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon>{{ i.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <router-link :to="{ name: item.title}" tag="v-list-tile-title">{{ item.title }}</router-link>
+          <v-list-tile-title>{{ i.title }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-subheader>Library</v-subheader>
     </v-list>
-    <v-list dense class="pt-0">
-      <v-list-tile
-        v-for="item in bottomItems"
-        :key="item.title"
-        @click=""
-      >
+    <v-subheader>Library</v-subheader>
+    <v-list>
+      <v-list-tile v-for="i in bottomItems" :key="i.icon" :to="{path: i.title}">
         <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon>{{ i.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          <v-list-tile-title>{{ i.title }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
   </v-navigation-drawer>
+
+
 </template>
 
 <script>
@@ -68,11 +49,6 @@ export default {
         { title: 'Playlists', icon: 'playlist_play' }
       ],
       right: null
-    }
-  },
-  methods: {
-    listTileClick(){
-      console.log(arguments, 'listTileClick')
     }
   }
 }
