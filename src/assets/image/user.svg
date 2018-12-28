@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>user</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="25" height="25" rx="12.5"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="系统首页" transform="translate(-1395.000000, -18.000000)">
+            <g id="title">
+                <g id="user" transform="translate(1395.000000, 18.000000)">
+                    <g id="background">
+                        <use fill="#161B1E" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <rect stroke="#3A3E47" stroke-width="1" x="0.5" y="0.5" width="24" height="24" rx="12"></rect>
+                    </g>
+                    <path d="M19.5,19.25 C19.5,19.6642136 19.1642136,20 18.75,20 C18.3357864,20 18,19.6642136 18,19.25 L18,17.75 C18,16.5073593 16.9926407,15.5 15.75,15.5 L9.75,15.5 C8.50735931,15.5 7.5,16.5073593 7.5,17.75 L7.5,19.25 C7.5,19.6642136 7.16421356,20 6.75,20 C6.33578644,20 6,19.6642136 6,19.25 L6,17.75 C6,15.6789322 7.67893219,14 9.75,14 L15.75,14 C17.8210678,14 19.5,15.6789322 19.5,17.75 L19.5,19.25 Z M12.75,12.5 C10.6789322,12.5 9,10.8210678 9,8.75 C9,6.67893219 10.6789322,5 12.75,5 C14.8210678,5 16.5,6.67893219 16.5,8.75 C16.5,10.8210678 14.8210678,12.5 12.75,12.5 Z M12.75,11 C13.9926407,11 15,9.99264069 15,8.75 C15,7.50735931 13.9926407,6.5 12.75,6.5 C11.5073593,6.5 10.5,7.50735931 10.5,8.75 C10.5,9.99264069 11.5073593,11 12.75,11 Z" id="icon" fill="#979797" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

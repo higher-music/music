@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>按子类 copy 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="异常分析" transform="translate(-1336.000000, -118.000000)" fill="#678BA4">
+            <g id="主体" transform="translate(210.000000, 70.000000)">
+                <g id="按设备" transform="translate(1116.000000, 50.000000)">
+                    <g id="设备-(1)" transform="translate(12.000000, 0.000000)">
+                        <g id="Shape">
+                            <path d="M11.9869528,9.74106607 L11.9869528,0.00467907795 L0.0037136392,0.00467907795 L0.0037136392,9.74106607 L4.49743176,9.74106607 L4.49743176,10.4900305 L3.74846734,10.4900305 L3.74846734,11.2389812 L2.99951661,11.2389812 L2.99951661,11.9879456 L8.99113621,11.9879456 L8.99113621,11.2389812 L8.24218547,11.2389812 L8.24218547,10.4900305 L7.49323473,10.4900305 L7.49323473,9.74106605 L11.9869528,9.74106607 Z M0.752664374,8.99211532 L0.752664374,0.753629813 L11.2380021,0.753629813 L11.2380021,8.99211532 L0.752664374,8.99211532 Z" fill-rule="nonzero"></path>
+                            <polygon fill-rule="nonzero" points="1.50161512 1.50258056 10.4890514 1.50258056 10.4890514 8.24315091 1.50161512 8.24315091"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
