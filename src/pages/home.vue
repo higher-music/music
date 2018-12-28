@@ -1,29 +1,30 @@
 <!--
- @Author: ganp
+ @Author: ganp&&cy
  @Date: 2018/12/28 16:05
  @ProjectName: high-material-music
- @title: home
+ @title:
 -->
 
 <template>
-  <div>
-    <h1>helloWorld</h1>
-    <v-btn color="success">Success</v-btn>
-    <v-btn color="error">Error</v-btn>
-    <v-btn color="warning">Warning</v-btn>
-    <v-btn color="info">Info</v-btn>
-    <div>
-      <h1>HelloWorld</h1>
-      <p>{{ json }}</p>
-    </div>
-  </div>
-
+  <v-app dark>
+    <!--<v-navigation-drawer app></v-navigation-drawer>-->
+    <navSide/>
+    <v-toolbar app/>
+    <v-content>
+      <v-container fluid>
+        <router-view/>
+      </v-container>
+    </v-content>
+    <v-footer app/>
+  </v-app>
 </template>
 
 <script>
+import navSide from '@/components/navSide'
 import { getTopList } from '../api/rank'
 export default {
   name: 'Home',
+  components: { navSide },
   data() {
     return {
       json: ''
