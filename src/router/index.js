@@ -5,8 +5,14 @@ Vue.use(Router);
 
 export const constantRouterMap = [
   {
-    path: '/',
-    component: () => import('@/pages/home.vue')
+    path: '/browse',
+    name: 'browse',
+    component: () => import('@/pages/browse.vue')
+  },
+  {
+    path: '/browse',
+    name: 'browse',
+    component: () => import('@/pages/browse.vue')
   }
   // {
   //   path: '*',
@@ -17,7 +23,7 @@ export const constantRouterMap = [
 
 
 export default new Router({
-  linkActiveClass: 'active',
+  linkActiveClass: 'active-link',
   routes: constantRouterMap
 });
 

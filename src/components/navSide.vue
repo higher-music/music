@@ -23,13 +23,14 @@
       <v-list-tile
         v-for="item in topItems"
         :key="item.title"
-        @click=""
+        @click="listTileClick(item.icon)"
       >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          <router-link :to="{ name: 'MyOrder'}" tag="v-list-tile-title">{{ item.title }}</router-link>
+          <!--<v-list-tile-title>{{ item.title }}</v-list-tile-title>-->
         </v-list-tile-content>
       </v-list-tile>
       <v-subheader>Library</v-subheader>
@@ -68,6 +69,11 @@ export default {
         { title: 'Playlists', icon: 'playlist_play' }
       ],
       right: null
+    }
+  },
+  methods: {
+    listTileClick(){
+      console.log(arguments, 'listTileClick')
     }
   }
 }
