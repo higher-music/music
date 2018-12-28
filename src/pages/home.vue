@@ -9,7 +9,7 @@
   <v-app dark>
     <!--<v-navigation-drawer app></v-navigation-drawer>-->
     <navSide/>
-    <v-toolbar app/>
+    <!--<v-toolbar app/>-->
     <v-content>
       <v-container fluid>
         <router-view/>
