@@ -1,3 +1,10 @@
-.v-list__tile__action, .v-list__tile__avatar{
+.v-list__tile__action, .v-list__tile__avatar {
   min-width: 32px !important;
+}
+
+.navSide-wapper {
+  .v-list__tile__title {
+    font-size: 16px !important;
+    font-family: "Helvetica Neue", sans-serif !important;
+  }
 }
