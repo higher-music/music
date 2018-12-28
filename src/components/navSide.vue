@@ -5,7 +5,7 @@
  @title: sideNav
 -->
 <template>
-  <v-navigation-drawer app clipped>
+  <v-navigation-drawer width="220" app clipped>
     <v-list>
       <v-list-tile v-for="i in topItems" :key="i.icon" :to="{name: i.title}">
         <v-list-tile-action>
