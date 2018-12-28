@@ -6,13 +6,13 @@
 -->
 
 <template>
-    <h1>helloWorld</h1>
+  <h1>helloWorld</h1>
 </template>
 
 <script>
-    export default {
-        name: "home"
-    }
+export default {
+  name: 'Home'
+};
 </script>
 
 <style scoped>
