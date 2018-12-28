@@ -1,0 +1,7 @@
+build/*.js
+config/*.js
+src/util/*.js
+src/vendor/*.js
+static/*.js
+static/js/*.js
+
