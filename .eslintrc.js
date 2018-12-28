@@ -309,8 +309,6 @@ module.exports = {
         allowTemplateLiterals: true
       }
     ],
-    //语句强制分号结尾
-    semi: [2, 'always'],
     //分号前后空格
     'semi-spacing': [2, { before: false, after: true }],
     //代码块前面需要加空格---------------------------
