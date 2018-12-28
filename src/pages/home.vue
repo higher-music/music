@@ -6,13 +6,27 @@
 -->
 
 <template>
-  <h1>helloWorld</h1>
+  <div>
+    <h1>HelloWorld</h1>
+    <p>{{ json }}</p>
+  </div>
 </template>
 
 <script>
+import { getTopList } from '../api/rank'
 export default {
-  name: 'Home'
-};
+  name: 'Home',
+  data() {
+    return {
+      json: ''
+    }
+  },
+  created() {
+    getTopList().then((res) => {
+      this.json = JSON.stringify(res)
+    })
+  }
+}
 </script>
 
 <style scoped>
