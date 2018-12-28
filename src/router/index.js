@@ -5,14 +5,23 @@ Vue.use(Router);
 
 export const constantRouterMap = [
   {
-    path: '/browse',
-    name: 'browse',
-    component: () => import('@/pages/browse.vue')
+    path: '/',
+    redirect: '/browse'
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import('@/pages/search.vue')
   },
   {
     path: '/browse',
-    name: 'browse',
+    name: 'Browse',
     component: () => import('@/pages/browse.vue')
+  },
+  {
+    path: '/foryou',
+    name: 'For You',
+    component: () => import('@/pages/forYou.vue')
   }
   // {
   //   path: '*',

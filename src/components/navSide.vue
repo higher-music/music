@@ -29,8 +29,7 @@
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <router-link :to="{ name: 'MyOrder'}" tag="v-list-tile-title">{{ item.title }}</router-link>
-          <!--<v-list-tile-title>{{ item.title }}</v-list-tile-title>-->
+          <router-link :to="{ name: item.title}" tag="v-list-tile-title">{{ item.title }}</router-link>
         </v-list-tile-content>
       </v-list-tile>
       <v-subheader>Library</v-subheader>
