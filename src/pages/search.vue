@@ -6,13 +6,30 @@
 -->
 
 <template>
-  <h1>search</h1>
+  <div>
+    <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keyup.enter="searchMusic"/>
+    <p>{{ result }}</p>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "search"
+import { search } from '@/api/search'
+export default {
+  name: 'Search',
+  data() {
+    return {
+      text: '',
+      result: ''
     }
+  },
+  methods: {
+    searchMusic() {
+      search(this.text, 1, null, 20).then((res) => {
+        this.result = JSON.stringify(res)
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
