@@ -5,7 +5,7 @@
  @title: sideNav
 -->
 <template>
-  <v-navigation-drawer class="primary navSide-wapper" width="220" app clipped>
+  <v-navigation-drawer v-model="visible" class="navSide-wapper" width="220" app clipped>
     <v-list>
       <v-list-tile v-for="i in topItems" :key="i.icon" :to="{name: i.title}" ripple active-class="active-link">
         <v-list-tile-action>
@@ -47,8 +47,19 @@ export default {
         { title: 'Albums', icon: 'album' },
         { title: 'Songs', icon: 'music_note' },
         { title: 'Playlists', icon: 'playlist_play' }
-      ]
+      ],
+      right: null,
+      visible: true
+    }
+  },
+  methods: {
+    toggle() {
+      this.visible = !this.visible
     }
   }
 }
 </script>
+
+<style scoped>
+
+</style>

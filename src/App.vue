@@ -2,8 +2,9 @@
   <div id="app">
     <v-app dark>
       <!--<v-navigation-drawer app></v-navigation-drawer>-->
-      <navSide/>
+      <navSide ref="nav"/>
       <!--<v-toolbar app/>-->
+      <tool-bar @menu-click="toggleNav"/>
       <v-content>
         <v-container fluid>
           <router-view/>
@@ -17,19 +18,20 @@
 
 <script>
 import navSide from '@/components/navSide'
-import { getTopList } from '@/api/rank'
+import ToolBar from '@/components/ToolBar'
 export default {
   name: 'App',
-  components: { navSide },
+  components: { navSide, ToolBar },
   data() {
     return {
-      json: ''
+      json: '',
+      visible: true
     }
   },
-  created() {
-    getTopList().then((res) => {
-      this.json = JSON.stringify(res)
-    })
+  methods: {
+    toggleNav() {
+      this.$refs.nav.toggle()
+    }
   }
 };
 </script>
