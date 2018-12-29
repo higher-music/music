@@ -7,9 +7,16 @@
 
 <template>
   <div class="grid-container">
-    <div v-for="item in json.topList" :key="item.id" class="list-wapper">
-      <div class="image-wapper">
-        <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle">
+    <div v-for="item in json.topList" :key="item.id">
+      <div class="list-container">
+        <div class="list-wapper">
+          <div class="image-wapper">
+            <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle" width="150">
+          </div>
+          <div class="text-wapper">
+            <span>{{ item.topTitle }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -41,20 +48,46 @@ export default {
     grid-template-columns: repeat(auto-fill,minmax(186px,1fr));
     padding-left: 12px;
     padding-right: 12px;
-  }
-  .list-wapper {
-    display: flex;
-    flex-direction: column;
-    width: 170px;
-    height: 180px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-bottom: 20px;
-    img{
-      border-radius: 5px;
-      width: 100%;
-      height: 100%;
-      transition: opacity .3s;
+    .list-container{
+      display: flex;
+      justify-content: center;
+      .list-wapper {
+        display: flex;
+        flex-direction: column;
+        width: 170px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-bottom: 20px;
+        .image-wapper {
+          background: 0 0/cover #212121;
+          outline: 0;
+          height: 170px;
+          width: 170px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          overflow: hidden;
+        }
+        img{
+          border-radius: 5px;
+          width: 100%;
+          height: 100%;
+          transition: opacity .3s;
+        }
+        .text-wapper{
+          span{
+            font-weight: 500;
+            cursor: pointer;
+            outline: 0;
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
     }
-  }
+
+    }
+
 </style>
