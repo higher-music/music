@@ -11,7 +11,7 @@
       <div class="list-container">
         <div class="list-wapper">
           <div class="image-wapper">
-            <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle" width="150">
+            <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle">
           </div>
           <div class="text-wapper">
             <span>{{ item.topTitle }}</span>
