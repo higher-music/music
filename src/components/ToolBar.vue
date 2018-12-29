@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar :clipped-left="true" class="hidden-sm-and-up">
+  <v-toolbar :clipped-left="true" class="hidden-sm-and-up" fixed>
     <v-toolbar-side-icon @click.stop="menuClick"/>
     <v-spacer/>
     <v-btn icon @click.stop="settingClick">
