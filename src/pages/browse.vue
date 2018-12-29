@@ -5,10 +5,9 @@
  @title: browse
 -->
 <template>
-  <div>
+  <div class="main-container">
     <div class="section-title">Top Albums</div>
     <AlbumsList/>
-
   </div>
 </template>
 
@@ -23,6 +22,10 @@ export default {
 </script>
 
 <style scoped>
+  .main-container{
+    background-image: linear-gradient(#1e3264,#04060c 130%);
+    min-height: 100%;
+  }
   .section-title{
     cursor: default;
     line-height: normal;
