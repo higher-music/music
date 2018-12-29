@@ -6,9 +6,7 @@
       <!--<v-toolbar app/>-->
       <tool-bar @menu-click="toggleNav"/>
       <v-content>
-        <v-container fluid>
-          <router-view/>
-        </v-container>
+        <router-view/>
       </v-content>
       <v-footer app/>
     </v-app>
@@ -17,7 +15,7 @@
 </template>
 
 <script>
-import navSide from '@/components/navSide'
+import navSide from '@/components/NavSide'
 import ToolBar from '@/components/ToolBar'
 export default {
   name: 'App',
