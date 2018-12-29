@@ -9,14 +9,7 @@ import Vuetify from 'vuetify'
 import '@/style/index.scss'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#69f0ae',
-    secondary: '#b0bec5',
-    accent: '#8c9eff',
-    error: '#b71c1c'
-  }
-})
+Vue.use(Vuetify)
 import * as filters from './util/filter';
 
 Vue.config.productionTip = false;
