@@ -8,6 +8,10 @@
   color: #69f0ae !important;
 }
 
+.image-wapper img:hover {
+  opacity: .7;
+}
+
 @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape){
   .grid-container{
     grid-template-columns: repeat(auto-fill,minmax(156px,1fr)) !important;
