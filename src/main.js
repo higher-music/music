@@ -5,7 +5,7 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import Vuetify from 'vuetify'
-// import store from './vuex/store'
+import store from './vuex/store'
 import '@/style/index.scss'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
@@ -20,5 +20,6 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
+  store,
   ...App
 });

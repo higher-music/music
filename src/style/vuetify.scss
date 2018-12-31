@@ -1,6 +1,11 @@
 .theme--dark.v-navigation-drawer{
   background-color: #000 !important;
 }
+
+.theme--dark.v-list{
+  padding: 0 !important;
+}
+
 .navSide-wapper {
   .v-list__tile__action, .v-list__tile__avatar {
     min-width: 32px !important;

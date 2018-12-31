@@ -1,6 +1,7 @@
 <template>
   <div class="song-list-container">
-    <div v-for="(item,index) in list" class="song-list-wapper">
+
+    <div v-for="(item,index) in songList" class="song-list-wapper">
       <div class="song-list">
         <div class="rank">{{ index+1 }}</div>
         <img :src="songListPic(item.albummid)" alt="">
@@ -8,20 +9,33 @@
           <div class="song-name-container">
             <span>{{ item.songname }}</span>
           </div>
-          <div class="secondary-info">
-            <template v-for="(s,i) in item.singer">
-              <span v-if="i !== item.s.length-1" >{{ s.name }} & &nbsp;</span>
-              <span v-if="i === item.s.length-1" >{{ s.name }}</span>
-            </template>
-          </div>
+          <!--<div class="secondary-info">-->
+            <!--<template v-for="(s,i) in item.singer">-->
+              <!--<span v-if="i !== item.s.length-1" >{{ s.name }} & &nbsp;</span>-->
+              <!--<span v-if="i === item.s.length-1" >{{ s.name }}</span>-->
+            <!--</template>-->
+          <!--</div>-->
         </div>
-        <v-btn
-          slot="activator"
-          dark
-          icon
-        >
-          <v-icon>more_vert</v-icon>
-        </v-btn>
+
+        <v-menu bottom left>
+          <v-btn
+            slot="activator"
+            dark
+            icon
+          >
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+
+          <v-list>
+            <v-list-tile
+              v-for="(item, i) in items"
+              :key="i"
+              @click=""
+            >
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
 
       </div>
     </div>
@@ -29,30 +43,41 @@
 </template>
 
 <script>
-import { search } from '../api/search'
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'SongList',
   data(){
     return {
-      list: []
+      items: [
+        { title: 'Play Next' },
+        { title: 'Play Later' }
+      ]
     }
   },
   computed: {
-
+    ...mapGetters([
+      'searchData'
+    ]),
+    songList(){
+      if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
+        console.log(this.searchData)
+        return this.searchData.data.song.list
+      }
+    }
   },
   mounted(){
-    this.searchMusic()
+    this.getData()
   },
   methods: {
-    searchMusic() {
-      search('cy', 1, 20).then((res) => {
-        this.list = res.data.song.list
-        console.log(res)
-        console.log(this.list)
-      })
-    },
     songListPic(albumId){
       return `http://y.gtimg.cn/music/photo_new/T002R90x90M000${albumId}.jpg?max_age=2592000`
+    },
+    ...mapActions([
+      'getSearchData'
+    ]),
+    getData(){
+      this.getSearchData()
     }
   }
 }

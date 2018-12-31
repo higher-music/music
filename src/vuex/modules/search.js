@@ -1,4 +1,4 @@
-import search from '@/api/search'
+import { search } from '@/api/search'
 
 const state = {
   searchData: {}
@@ -6,8 +6,9 @@ const state = {
 
 const actions = {
 
-  getSearchData({ commit }, str){
-    search(str, 1, 20).then((res) => {
+  getSearchData({ commit }){
+    search('cy', 1, 20).then((res) => {
+      console.log(res)
       commit('GET_SEARCH_DATA', res)
     })
   }
