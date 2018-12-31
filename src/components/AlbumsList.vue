@@ -33,7 +33,6 @@ export default {
   mounted() {
     getTopList().then((res) => {
       if (res && res.code === 0 && res.data){
-        console.log(res)
         this.json = res.data
       }
     })

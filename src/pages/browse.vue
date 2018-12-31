@@ -8,15 +8,18 @@
   <div class="main-container">
     <div class="section-title">Top Albums</div>
     <AlbumsList/>
+    <div class="section-title">Top Songs</div>
+    <SongList/>
   </div>
 </template>
 
 <script>
 import AlbumsList from '@/components/AlbumsList'
+import SongList from '@/components/SongList'
+
 export default {
-  components: { AlbumsList },
+  components: { AlbumsList, SongList },
   data: () => ({
-    lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`
   })
 }
 </script>
