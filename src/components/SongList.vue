@@ -61,7 +61,6 @@ export default {
     ]),
     songList(){
       if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
-        console.log(this.searchData)
         return this.searchData.data.song.list
       }
     }
@@ -77,7 +76,7 @@ export default {
       'getSearchData'
     ]),
     getData(){
-      this.getSearchData()
+      this.getSearchData('cy')
     }
   }
 }
@@ -129,6 +128,9 @@ export default {
           }
         }
       }
+    }
+    .song-list-wapper:hover{
+      background-color: rgba(255,255,255,.04);
     }
   }
 </style>
