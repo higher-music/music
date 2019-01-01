@@ -9,12 +9,12 @@
           <div class="song-name-container">
             <span>{{ item.songname }}</span>
           </div>
-          <!--<div class="secondary-info">-->
-            <!--<template v-for="(s,i) in item.singer">-->
-              <!--<span v-if="i !== item.s.length-1" >{{ s.name }} & &nbsp;</span>-->
-              <!--<span v-if="i === item.s.length-1" >{{ s.name }}</span>-->
-            <!--</template>-->
-          <!--</div>-->
+          <div class="secondary-info">
+            <template v-for="(s,i) in item.singer">
+              <span v-if="i !== item.singer.length-1" >{{ s.name }} & &nbsp;</span>
+              <span v-if="i === item.singer.length-1" >{{ s.name }}</span>
+            </template>
+          </div>
         </div>
 
         <v-menu bottom left>
