@@ -3,8 +3,8 @@
 
     <div v-for="(item,index) in songList" class="song-list-wapper">
       <div class="song-list">
-        <div class="rank">{{ index+1 }}</div>
-        <img :src="songListPic(item.albummid)" alt="">
+        <div v-if="showRank" class="rank">{{ index+1 }}</div>
+        <img v-if="showAlbum" :src="songListPic(item.albummid)" alt="">
         <div class="track-info">
           <div class="song-name-container">
             <span>{{ item.songname }}</span>
@@ -47,6 +47,16 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'SongList',
+  props: {
+    showRank: {
+      type: Boolean,
+      default: false
+    },
+    showAlbum: {
+      type: Boolean,
+      default: true
+    }
+  },
   data(){
     return {
       items: [
@@ -61,12 +71,10 @@ export default {
     ]),
     songList(){
       if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
+        console.log(this.searchData.data.song.list)
         return this.searchData.data.song.list
       }
     }
-  },
-  mounted(){
-    this.getData()
   },
   methods: {
     songListPic(albumId){
@@ -75,8 +83,8 @@ export default {
     ...mapActions([
       'getSearchData'
     ]),
-    getData(){
-      this.getSearchData('cy')
+    getData(text){
+      this.getSearchData(text)
     }
   }
 }
