@@ -1,13 +1,12 @@
 <template>
   <div class="song-list-container">
-
-    <div v-for="(item,index) in songList" class="song-list-wapper">
+    <div v-for="(item,index) in data" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index+1 }}</div>
         <img v-if="showAlbum" :src="songListPic(item.albummid)" alt="">
         <div class="track-info">
           <div class="song-name-container">
-            <span>{{ item.songname }}</span>
+            <span>{{ item.data.songname }}</span>
           </div>
           <div class="secondary-info">
             <template v-for="(s,i) in item.singer">
@@ -16,7 +15,6 @@
             </template>
           </div>
         </div>
-
         <v-menu bottom left>
           <v-btn
             slot="activator"
@@ -36,14 +34,12 @@
             </v-list-tile>
           </v-list>
         </v-menu>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'SongList',
@@ -55,6 +51,12 @@ export default {
     showAlbum: {
       type: Boolean,
       default: true
+    },
+    data: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
   data(){
@@ -65,26 +67,9 @@ export default {
       ]
     }
   },
-  computed: {
-    ...mapGetters([
-      'searchData'
-    ]),
-    songList(){
-      if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
-        console.log(this.searchData.data.song.list)
-        return this.searchData.data.song.list
-      }
-    }
-  },
   methods: {
     songListPic(albumId){
       return `http://y.gtimg.cn/music/photo_new/T002R90x90M000${albumId}.jpg?max_age=2592000`
-    },
-    ...mapActions([
-      'getSearchData'
-    ]),
-    getData(text){
-      this.getSearchData(text)
     }
   }
 }

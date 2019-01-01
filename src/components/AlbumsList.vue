@@ -7,7 +7,7 @@
 
 <template>
   <div class="grid-container">
-    <div v-for="item in json.topList" :key="item.id">
+    <div v-for="item in data" :key="item.id">
       <div class="list-container">
         <div class="list-wapper">
           <div class="image-wapper">
@@ -23,21 +23,15 @@
 </template>
 
 <script>
-import { getTopList } from '../api/rank'
 export default {
-  data(){
-    return {
-      json: ''
-    }
-  },
-  mounted() {
-    getTopList().then((res) => {
-      if (res && res.code === 0 && res.data){
-        this.json = res.data
+  props: {
+    data: {
+      type: Array,
+      default: () => {
+        return []
       }
-    })
+    }
   }
-
 }
 </script>
 
