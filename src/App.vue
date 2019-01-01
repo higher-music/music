@@ -4,7 +4,10 @@
       <navSide ref="nav"/>
       <tool-bar @menu-click="toggleNav"/>
       <v-content>
-        <router-view/>
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive"/>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive"/>
       </v-content>
       <v-footer app>
         <v-card tile>
@@ -12,7 +15,7 @@
             :value="50"
             class="my-0"
             height="3"
-          ></v-progress-linear>
+          />
 
           <v-list>
             <v-list-tile>
@@ -21,7 +24,7 @@
                 <v-list-tile-sub-title>Fitz & The Trantrums</v-list-tile-sub-title>
               </v-list-tile-content>
 
-              <v-spacer></v-spacer>
+              <v-spacer/>
 
               <v-list-tile-action>
                 <v-btn icon>

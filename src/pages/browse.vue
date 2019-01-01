@@ -38,7 +38,7 @@ export default {
       }
     }
   },
-  created(){
+  mounted(){
     this.getTopListData()
     this.getTopListDetailData(26)
   },

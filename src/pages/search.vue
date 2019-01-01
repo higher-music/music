@@ -22,7 +22,6 @@ export default {
     ]),
     songList(){
       if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
-        console.log(this.searchData.data.song.list)
         return this.searchData.data.song.list
       }
     }

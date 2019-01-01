@@ -16,7 +16,10 @@ export const constantRouterMap = [
   {
     path: '/browse',
     name: 'Browse',
-    component: () => import('@/pages/browse.vue')
+    component: () => import('@/pages/browse.vue'),
+    meta: {
+      keepAlive: true // 需要被缓存
+    }
   },
   {
     path: '/foryou',

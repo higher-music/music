@@ -10,11 +10,13 @@ const state = {
 const actions = {
   getTopListData({ commit }){
     getTopList().then((res) => {
+      console.log(res,11111)
       commit('GET_TOP_LIST_DATA', res)
     })
   },
   getTopListDetailData({ commit }, topid){
     getMusicList(topid).then((res) => {
+      console.log(res,222222)
       commit('GET_TOP_LIST_DETAIL_DATA', res)
     })
   }
