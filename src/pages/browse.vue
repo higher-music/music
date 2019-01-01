@@ -9,7 +9,7 @@
     <div class="section-title">Top Albums</div>
     <AlbumsList :data="albumsList" />
     <div class="section-title">Top Songs</div>
-    <SongList :data="songList" show-rank />
+    <SongList :data="songList" inner-data show-rank />
   </div>
 </template>
 

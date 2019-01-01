@@ -3,15 +3,19 @@
     <div v-for="(item,index) in data" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index+1 }}</div>
-        <img v-if="showAlbum" :src="songListPic(item.albummid)" alt="">
+        <img
+          v-if="showAlbum"
+          :src="innerData ? songListPic(item.data.albummid) :songListPic(item.albummid)"
+          :alt="innerData ? item.data.songname :item.songname"
+          :title="innerData ? item.data.songname :item.songname">
         <div class="track-info">
           <div class="song-name-container">
-            <span>{{ item.data.songname }}</span>
+            <span>{{ innerData ? item.data.songname :item.songname }}</span>
           </div>
           <div class="secondary-info">
-            <template v-for="(s,i) in item.singer">
-              <span v-if="i !== item.singer.length-1" >{{ s.name }} & &nbsp;</span>
-              <span v-if="i === item.singer.length-1" >{{ s.name }}</span>
+            <template v-for="(s,i) in innerData ? item.data.singer: item.singer">
+              <span v-if="i !== (innerData ? item.data.singer.length-1 :item.singer.length-1)" >{{ s.name }} & &nbsp;</span>
+              <span v-if="i === (innerData ? item.data.singer.length-1 :item.singer.length-1)" >{{ s.name }}</span>
             </template>
           </div>
         </div>
@@ -51,6 +55,10 @@ export default {
     showAlbum: {
       type: Boolean,
       default: true
+    },
+    innerData: {
+      type: Boolean,
+      default: false
     },
     data: {
       type: Array,
