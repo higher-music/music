@@ -7,8 +7,8 @@
 
 <script>
 import SongList from '@/components/SongList'
-import { createSong } from '../js/song';
-import { mapGetters, mapActions } from 'vuex';
+import { createSong } from '../js/song'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { SongList },

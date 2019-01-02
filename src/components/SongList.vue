@@ -1,6 +1,6 @@
 <template>
   <div class="song-list-container">
-    <div v-for="(item,index) in data" :key="index" class="song-list-wapper">
+    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @click="playIndex(index)">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index+1 }}</div>
         <img
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 export default {
   name: 'SongList',
   props: {
@@ -64,6 +64,14 @@ export default {
         { title: 'Play Next' },
         { title: 'Play Later' }
       ]
+    }
+  },
+  methods: {
+    ...mapActions([
+      'addSongToCurrentIndex'
+    ]),
+    playIndex(index) {
+      this.addSongToCurrentIndex(this.data[index])
     }
   }
 }

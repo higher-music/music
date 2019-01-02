@@ -18,13 +18,13 @@
         <v-spacer/>
 
         <v-list-tile-action>
-          <v-btn icon>
+          <v-btn icon @click="prev">
             <v-icon>fast_rewind</v-icon>
           </v-btn>
         </v-list-tile-action>
 
         <v-list-tile-action :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
-          <v-btn icon>
+          <v-btn icon @click="play">
             <v-icon v-if="isPlay">pause</v-icon>
             <v-icon v-else>play_arrow</v-icon>
           </v-btn>
@@ -37,34 +37,55 @@
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
-    <audio id="audio" :src="currentSong.url" @timeupdate="updateTime">
+    <audio id="audio" :src="playUrl" @timeupdate="updateTime">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
     </audio>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Player',
   data() {
     return {
-      currentSong: {},
       currentTime: 0,
       isPlay: false
     }
   },
   computed: {
+    ...mapGetters([
+      'currentSong'
+    ]),
     progress() {
       console.log(document.getElementById('audio'))
       return Math.round(this.currentTime / 0 * 100)
+    },
+    playUrl() {
+      return this.currentSong.url
     }
   },
   methods: {
+    ...mapActions([
+      'nextSong',
+      'prevSong'
+    ]),
     updateTime(e) {
       this.currentTime = e.target.currentTime
     },
     next() {
-      console.log(document.getElementById('audio'))
+      this.nextSong()
+    },
+    prev() {
+      this.prevSong()
+    },
+    play() {
+      if (this.isPlay) {
+        document.getElementById('audio').pause()
+      } else {
+        document.getElementById('audio').play()
+      }
+      this.isPlay = !this.isPlay
     }
   }
 }
