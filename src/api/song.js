@@ -28,7 +28,8 @@ export function getLyric(mid) {
 export function getVKey() {
   const guid = parseInt(100 * Math.random())
   store.dispatch('setGuid', guid)
-  // TODO 这里把guid保存到vuex中，module为playList
-  const url = `http://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg?g_tk=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&cid=205361747&songmid=003a1tne1nSz1Y&filename=C400003a1tne1nSz1Y.m4a&guid=${guid}`
-  return jsonp(url, null, null)
+  const url = `https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg?g_tk=1211736891&loginUin=1257126113&hostUin=0&format=json&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&cid=205361747&uin=1257126113&callback=__jp0&songmid=003OUlho2HcRHC&filename=C400003OUlho2HcRHC.m4a&guid=${guid}`
+  return jsonp(url, null, {
+    param: 'callback'
+  })
 }
