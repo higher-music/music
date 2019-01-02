@@ -1,39 +1,30 @@
 <template>
   <div class="song-list-container">
-    <div v-for="(item,index) in data" class="song-list-wapper">
+    <div v-for="(item,index) in data" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index+1 }}</div>
         <img
           v-if="showAlbum"
-          :src="innerData ? songListPic(item.data.albummid) :songListPic(item.albummid)"
-          :alt="innerData ? item.data.songname :item.songname"
-          :title="innerData ? item.data.songname :item.songname">
+          :src="item.image"
+          :alt="item.name"
+          :title="item.name">
         <div class="track-info">
           <div class="song-name-container">
-            <span>{{ innerData ? item.data.songname :item.songname }}</span>
+            <span>{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <template v-for="(s,i) in innerData ? item.data.singer: item.singer">
-              <span v-if="i !== (innerData ? item.data.singer.length-1 :item.singer.length-1)" >{{ s.name }} & &nbsp;</span>
-              <span v-if="i === (innerData ? item.data.singer.length-1 :item.singer.length-1)" >{{ s.name }}</span>
-            </template>
+            <span>{{ item.singer }}</span>
           </div>
         </div>
         <v-menu bottom left>
-          <v-btn
-            slot="activator"
-            dark
-            icon
-          >
+          <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
 
           <v-list>
             <v-list-tile
               v-for="(item, i) in items"
-              :key="i"
-              @click=""
-            >
+              :key="i">
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -73,11 +64,6 @@ export default {
         { title: 'Play Next' },
         { title: 'Play Later' }
       ]
-    }
-  },
-  methods: {
-    songListPic(albumId){
-      return `http://y.gtimg.cn/music/photo_new/T002R90x90M000${albumId}.jpg?max_age=2592000`
     }
   }
 }

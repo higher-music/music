@@ -16,7 +16,8 @@
 <script>
 import AlbumsList from '@/components/AlbumsList'
 import SongList from '@/components/SongList'
-import { mapGetters, mapActions } from 'vuex';
+import { createSong } from "../js/song";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { AlbumsList, SongList },
@@ -34,7 +35,11 @@ export default {
     },
     songList(){
       if (this.topListDetailData && this.topListDetailData.code === 0 && this.topListDetailData.songlist){
-        return this.topListDetailData.songlist
+        const songs = []
+        this.topListDetailData.songlist.forEach((item) => {
+          songs.push(createSong(item.data))
+        })
+        return songs
       }
     }
   },

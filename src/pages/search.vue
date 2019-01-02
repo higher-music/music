@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div class="main-container" style="padding: 20px">
     <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keyup.enter="searchMusic"/>
     <SongList ref="searchRef" :data="songList"/>
   </div>
@@ -7,6 +7,7 @@
 
 <script>
 import SongList from '@/components/SongList'
+import { createSong } from '../js/song';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -21,8 +22,12 @@ export default {
       'searchData'
     ]),
     songList(){
+      const songs = []
       if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
-        return this.searchData.data.song.list
+        this.searchData.data.song.list.forEach((item) => {
+          songs.push(createSong(item))
+        })
+        return songs
       }
     }
   },
