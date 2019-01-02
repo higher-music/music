@@ -49,8 +49,7 @@ export default {
   name: 'Player',
   data() {
     return {
-      currentTime: 0,
-      isPlay: true
+      currentTime: 0
     }
   },
   computed: {
