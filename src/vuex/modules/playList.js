@@ -2,7 +2,9 @@ const state = {
   // 播放列表
   list: [],
   // 当前播放位置
-  index: -1
+  index: -1,
+  // 歌曲链接验证用的秘钥
+  vkey: ''
 }
 
 const actions = {
@@ -17,13 +19,17 @@ const actions = {
   },
   replacePlayList({ commit }, list) {
     commit('REPLACE_PLAY_LIST', list)
+  },
+  setVKey({ commit }, vkey) {
+    commit('SET_VKEY', vkey)
   }
 }
 
 const getters = {
   playList: state => state.list,
   currentIndex: state => state.index,
-  currentSong: state => state.list[state.index]
+  currentSong: state => state.list[state.index],
+  getVKey: state => state.vkey
 }
 
 const mutations = {
@@ -46,6 +52,9 @@ const mutations = {
   },
   REPLACE_PLAY_LIST(state, list) {
     state.list = list
+  },
+  SET_VKEY(state, vkey) {
+    state.vkey = vkey
   }
 }
 

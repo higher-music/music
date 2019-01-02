@@ -9,9 +9,9 @@
     <v-list two-line dark>
       <v-list-tile>
         <v-list-tile-content>
-          <v-list-tile-title v-if="currentSong.name">{{ currentSong.name }}</v-list-tile-title>
+          <v-list-tile-title v-if="currentSong">{{ currentSong.name }}</v-list-tile-title>
           <v-list-tile-title v-else>暂无播放歌曲</v-list-tile-title>
-          <v-list-tile-sub-title v-if="currentSong.singer">{{ currentSong.singer }}</v-list-tile-sub-title>
+          <v-list-tile-sub-title v-if="currentSong">{{ currentSong.singer }}</v-list-tile-sub-title>
           <v-list-tile-sub-title v-else>未知歌手</v-list-tile-sub-title>
         </v-list-tile-content>
 
@@ -62,7 +62,10 @@ export default {
       return Math.round(this.currentTime / 0 * 100)
     },
     playUrl() {
-      return this.currentSong.url
+      if (this.currentSong) {
+        return this.currentSong.url
+      }
+      return ''
     }
   },
   methods: {
