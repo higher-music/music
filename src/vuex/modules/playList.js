@@ -4,7 +4,9 @@ const state = {
   // 当前播放位置
   index: -1,
   // 歌曲链接验证用的秘钥
-  vkey: ''
+  vkey: '',
+  // 用于获取VKey而生成的随机数
+  guid: 0
 }
 
 const actions = {
@@ -22,6 +24,9 @@ const actions = {
   },
   setVKey({ commit }, vkey) {
     commit('SET_VKEY', vkey)
+  },
+  setGuid({ commit }, guid) {
+    commit('SET_GUID', guid)
   }
 }
 
@@ -55,6 +60,9 @@ const mutations = {
   },
   SET_VKEY(state, vkey) {
     state.vkey = vkey
+  },
+  SET_GUID(state, guid) {
+    state.guid = guid
   }
 }
 

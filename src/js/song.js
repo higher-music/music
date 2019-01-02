@@ -42,7 +42,8 @@ export function createSong(musicData) {
     album: musicData.albumname,
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    url: `http://ws.stream.qqmusic.qq.com/${musicData.songid}.m4a?fromtag=46`
+    // TODO 这里把下面字符串中的vkey和guid替换成保存在module为playList中的vkey和guid
+    url: `http://dl.stream.qqmusic.qq.com/M500${musicData.mid}.mp3?vkey=${vkey}&guid=${guid}&uin=1008611&fromtag=64`
   })
 }
 
