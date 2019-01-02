@@ -4,15 +4,13 @@
  @ProjectName: high-material-music
  @title: artists
 -->
-
 <template>
-
+  <h1>Artists</h1>
 </template>
-
 <script>
-    export default {
-        name: "artists"
-    }
+export default {
+  name: 'Artists'
+}
 </script>
 
 <style scoped>

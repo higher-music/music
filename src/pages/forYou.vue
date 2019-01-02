@@ -6,13 +6,13 @@
 -->
 
 <template>
-<h1>for you</h1>
+  <h1>for you</h1>
 </template>
 
 <script>
-    export default {
-        name: "ForYou"
-    }
+export default {
+  name: 'ForYou'
+}
 </script>
 
 <style scoped>

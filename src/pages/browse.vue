@@ -16,7 +16,7 @@
 <script>
 import AlbumsList from '@/components/AlbumsList'
 import SongList from '@/components/SongList'
-import { createSong } from "../js/song";
+import { createSong } from '../js/song';
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -26,7 +26,8 @@ export default {
   computed: {
     ...mapGetters([
       'topListData',
-      'topListDetailData'
+      'topListDetailData',
+      'loading'
     ]),
     albumsList() {
       if (this.topListData && this.topListData.code === 0 && this.topListData.data && this.topListData.data.topList){
@@ -39,6 +40,7 @@ export default {
         this.topListDetailData.songlist.forEach((item) => {
           songs.push(createSong(item.data))
         })
+        this.setLoadingState(false)
         return songs
       }
     }
@@ -50,7 +52,8 @@ export default {
   methods: {
     ...mapActions([
       'getTopListData',
-      'getTopListDetailData'
+      'getTopListDetailData',
+      'setLoadingState'
     ])
   }
 }

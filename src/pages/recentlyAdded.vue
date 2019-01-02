@@ -4,15 +4,13 @@
  @ProjectName: high-material-music
  @title: recentlyAdded
 -->
-
 <template>
-
+  <h1>RecentlyAdded</h1>
 </template>
-
 <script>
-    export default {
-        name: "recentlyAdded"
-    }
+export default {
+  name: 'RecentlyAdded'
+}
 </script>
 
 <style scoped>

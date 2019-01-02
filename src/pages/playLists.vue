@@ -4,15 +4,13 @@
  @ProjectName: high-material-music
  @title: playLists
 -->
-
 <template>
-
+  <h1>PlayLists</h1>
 </template>
-
 <script>
-    export default {
-        name: "playLists"
-    }
+export default {
+  name: 'PlayLists'
+}
 </script>
 
 <style scoped>

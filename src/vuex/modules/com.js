@@ -4,7 +4,7 @@ import * as types from '../types';
  * App通用配置
  */
 const state = {
-  loading: false,
+  loading: true,
   showToast: false,
   leftNavStatus: false,
   leftMenuStatus: true,
