@@ -1,10 +1,13 @@
 <template>
-  <v-progress-circular
-    :size="70"
-    :width="7"
-    color="purple"
-    indeterminate
-  />
+  <div class="progress-container">
+    <v-progress-circular
+      :size="100"
+      :width="10"
+      color="purple"
+      indeterminate
+    />
+  </div>
+
 </template>
 
 <script>
@@ -14,5 +17,9 @@ export default {
 </script>
 
 <style scoped>
-
+.progress-container{
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
 </style>
