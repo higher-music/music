@@ -1,3 +1,5 @@
+import store from '../vuex/store'
+import router from '../router'
 import { getLyric } from '../api/song'
 import { Base64 } from 'js-base64'
 
