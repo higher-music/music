@@ -37,7 +37,7 @@
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
-    <audio id="audio" :src="playUrl" @timeupdate="updateTime">
+    <audio id="audio" :src="playUrl" autoplay @timeupdate="updateTime">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
     </audio>
   </div>
@@ -49,8 +49,7 @@ export default {
   name: 'Player',
   data() {
     return {
-      currentTime: 0,
-      isPlay: false
+      currentTime: 0
     }
   },
   computed: {
@@ -58,8 +57,13 @@ export default {
       'currentSong'
     ]),
     progress() {
-      console.log(document.getElementById('audio'))
-      return Math.round(this.currentTime / 0 * 100)
+      let duration
+      if (this.currentSong) {
+        duration = document.getElementById('audio').duration
+      } else {
+        duration = 0
+      }
+      return Math.round(this.currentTime / duration * 100)
     },
     playUrl() {
       if (this.currentSong) {
@@ -75,6 +79,13 @@ export default {
     ]),
     updateTime(e) {
       this.currentTime = e.target.currentTime
+    },
+    isPlay() {
+      const player = document.getElementById('audio')
+      if (this.currentSong) {
+        return !player.paused;
+      }
+      return false
     },
     next() {
       this.nextSong()
