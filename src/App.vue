@@ -45,9 +45,6 @@ export default {
       }
     })
   },
-  mounted(){
-    console.log(this.$store.state.com.loading)
-  },
   methods: {
     ...mapActions([
       'setVKey'
