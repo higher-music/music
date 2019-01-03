@@ -1,5 +1,8 @@
 <template>
   <div class="song-list-container">
+    <div v-show="loading">
+      <Progress/>
+    </div>
     <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)" @click="playIndex(index)">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index+1 }}</div>
@@ -35,8 +38,10 @@
 
 <script>
 import { mapActions } from 'vuex'
+import Progress from '@/components/Progress'
 export default {
   name: 'SongList',
+  components: { Progress },
   props: {
     showRank: {
       type: Boolean,
@@ -47,6 +52,10 @@ export default {
       default: true
     },
     innerData: {
+      type: Boolean,
+      default: false
+    },
+    loading: {
       type: Boolean,
       default: false
     },

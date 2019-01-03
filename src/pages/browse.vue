@@ -6,21 +6,27 @@
 -->
 <template>
   <div class="main-container">
-    <div class="section-title">Top Albums</div>
-    <AlbumsList :data="albumsList" />
-    <div class="section-title">Top Songs</div>
-    <SongList :data="songList" inner-data show-rank />
+    <div v-show="$store.state.com.loading">
+      <Progress/>
+    </div>
+    <div v-show="!$store.state.com.loading">
+      <div class="section-title">Top Albums</div>
+      <AlbumsList :data="albumsList" />
+      <div class="section-title">Top Songs</div>
+      <SongList :data="songList" inner-data show-rank />
+    </div>
   </div>
 </template>
 
 <script>
 import AlbumsList from '@/components/AlbumsList'
+import Progress from '@/components/Progress'
 import SongList from '@/components/SongList'
 import { createSong } from '../js/song';
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  components: { AlbumsList, SongList },
+  components: { AlbumsList, SongList, Progress },
   data: () => ({
   }),
   computed: {

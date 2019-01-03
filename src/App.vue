@@ -3,10 +3,7 @@
     <v-app dark>
       <navSide ref="nav"/>
       <tool-bar @menu-click="toggleNav"/>
-      <v-content v-show="$store.state.com.loading">
-        <Progress/>
-      </v-content>
-      <v-content v-show="!$store.state.com.loading">
+      <v-content>
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive"/>
         </keep-alive>
@@ -23,13 +20,12 @@
 import NavSide from '@/components/NavSide'
 import ToolBar from '@/components/ToolBar'
 import Player from '@/components/Player'
-import Progress from '@/components/Progress'
 import { getVKey } from '@/api/song'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: { NavSide, ToolBar, Player, Progress },
+  components: { NavSide, ToolBar, Player },
   data() {
     return {
       json: '',
