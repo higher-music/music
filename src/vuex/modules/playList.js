@@ -35,6 +35,9 @@ const actions = {
   prevSong({ commit }){
     commit('PREV_SONG')
   },
+  delSong({ commit }, index) {
+    commit('DEL_SONG', index)
+  },
   replacePlayList({ commit }, list) {
     commit('REPLACE_PLAY_LIST', list)
   },
@@ -63,19 +66,21 @@ const mutations = {
       state.index++
     }
     state.list.splice(state.index, 0, song)
+    state.hasNext = state.index < state.list.length - 2
+    state.hasPrev = state.index > 0
   },
   NEXT_SONG(state) {
     const length = state.list.length
     if (state.index < length - 1){
       state.index++
     }
-    state.hasNext = state.index > length - 2;
+    state.hasNext = state.index > length - 2
   },
   PREV_SONG(state) {
     if (state.index > 0) {
       state.index--
     }
-    state.hasPrev = state.index < 1
+    state.hasPrev = state.index > 0
   },
   REPLACE_PLAY_LIST(state, list) {
     state.list = list
@@ -88,6 +93,14 @@ const mutations = {
   },
   CHANGE_INDEX(state, index) {
     state.index = index
+    state.hasNext = state.index < state.list.length - 2
+    state.hasPrev = state.index > 0
+  },
+  DEL_SONG(state, index) {
+    if (index === state.index) {
+      state.index = index - 1
+    }
+    state.list.splice(index, 1)
   }
 }
 

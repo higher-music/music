@@ -22,9 +22,34 @@ export const constantRouterMap = [
     }
   },
   {
-    path: '/foryou',
+    path: '/for_you',
     name: 'For You',
     component: () => import('@/pages/forYou.vue')
+  },
+  {
+    path: '/recently_added',
+    name: 'Recently Added',
+    component: () => import('@/pages/recentlyAdded.vue')
+  },
+  {
+    path: '/artists',
+    name: 'Artists',
+    component: () => import('@/pages/artists.vue')
+  },
+  {
+    path: '/albums',
+    name: 'Albums',
+    component: () => import('@/pages/albums.vue')
+  },
+  {
+    path: '/songs',
+    name: 'Songs',
+    component: () => import('@/pages/songs.vue')
+  },
+  {
+    path: '/play_lists',
+    name: 'PlayLists',
+    component: () => import('@/pages/playLists.vue')
   }
   // {
   //   path: '*',

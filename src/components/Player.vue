@@ -18,7 +18,7 @@
         <v-spacer/>
 
         <v-list-tile-action>
-          <v-btn icon @click="prev">
+          <v-btn icon @click="prevSong">
             <v-icon>fast_rewind</v-icon>
           </v-btn>
         </v-list-tile-action>
@@ -31,7 +31,7 @@
         </v-list-tile-action>
 
         <v-list-tile-action :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }">
-          <v-btn icon @click="next">
+          <v-btn icon @click="nextSong">
             <v-icon>fast_forward</v-icon>
           </v-btn>
         </v-list-tile-action>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Player',
   data() {
@@ -89,12 +89,6 @@ export default {
     ]),
     updateTime(e) {
       this.currentTime = e.target.currentTime
-    },
-    next() {
-      this.nextSong()
-    },
-    prev() {
-      this.prevSong()
     },
     play() {
       if (this.isPlay) {

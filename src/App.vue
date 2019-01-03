@@ -3,7 +3,7 @@
     <v-app dark>
       <navSide ref="nav"/>
       <tool-bar @menu-click="toggleNav"/>
-      <v-content>
+      <v-content app>
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive"/>
         </keep-alive>

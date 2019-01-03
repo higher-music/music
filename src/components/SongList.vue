@@ -3,15 +3,16 @@
     <div v-show="loading">
       <Progress/>
     </div>
-    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)" @click="playIndex(index)">
+    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index+1 }}</div>
         <img
           v-if="showAlbum"
           :src="item.image"
           :alt="item.name"
-          :title="item.name">
-        <div class="track-info">
+          :title="item.name"
+          @click="playIndex(index)">
+        <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
             <span>{{ item.name }}</span>
           </div>
@@ -98,8 +99,8 @@ export default {
 
 <style lang="scss" scoped>
   .song-list-container{
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     .song-list-wapper {
       display: flex;
       height: 60px;

@@ -1,16 +1,15 @@
 <template>
-  <div class="main-container" style="padding: 20px">
-    <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable />
+  <div style="padding: 20px">
+    <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keydown.enter="search"/>
     <SongList ref="searchRef" :data="songList" :loading="loading"/>
   </div>
 </template>
 
 <script>
-/* eslint-disable vue/no-side-effects-in-computed-properties  */
 import SongList from '@/components/SongList'
-import { createSong } from '../js/song';
+import { createSong } from '@/js/song'
 import Progress from '@/components/Progress'
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { SongList, Progress },
@@ -35,17 +34,14 @@ export default {
       }
     }
   },
-  watch: {
-    text(val) {
-      this.loading = true
-      this.text = val;
-      this.getSearchData(this.text)
-    }
-  },
   methods: {
     ...mapActions([
       'getSearchData'
-    ])
+    ]),
+    search() {
+      this.loading = true
+      this.getSearchData(this.text)
+    }
   }
 }
 </script>
