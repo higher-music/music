@@ -37,8 +37,16 @@
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
-    <audio id="audio" :src="playUrl" autoplay @timeupdate="updateTime">
+    <audio
+      id="audio"
+      :src="playUrl"
+      autoplay
+      @timeupdate="updateTime"
+      @ended="end"
+      @pause="onPause"
+      @play="onPlay">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
+      EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
   </div>
 </template>
@@ -49,12 +57,14 @@ export default {
   name: 'Player',
   data() {
     return {
-      currentTime: 0
+      currentTime: 0,
+      isPlay: false
     }
   },
   computed: {
     ...mapGetters([
-      'currentSong'
+      'currentSong',
+      'haveNext'
     ]),
     progress() {
       let duration
@@ -80,13 +90,6 @@ export default {
     updateTime(e) {
       this.currentTime = e.target.currentTime
     },
-    isPlay() {
-      const player = document.getElementById('audio')
-      if (this.currentSong) {
-        return !player.paused;
-      }
-      return false
-    },
     next() {
       this.nextSong()
     },
@@ -99,7 +102,19 @@ export default {
       } else {
         document.getElementById('audio').play()
       }
-      this.isPlay = !this.isPlay
+    },
+    end() {
+      if (this.haveNext) {
+        this.nextSong()
+      } else {
+        document.getElementById('audio').pause()
+      }
+    },
+    onPause() {
+      this.isPlay = false
+    },
+    onPlay() {
+      this.isPlay = true
     }
   }
 }

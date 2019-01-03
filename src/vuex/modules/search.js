@@ -7,7 +7,7 @@ const state = {
 const actions = {
 
   getSearchData({ commit }, str){
-    search(str, 1, 20).then((res) => {
+    search(str, 1, 50).then((res) => {
       commit('GET_SEARCH_DATA', res)
     })
   }
