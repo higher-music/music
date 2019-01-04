@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       text: '',
-      loading: false
+      loading: false,
+      searchTimer: null
     }
   },
   computed: {
@@ -32,6 +33,17 @@ export default {
         this.loading = false
         return songs
       }
+    }
+  },
+  watch: {
+    text(){
+      if (this.searchTimer){
+        clearTimeout(this.searchTimer);
+      }
+      this.searchTimer = setTimeout(() => {
+        this.search()
+        this.searchTimer = null
+      }, 2000)
     }
   },
   methods: {
