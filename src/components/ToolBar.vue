@@ -2,9 +2,7 @@
   <v-toolbar :clipped-left="true" class="hidden-sm-and-up" scroll-off-screen>
     <v-toolbar-side-icon @click.stop="menuClick"/>
     <v-spacer/>
-    <v-btn icon @click.stop="settingClick">
-      <v-icon>settings</v-icon>
-    </v-btn>
+    <Sheet/>
     <v-btn icon @click.stop="musicClick">
       <v-icon>queue_music</v-icon>
     </v-btn>
@@ -12,8 +10,10 @@
 </template>
 
 <script>
+import Sheet from '@/components/Sheet'
 export default {
   name: 'ToolBar',
+  components: { Sheet },
   methods: {
     menuClick() {
       this.$emit('menu-click')
