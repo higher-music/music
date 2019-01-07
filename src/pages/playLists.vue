@@ -1,9 +1,3 @@
-<!--
- @Author: ganp
- @Date: 2018/12/28 19:31
- @ProjectName: high-material-music
- @title: playLists
--->
 <template>
   <div class="song-list-container">
     <div class="section-title">PlayLists</div>

@@ -1,10 +1,3 @@
-<!--
- @Author: ganp
- @Date: 2018/12/29 14:38
- @ProjectName: high-material-music
- @title: Albums
--->
-
 <template>
   <div class="grid-container">
     <div v-for="item in data" :key="item.id">

@@ -1,9 +1,3 @@
-<!--
- @Author: ganp
- @Date: 2018/12/28 19:28
- @ProjectName: high-material-music
- @title: browse
--->
 <template>
   <div class="main-container">
     <div v-show="$store.state.com.loading">

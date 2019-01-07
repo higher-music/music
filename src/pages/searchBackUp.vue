@@ -1,10 +1,3 @@
-<!--
- @Author: ganp
- @Date: 2018/12/28 19:27
- @ProjectName: high-material-music
- @title: search
--->
-
 <template>
   <div>
     <v-container fluid>

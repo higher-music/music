@@ -1,10 +1,3 @@
-<!--
- @Author: ganp
- @Date: 2019/1/4 14:57
- @ProjectName: high-material-music
- @title: Sheet
--->
-
 <template>
   <div class="text-xs-center">
     <v-bottom-sheet v-model="sheet">

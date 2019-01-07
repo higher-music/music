@@ -27,11 +27,6 @@ export const constantRouterMap = [
     component: () => import('@/pages/forYou.vue')
   },
   {
-    path: '/recently_added',
-    name: 'Recently Added',
-    component: () => import('@/pages/recentlyAdded.vue')
-  },
-  {
     path: '/artists',
     name: 'Artists',
     component: () => import('@/pages/artists.vue')

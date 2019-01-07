@@ -1,9 +1,3 @@
-<!--
- @Author: ganp
- @Date: 2018/12/28 18:25
- @ProjectName: high-material-music
- @title: sideNav
--->
 <template>
   <v-navigation-drawer v-model="visible" class="navSide-wapper" width="220" app>
     <v-list>
@@ -42,11 +36,10 @@ export default {
         { title: 'For You', icon: 'favorite' }
       ],
       bottomItems: [
-        { title: 'Recently Added', icon: 'calendar_today' },
+        { title: 'PlayLists', icon: 'playlist_play' },
         { title: 'Artists', icon: 'person' },
         { title: 'Albums', icon: 'album' },
-        { title: 'Songs', icon: 'music_note' },
-        { title: 'PlayLists', icon: 'playlist_play' }
+        { title: 'Songs', icon: 'music_note' }
       ],
       right: null,
       visible: true
