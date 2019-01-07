@@ -1,7 +1,7 @@
 <template>
   <div class="grid-container">
     <div v-for="item in data" :key="item.id">
-      <div class="list-container">
+      <div class="list-container" @click="toAlbums(item.topTitle)">
         <div class="list-wapper">
           <div class="image-wapper">
             <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle">
@@ -23,6 +23,11 @@ export default {
       default: () => {
         return []
       }
+    }
+  },
+  methods: {
+    toAlbums(data){
+      this.$router.push({ path: '/browse/albums/2312321' });
     }
   }
 }

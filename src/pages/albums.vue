@@ -1,10 +1,14 @@
 <template>
-  <h1>Albums</h1>
+  <div class="main-container">
+    <h1>Albums</h1>
+    <Albums/>
+  </div>
 </template>
 
 <script>
+import Albums from '@/components/Albums'
 export default {
-  name: 'Albums'
+  components: { Albums }
 }
 </script>
 

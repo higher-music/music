@@ -17,9 +17,11 @@ export const constantRouterMap = [
     path: '/browse',
     name: 'Browse',
     component: () => import('@/pages/browse.vue'),
-    meta: {
-      keepAlive: true // 需要被缓存
-    }
+    meta: { keepAlive: true }
+  },
+  {
+    path: '/browse/albums/:id',
+    component: () => import('@/pages/albums.vue')
   },
   {
     path: '/for_you',
@@ -31,11 +33,11 @@ export const constantRouterMap = [
     name: 'Artists',
     component: () => import('@/pages/artists.vue')
   },
-  {
-    path: '/albums',
-    name: 'Albums',
-    component: () => import('@/pages/albums.vue')
-  },
+  // {
+  //   path: '/albums',
+  //   name: 'Albums',
+  //   component: () => import('@/pages/albums.vue')
+  // },
   {
     path: '/songs',
     name: 'Songs',
@@ -45,12 +47,12 @@ export const constantRouterMap = [
     path: '/play_lists',
     name: 'PlayLists',
     component: () => import('@/pages/playLists.vue')
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue')
   }
-  // {
-  //   path: '*',
-  //   name: 'NotFound',
-  //   component: () => import('@/pages/common/NotFound.vue')
-  // }
 ];
 
 
