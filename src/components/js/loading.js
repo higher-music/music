@@ -13,9 +13,7 @@ export default {
 
       document.body.appendChild($vm.$el);
     }
-
-    $vm.show = false;
-
+    $vm.show = false
     const loading = {
       show() {
         $vm.show = true;

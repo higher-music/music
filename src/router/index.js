@@ -56,9 +56,15 @@ export const constantRouterMap = [
 ];
 
 
-export default new Router({
+const router = new Router({
   linkActiveClass: 'active-link',
   routes: constantRouterMap
 });
 
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  next()
+})
 
+
+export default router

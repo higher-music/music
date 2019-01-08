@@ -42,7 +42,6 @@
 import { mapActions } from 'vuex'
 import Progress from '@/components/Progress'
 export default {
-  name: 'SongList',
   components: { Progress },
   props: {
     showRank: {
@@ -94,7 +93,7 @@ export default {
       this.songListTimer = setTimeout(() => {
         this.songListfocus = index
         this.songListTimer = null
-      }, 30)
+      }, 10)
     },
     menuClick(index) {
       if (index === 0) {

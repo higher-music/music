@@ -10,54 +10,46 @@
     </header>
     <section>
       <div class="tracklist">
-        <SongList :data="songList"/>
+        <SongList :data="songList" show-rank/>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import { createSong } from '@/components/js/song';
+import { getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 export default {
   components: { SongList },
-  computed: {
-    ...mapGetters([
-      'topListData',
-      'topListDetailData',
-      'loading'
-    ]),
-    albumsPicList() {
-      if (this.topListData && this.topListData.code === 0 && this.topListData.data && this.topListData.data.topList){
-        return this.topListData.data.topList
-      }
-    },
-    songList(){
-      if (this.topListDetailData && this.topListDetailData.code === 0 && this.topListDetailData.songlist){
-        const songs = []
-        const songList = (this.topListDetailData.songlist).slice(0, 100)
-        songList.forEach((item) => {
-          songs.push(createSong(item.data))
-        })
-        this.setLoadingState(false)
-        return songs
-      }
+  data(){
+    return {
+      songList: []
     }
   },
   watch: {
     $route: {
       immediate: true,
-      handler: function(v) {
-        this.getTopListDetailData(v.params.id)
+      handler: function(to, from) {
+        this.$nextTick(() => {
+          this.$loading.show()
+          this.getRankList(to)
+        })
       }
     }
   },
   methods: {
-    ...mapActions([
-      'getTopListDetailData',
-      'setLoadingState'
-    ])
+    getRankList(data){
+      getMusicList(data.params.id).then(res => {
+        const songs = []
+        const songList = (res.songlist).slice(0, 100)
+        songList.forEach((item) => {
+          songs.push(createSong(item.data))
+        })
+        this.songList = songs
+        this.$loading.hide()
+      })
+    }
   }
 }
 </script>

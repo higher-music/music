@@ -1,15 +1,15 @@
 <template>
   <div style="padding: 20px">
-    <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keydown.enter="search"/>
-    <SongList ref="searchRef" :data="songList" :loading="loading"/>
+    <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keydown.enter="getSearchList"/>
+    <SongList :data="songList" :loading="loading"/>
   </div>
 </template>
 
 <script>
 import SongList from '@/components/SongList'
+import { search } from '@/api/search'
 import { createSong } from '@/components/js/song'
 import Progress from '@/components/Progress'
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { SongList, Progress },
@@ -17,22 +17,8 @@ export default {
     return {
       text: '',
       loading: false,
+      songList: [],
       searchTimer: null
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'searchData'
-    ]),
-    songList(){
-      const songs = []
-      if (this.searchData && this.searchData.code === 0 && this.searchData.data && this.searchData.data.song && this.searchData.data.song.list){
-        this.searchData.data.song.list.forEach((item) => {
-          songs.push(createSong(item))
-        })
-        this.loading = false
-        return songs
-      }
     }
   },
   watch: {
@@ -41,18 +27,22 @@ export default {
         clearTimeout(this.searchTimer);
       }
       this.searchTimer = setTimeout(() => {
-        this.search()
+        this.getSearchList()
         this.searchTimer = null
       }, 2000)
     }
   },
   methods: {
-    ...mapActions([
-      'getSearchData'
-    ]),
-    search() {
+    getSearchList(){
       this.loading = true
-      this.getSearchData(this.text)
+      const songs = []
+      search(this.text, 1, 50).then((res) => {
+        res.data.song.list.forEach((item) => {
+          songs.push(createSong(item))
+        })
+        this.loading = false
+        this.songList = songs
+      })
     }
   }
 }
