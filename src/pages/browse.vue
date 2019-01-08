@@ -5,7 +5,7 @@
     </div>
     <div v-show="!$store.state.com.loading">
       <div class="section-title">Top Albums</div>
-      <AlbumsList :data="albumsList" />
+      <AlbumsPicList :data="albumsPicList" />
       <div class="section-title">Top Songs</div>
       <SongList :data="songList" inner-data show-rank />
     </div>
@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import AlbumsList from '@/components/AlbumsList'
+import AlbumsPicList from '@/components/AlbumsPicList'
 import Progress from '@/components/Progress'
 import SongList from '@/components/SongList'
 import { createSong } from '../js/song';
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  components: { AlbumsList, SongList, Progress },
+  components: { AlbumsPicList, SongList, Progress },
   data: () => ({
   }),
   computed: {
@@ -29,7 +29,7 @@ export default {
       'topListDetailData',
       'loading'
     ]),
-    albumsList() {
+    albumsPicList() {
       if (this.topListData && this.topListData.code === 0 && this.topListData.data && this.topListData.data.topList){
         return this.topListData.data.topList
       }
