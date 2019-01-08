@@ -26,27 +26,29 @@ export default {
     this.$loading.show()
   },
   mounted(){
-    this.getBrowseAlbumsList()
-    this.getBrowseRankList(26)
+    this.getBrowseData()
   },
   methods: {
-    getBrowseAlbumsList(){
+    getBrowseData(){
       getTopList().then((res) => {
         this.browseAlbumsList = res.data.topList
       })
-    },
-    getBrowseRankList(data){
-      getMusicList(data).then(res => {
+
+      console.log(getTopList())
+
+      getMusicList(26).then(res => {
         const songs = []
         const songList = (res.songlist).slice(0, 100)
         songList.forEach((item) => {
           songs.push(createSong(item.data))
         })
         this.browseSongList = songs
+      })
+
+      Promise.all([getTopList(), getMusicList()]).then(() => {
         this.$loading.hide()
       })
     }
-
   }
 }
 </script>
