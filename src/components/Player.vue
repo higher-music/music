@@ -64,7 +64,9 @@ export default {
   computed: {
     ...mapGetters([
       'currentSong',
-      'haveNext'
+      'haveNext',
+      'currentIndex',
+      'playList'
     ]),
     progress() {
       let duration
@@ -85,7 +87,8 @@ export default {
   methods: {
     ...mapActions([
       'nextSong',
-      'prevSong'
+      'prevSong',
+      'changeIndex'
     ]),
     updateTime(e) {
       this.currentTime = e.target.currentTime
@@ -94,7 +97,11 @@ export default {
       if (this.isPlay) {
         document.getElementById('audio').pause()
       } else {
-        document.getElementById('audio').play()
+        if (this.currentIndex < 0 && this.playList.length > 0) {
+          this.changeIndex(0)
+        } else {
+          document.getElementById('audio').play()
+        }
       }
     },
     end() {

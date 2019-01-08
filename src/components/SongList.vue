@@ -27,7 +27,8 @@
           <v-list>
             <v-list-tile
               v-for="(item, i) in items"
-              :key="i">
+              :key="i"
+              @click="menuClick(i)">
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -79,7 +80,9 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addSongToCurrentIndex'
+      'addSongToCurrentIndex',
+      'addSongToNext',
+      'addSongToLast'
     ]),
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
@@ -92,6 +95,19 @@ export default {
         this.songListfocus = index
         this.songListTimer = null
       }, 30)
+    },
+    menuClick(index) {
+      if (index === 0) {
+        this.playNext()
+      } else {
+        this.playLatter()
+      }
+    },
+    playNext() {
+      this.addSongToNext(this.data[this.songListfocus])
+    },
+    playLatter() {
+      this.addSongToLast(this.data[this.songListfocus])
     }
   }
 }
