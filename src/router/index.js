@@ -20,7 +20,7 @@ export const constantRouterMap = [
     meta: { keepAlive: true }
   },
   {
-    path: '/browse/albums/:id',
+    path: '/albums/:id',
     component: () => import('@/pages/albums.vue')
   },
   {

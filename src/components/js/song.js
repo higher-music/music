@@ -1,5 +1,5 @@
-import store from '../vuex/store'
-import { getLyric } from '../api/song'
+import store from '@/vuex/store'
+import { getLyric } from '@/api/song'
 import { Base64 } from 'js-base64'
 
 export default class Song {

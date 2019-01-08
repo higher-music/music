@@ -7,7 +7,7 @@
 
 <script>
 import SongList from '@/components/SongList'
-import { createSong } from '@/js/song'
+import { createSong } from '@/components/js/song'
 import Progress from '@/components/Progress'
 import { mapGetters, mapActions } from 'vuex'
 

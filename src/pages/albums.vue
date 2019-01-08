@@ -1,8 +1,5 @@
 <template>
-  <div class="main-container">
-    <h1>Albums</h1>
-    <Albums/>
-  </div>
+  <Albums/>
 </template>
 
 <script>

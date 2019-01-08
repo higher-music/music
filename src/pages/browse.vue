@@ -16,7 +16,7 @@
 import AlbumsPicList from '@/components/AlbumsPicList'
 import Progress from '@/components/Progress'
 import SongList from '@/components/SongList'
-import { createSong } from '../js/song';
+import { createSong } from '@/components/js/song';
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
