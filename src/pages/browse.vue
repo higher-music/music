@@ -1,14 +1,9 @@
 <template>
-  <div class="main-container">
-    <div v-show="$store.state.com.loading">
-      <Progress/>
-    </div>
-    <div v-show="!$store.state.com.loading">
-      <div class="section-title">Top Albums</div>
-      <AlbumsPicList :data="albumsPicList" />
-      <div class="section-title">Top Songs</div>
-      <SongList :data="songList" inner-data show-rank />
-    </div>
+  <div v-show="browseSongList" class="main-container">
+    <div class="section-title">Top Albums</div>
+    <AlbumsPicList :data="albumsPicList" />
+    <div class="section-title">Top Songs</div>
+    <SongList :data="browseSongList" inner-data show-rank />
   </div>
 </template>
 
@@ -21,29 +16,30 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { AlbumsPicList, SongList, Progress },
-  data: () => ({
-  }),
   computed: {
     ...mapGetters([
       'topListData',
-      'topListDetailData',
-      'loading'
+      'topListDetailData'
     ]),
     albumsPicList() {
       if (this.topListData && this.topListData.code === 0 && this.topListData.data && this.topListData.data.topList){
         return this.topListData.data.topList
       }
     },
-    songList(){
+    browseSongList(){
       if (this.topListDetailData && this.topListDetailData.code === 0 && this.topListDetailData.songlist){
         const songs = []
-        this.topListDetailData.songlist.forEach((item) => {
+        const songList = (this.topListDetailData.songlist).slice(0, 100)
+        songList.forEach((item) => {
           songs.push(createSong(item.data))
         })
-        this.setLoadingState(false)
+        this.$loading.hide()
         return songs
       }
     }
+  },
+  created(){
+    this.$loading.show()
   },
   mounted(){
     this.getTopListData()
@@ -52,8 +48,8 @@ export default {
   methods: {
     ...mapActions([
       'getTopListData',
-      'getTopListDetailData',
-      'setLoadingState'
+      'getTopListDetailData'
+      // 'setLoadingState'
     ])
   }
 }

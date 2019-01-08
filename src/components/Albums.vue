@@ -8,12 +8,20 @@
         <div class="artwork" style=""/>
       </div>
     </header>
+    <section>
+      <div class="tracklist">
+        <SongList :data="songList"/>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { createSong } from '@/components/js/song';
+import SongList from '@/components/SongList'
 export default {
+  components: { SongList },
   computed: {
     ...mapGetters([
       'topListData',
@@ -28,7 +36,8 @@ export default {
     songList(){
       if (this.topListDetailData && this.topListDetailData.code === 0 && this.topListDetailData.songlist){
         const songs = []
-        this.topListDetailData.songlist.forEach((item) => {
+        const songList = (this.topListDetailData.songlist).slice(0, 100)
+        songList.forEach((item) => {
           songs.push(createSong(item.data))
         })
         this.setLoadingState(false)
@@ -36,8 +45,13 @@ export default {
       }
     }
   },
-  mounted(){
-    this.getTopListDetailData(26)
+  watch: {
+    $route: {
+      immediate: true,
+      handler: function(v) {
+        this.getTopListDetailData(v.params.id)
+      }
+    }
   },
   methods: {
     ...mapActions([
@@ -100,6 +114,16 @@ export default {
           box-shadow: 0 0 10px rgba(0,0,0,.5);
           border-radius: 4px;
         }
+      }
+    }
+    section{
+      box-shadow: 0 0 20px 0 #000;
+      background-image: linear-gradient(#04060c,#1e3264 120%);
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      min-height: calc(100% - 300px);
+      .tracklist{
+        padding: 10px;
       }
     }
   }

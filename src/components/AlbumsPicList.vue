@@ -27,8 +27,7 @@ export default {
   },
   methods: {
     toAlbums(data){
-      console.log(data,'1111')
-      // this.$router.push({ path: '/albums/2312321' + data });
+      this.$router.push({ path: '/albums/' + data.id });
     }
   }
 }

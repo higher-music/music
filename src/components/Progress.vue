@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-container">
+  <div v-show="show" class="progress-container">
     <v-progress-circular
       :size="100"
       :width="10"
@@ -7,16 +7,17 @@
       indeterminate
     />
   </div>
-
 </template>
 
 <script>
 export default {
-  name: 'Progress'
+  props: {
+    show: Boolean
+  }
 }
 </script>
 
-<style scoped>
+<style>
 .progress-container{
   position: absolute;
   top: calc(50% - 50px);
