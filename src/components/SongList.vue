@@ -52,10 +52,6 @@ export default {
       type: Boolean,
       default: true
     },
-    innerData: {
-      type: Boolean,
-      default: false
-    },
     loading: {
       type: Boolean,
       default: false

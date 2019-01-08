@@ -3,7 +3,7 @@
     <div class="section-title">Top Albums</div>
     <AlbumsPicList :data="browseAlbumsList" />
     <div class="section-title">Top Songs</div>
-    <SongList :data="browseSongList" inner-data show-rank />
+    <SongList :data="browseSongList" show-rank />
   </div>
 </template>
 
@@ -33,8 +33,6 @@ export default {
       getTopList().then((res) => {
         this.browseAlbumsList = res.data.topList
       })
-
-      console.log(getTopList())
 
       getMusicList(26).then(res => {
         const songs = []
