@@ -1,10 +1,14 @@
 <template>
-  <div class="main-container">
-    <div class="section-title">Top Albums</div>
-    <AlbumsPicList :data="browseAlbumsList" />
-    <div class="section-title">Top Songs</div>
-    <SongList :data="browseSongList" show-rank />
-  </div>
+  <v-app>
+    <Progress :show="show"/>
+    <div v-show="browseAlbumsList.length!==0&&browseSongList.length!==0" class="main-container">
+      <div class="section-title">Top Albums</div>
+      <AlbumsPicList :data="browseAlbumsList"/>
+      <div class="section-title">Top Songs</div>
+      <SongList :data="browseSongList" show-rank/>
+    </div>
+  </v-app>
+
 </template>
 
 <script>
@@ -16,20 +20,18 @@ import { createSong } from '@/components/js/song';
 
 export default {
   components: { AlbumsPicList, SongList, Progress },
-  data(){
+  data() {
     return {
       browseAlbumsList: [],
-      browseSongList: []
+      browseSongList: [],
+      show: true
     }
   },
-  created(){
-    this.$loading.show()
-  },
-  mounted(){
+  created() {
     this.getBrowseData()
   },
   methods: {
-    getBrowseData(){
+    getBrowseData() {
       getTopList().then((res) => {
         this.browseAlbumsList = res.data.topList
       })
@@ -44,7 +46,9 @@ export default {
       })
 
       Promise.all([getTopList(), getMusicList()]).then(() => {
-        this.$loading.hide()
+        setTimeout(() => {
+          this.show = false
+        }, 1500)
       })
     }
   }
@@ -52,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-  .section-title{
+  .section-title {
     cursor: default;
     line-height: normal;
     font-size: 24px;

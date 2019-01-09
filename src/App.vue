@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app dark>
+    <v-app id="inspire" dark>
       <navSide ref="nav"/>
       <tool-bar @menu-click="toggleNav"/>
       <v-content app>
@@ -10,7 +10,7 @@
         </keep-alive>
         <router-view v-if="!$route.meta.keepAlive"/>
       </v-content>
-      <v-footer height="64" app>
+      <v-footer height="64" app fixed>
         <player/>
       </v-footer>
     </v-app>
@@ -29,7 +29,6 @@ export default {
   components: { NavSide, ToolBar, Player },
   data() {
     return {
-      json: '',
       visible: true
     }
   },

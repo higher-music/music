@@ -40,8 +40,10 @@ export default {
         res.data.song.list.forEach((item) => {
           songs.push(createSong(item))
         })
-        this.loading = false
         this.songList = songs
+        setTimeout(() => {
+          this.loading = false
+        }, 1000)
       })
     }
   }

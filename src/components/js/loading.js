@@ -6,11 +6,9 @@ export default {
   install(Vue, options) {
     if (!$vm) {
       const LoadingPlugin = Vue.extend(Progress);
-
       $vm = new LoadingPlugin({
         el: document.createElement('div')
       });
-
       document.body.appendChild($vm.$el);
     }
     $vm.show = false

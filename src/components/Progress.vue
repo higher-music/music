@@ -12,10 +12,7 @@
 <script>
 export default {
   props: {
-    show: {
-      type: Boolean,
-      default: true
-    }
+    show: Boolean
   }
 }
 </script>

@@ -1,9 +1,7 @@
 <template>
   <div class="song-list-container">
-    <div v-show="loading">
-      <Progress/>
-    </div>
-    <div v-for="(item,index) in data" :key="index" class="song-list-wapper">
+    <Progress v-show="loading"/>
+    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
       <div class="song-list">
         <div v-if="showRank" class="rank">{{ index + 1 }}</div>
         <img
@@ -68,7 +66,9 @@ export default {
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' }
-      ]
+      ],
+      songListfocus: null,
+      songListTimer: null
     }
   },
   methods: {
@@ -79,6 +79,15 @@ export default {
     ]),
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
+    },
+    mouseover(index){
+      if (this.songListTimer){
+        clearTimeout(this.songListTimer);
+      }
+      this.songListTimer = setTimeout(() => {
+        this.songListfocus = index
+        this.songListTimer = null
+      }, 10)
     },
     menuClick(index, i) {
       if (i === 0) {

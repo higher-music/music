@@ -6,13 +6,11 @@
   padding: 0 !important;
 }
 
-.v-content {
+.application--wrap {
   background-image: linear-gradient(#1e3264, #04060c 130%);
 }
 
 .navSide-wapper {
-  overflow-y: auto;
-  transition: width .5s ease-in-out;
   .v-list__tile__action, .v-list__tile__avatar {
     min-width: 32px !important;
   }

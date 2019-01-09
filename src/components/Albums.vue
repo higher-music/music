@@ -1,39 +1,44 @@
 <template>
-  <div class="albums-container">
-    <header>
-      <div class="header-image-container">
-        <img :src="headerInfo.pic_album" :alt="headerInfo.ListName" class="header-image">
-      </div>
-      <div class="header">
-        <div :style="{backgroundImage:`url(${headerInfo.pic_album})`}" class="artwork"/>
-        <div class="album-extras">
-          <div class="track-text">
-            <span class="album-name">{{ headerInfo.ListName }}</span>
-            <span class="album-detail" v-html="headerInfo.info"/>
-          </div>
-          <div class="album-button-container"/>
+  <v-app>
+    <Progress v-show="show"/>
+    <div v-show="songList.length" class="albums-container">
+      <header>
+        <div class="header-image-container">
+          <img :src="headerInfo.pic_album" :alt="headerInfo.ListName" class="header-image">
         </div>
-      </div>
-    </header>
-    <section>
-      <div class="tracklist">
-        <SongList :data="songList" show-rank/>
-      </div>
-    </section>
-  </div>
+        <div class="header">
+          <div :style="{backgroundImage:`url(${headerInfo.pic_album})`}" class="artwork"/>
+          <div class="album-extras">
+            <div class="track-text">
+              <span class="album-name">{{ headerInfo.ListName }}</span>
+              <span class="album-detail" v-html="headerInfo.info"/>
+            </div>
+            <div class="album-button-container"/>
+          </div>
+        </div>
+      </header>
+      <section>
+        <div class="tracklist">
+          <SongList :data="songList" show-rank/>
+        </div>
+      </section>
+    </div>
+  </v-app>
 </template>
 
 <script>
+import Progress from '@/components/Progress'
 import { createSong } from '@/components/js/song';
 import { getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 
 export default {
-  components: { SongList },
+  components: { SongList, Progress },
   data() {
     return {
       headerInfo: [],
-      songList: []
+      songList: [],
+      show: true
     }
   },
   watch: {
@@ -41,7 +46,6 @@ export default {
       immediate: true,
       handler: function(to, from) {
         this.$nextTick(() => {
-          this.$loading.show()
           this.getRankList(to)
         })
       }
@@ -51,14 +55,13 @@ export default {
     getRankList(data) {
       getMusicList(data.params.id).then(res => {
         this.headerInfo = res.topinfo
-        console.log(this.headerInfo)
         const songs = []
         const songList = (res.songlist).slice(0, 100)
         songList.forEach((item) => {
           songs.push(createSong(item.data))
         })
         this.songList = songs
-        this.$loading.hide()
+        this.show = false
       })
     }
   }

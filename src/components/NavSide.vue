@@ -51,11 +51,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-  .sidebar-container{
-    width: 220px;
-    height: 100%;
-    overflow-y: auto;
-    transition: width .5s ease-in-out;
-  }
-</style>
