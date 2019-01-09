@@ -1,32 +1,37 @@
 <template>
-  <div class="song-list-container">
-    <div class="section-title">PlayLists</div>
-    <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
-      <div class="song-list">
-        <div v-if="index !== currentIndex" class="rank">{{ index+1 }}</div>
-        <div v-else><v-icon>play_circle_outline</v-icon></div>
-        <img
-          :src="item.image"
-          :alt="item.name"
-          :title="item.name"
-          @click="playIndex(index)">
-        <div class="track-info" @click="playIndex(index)">
-          <div class="song-name-container">
-            <span>{{ item.name }}</span>
+  <v-container fill-height>
+    <div v-if="playList.length > 0" :key="0" class="song-list-container">
+      <div class="section-title">PlayLists</div>
+      <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
+        <div class="song-list">
+          <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
+          <div v-else><v-icon>play_circle_outline</v-icon></div>
+          <img
+            :src="item.image"
+            :alt="item.name"
+            :title="item.name"
+            @click="playIndex(index)">
+          <div class="track-info" @click="playIndex(index)">
+            <div class="song-name-container">
+              <span>{{ item.name }}</span>
+            </div>
+            <div class="secondary-info">
+              <span>{{ item.singer }}</span>
+            </div>
           </div>
-          <div class="secondary-info">
-            <span>{{ item.singer }}</span>
-          </div>
+          <v-btn slot="activator" class="menu" dark icon @click="deleteSong(index)">
+            <v-icon>delete_outline</v-icon>
+          </v-btn>
         </div>
-        <v-btn slot="activator" class="menu" dark icon @click="deleteSong(index)">
-          <v-icon>delete_outline</v-icon>
-        </v-btn>
       </div>
     </div>
-  </div>
+    <v-layout v-else :key="1" align-center justify-center class="card">
+      Empty
+    </v-layout>
+  </v-container>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'PlayLists',
   computed: {
@@ -115,5 +120,8 @@ export default {
         }
       }
     }
+  }
+  .card{
+    font-size: 50px;
   }
 </style>

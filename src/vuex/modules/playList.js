@@ -127,6 +127,7 @@ const mutations = {
   REPLACE_PLAY_LIST(state, list) {
     state.list = list
     state.index = 0
+    CHECK_PREV_NEXT(state)
   },
   SET_VKEY(state, vkey) {
     state.vkey = vkey

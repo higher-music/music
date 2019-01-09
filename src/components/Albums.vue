@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Progress v-show="show"/>
+    <Progress v-if="show"/>
     <div v-show="songList.length" class="albums-container">
       <header>
         <div class="header-image-container">
@@ -18,6 +18,15 @@
         </div>
       </header>
       <section>
+        <v-btn
+          dark
+          absolute
+          top
+          right
+          fab
+          @click="playAll">
+          <v-icon>play_arrow</v-icon>
+        </v-btn>
         <div class="tracklist">
           <SongList :data="songList" show-rank/>
         </div>
@@ -31,6 +40,7 @@ import Progress from '@/components/Progress'
 import { createSong } from '@/components/js/song';
 import { getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
+import { mapActions } from 'vuex'
 
 export default {
   components: { SongList, Progress },
@@ -52,6 +62,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'replacePlayList'
+    ]),
     getRankList(data) {
       getMusicList(data.params.id).then(res => {
         this.headerInfo = res.topinfo
@@ -63,6 +76,9 @@ export default {
         this.songList = songs
         this.show = false
       })
+    },
+    playAll() {
+      this.replacePlayList(this.songList)
     }
   }
 }
