@@ -8,7 +8,14 @@
           <v-list-tile-sub-title v-if="currentSong">{{ currentSong.singer }}</v-list-tile-sub-title>
           <v-list-tile-sub-title v-else>未知歌手</v-list-tile-sub-title>
         </v-list-tile-content>
-        <v-slider :max="duration" :value="currentTime" :height="3" @mousedown="isFromUser = true " @mouseup="isFromUser = false" @change="slideChange"/>
+        <v-slider
+          :max="duration"
+          :value="currentTime"
+          :height="3"
+          class="hidden-sm-and-down"
+          @mousedown="isFromUser = true "
+          @mouseup="isFromUser = false"
+          @change="slideChange"/>
         <v-list-tile-action>
           <v-btn icon @click="prevSong">
             <v-icon>fast_rewind</v-icon>

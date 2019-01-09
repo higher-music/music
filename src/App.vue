@@ -4,6 +4,7 @@
       <navSide ref="nav"/>
       <tool-bar @menu-click="toggleNav"/>
       <v-content app>
+        <div class="hidden-md-and-up tool_bar_height"/>
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive"/>
         </keep-alive>
@@ -55,5 +56,9 @@ export default {
   @import url(../static/css/font.css);
   #app{
     font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
+  }
+  .tool_bar_height{
+    width: 100%;
+    height: 56px;
   }
 </style>
