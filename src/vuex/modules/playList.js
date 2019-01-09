@@ -1,4 +1,4 @@
-import { CHECK_PREV_NEXT } from '../../components/js/utils'
+import { CHECK_PREV_NEXT, HAD_THE_SONG, FLAC } from '@/components/js/utils'
 
 const state = {
   // 播放列表
@@ -7,26 +7,21 @@ const state = {
   index: -1,
   // 歌曲链接验证用的秘钥
   vkey: '',
-  // 用于获取VKey而生成的随机数
+  // 用于获取VKey而生成的随机数K
   guid: 0,
   // 是否还有上一首
   hasPrev: false,
   // 是否还有下一首
-  hasNext: false
+  hasNext: false,
+  // 音乐品质（1、flac，2、320K，3、128）
+  type: FLAC
 }
 
 const actions = {
   // 在当前播放位置播放点击的音乐
   addSongToCurrentIndex({ commit, state }, song){
-    let hadTheSong = false
-    let i
-    state.list.forEach((item, index) => {
-      if (item.id === song.id) {
-        hadTheSong = true
-        i = index
-      }
-    })
-    if (!hadTheSong) {
+    const i = HAD_THE_SONG(state, song.id)
+    if (i < 0) {
       commit('ADD_SONG_TO_CURRENT_INDEX', song)
     } else {
       commit('CHANGE_INDEX', i)
@@ -58,30 +53,16 @@ const actions = {
   },
   // 添加歌曲到下一首播放
   addSongToNext({ commit, state }, song) {
-    let hadTheSong = false
-    let i
-    state.list.forEach((item, index) => {
-      if (item.id === song.id) {
-        hadTheSong = true
-        i = index
-      }
-    })
-    if (hadTheSong) {
+    const i = HAD_THE_SONG(state, song.id)
+    if (i > -1) {
       commit('DEL_SONG', i)
     }
     commit('ADD_SONG_TO_NEXT', song)
   },
   // 添加歌曲到播放列表最后
   addSongToLast({ commit, state }, song) {
-    let hadTheSong = false
-    let i
-    state.list.forEach((item, index) => {
-      if (item.id === song.id) {
-        hadTheSong = true
-        i = index
-      }
-    })
-    if (hadTheSong) {
+    const i = HAD_THE_SONG(state, song.id)
+    if (i > -1) {
       commit('DEL_SONG', i)
     }
     commit('ADD_SONG_TO_LAST', song)
@@ -89,6 +70,9 @@ const actions = {
   // 改变当前播放位置
   changeIndex({ commit }, index) {
     commit('CHANGE_INDEX', index)
+  },
+  changeType({ commit }, type) {
+    commit('CHANGE_TYPE', type)
   }
 }
 
@@ -98,7 +82,8 @@ const getters = {
   currentSong: state => state.list[state.index],
   getVKey: state => state.vkey,
   haveNext: state => state.hasNext,
-  havePrev: state => state.hasPrev
+  havePrev: state => state.hasPrev,
+  getType: state => state.type
 }
 
 const mutations = {
@@ -156,6 +141,9 @@ const mutations = {
   ADD_SONG_TO_LAST(state, song) {
     state.list.push(song)
     CHECK_PREV_NEXT(state)
+  },
+  CHANGE_TYPE(state, type) {
+    state.type = type
   }
 }
 

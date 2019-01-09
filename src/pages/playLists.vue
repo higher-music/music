@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <v-layout v-else :key="1" align-center justify-center class="card">
+    <v-layout v-else align-center justify-center class="card">
       Empty
     </v-layout>
   </v-container>

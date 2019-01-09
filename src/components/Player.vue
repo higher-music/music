@@ -20,6 +20,7 @@
           @mousedown="isFromUser = true "
           @mouseup="isFromUser = false"
           @change="slideChange"/>
+        <Sheet style="margin-left: 30px"/>
         <v-list-tile-action>
           <v-btn icon @click="prevSong">
             <v-icon>fast_rewind</v-icon>
@@ -57,9 +58,12 @@
 </template>
 
 <script>
+import Sheet from '@/components/Sheet'
+import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Player',
+  components: { Sheet },
   data() {
     return {
       currentTime: 0,
@@ -73,11 +77,26 @@ export default {
       'currentSong',
       'haveNext',
       'currentIndex',
-      'playList'
+      'playList',
+      'getType'
     ]),
     playUrl() {
       if (this.currentSong) {
-        return this.currentSong.url
+        let playUrl
+        switch (this.getType) {
+          case FLAC:
+            playUrl = this.currentSong.flac
+            break
+          case MP3_320K:
+            playUrl = this.currentSong.mp3_320k
+            break
+          case MP3_128K:
+            playUrl = this.currentSong.mp3_128k
+            break
+          default:
+            break
+        }
+        return playUrl
       }
       return ''
     }

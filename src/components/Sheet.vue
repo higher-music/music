@@ -2,8 +2,7 @@
   <v-bottom-sheet v-model="sheet">
     <v-btn
       slot="activator"
-      icon
-    >
+      icon>
       <v-icon>settings</v-icon>
     </v-btn>
     <v-list>
@@ -22,17 +21,32 @@
 </template>
 
 <script>
+import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
+import { mapActions } from 'vuex'
+import store from '@/vuex/store'
 export default {
   name: 'Sheet',
-  data: () => ({
-    sheet: false,
-    radioGroup: 1,
-    radioGroupData: [
-      { val: 1, text: 'Flac (550 kbps)' },
-      { val: 2, text: 'High (256 kbps)' },
-      { val: 3, text: 'Standard (64 kbps)' }
-    ]
-  })
+  data() {
+    return {
+      sheet: false,
+      radioGroup: store.state.playList.type,
+      radioGroupData: [
+        { val: FLAC, text: 'Flac (550 kbps)' },
+        { val: MP3_320K, text: 'High (320 kbps)' },
+        { val: MP3_128K, text: 'Standard (128 kbps)' }
+      ]
+    }
+  },
+  watch: {
+    radioGroup() {
+      this.changeType(this.radioGroup)
+    }
+  },
+  methods: {
+    ...mapActions([
+      'changeType'
+    ])
+  }
 }
 </script>
 

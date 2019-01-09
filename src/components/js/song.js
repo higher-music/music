@@ -3,7 +3,7 @@ import { getLyric } from '@/api/song'
 import { Base64 } from 'js-base64'
 
 export default class Song {
-  constructor({ id, mid, singer, name, album, duration, image, url }) {
+  constructor({ id, mid, singer, name, album, duration, image, mp3_128k, mp3_320k, flac }) {
     this.id = id
     this.mid = mid
     this.singer = singer
@@ -11,7 +11,9 @@ export default class Song {
     this.album = album
     this.duration = duration
     this.image = image
-    this.url = url
+    this.mp3_128k = mp3_128k
+    this.mp3_320k = mp3_320k
+    this.flac = flac
   }
 
   getLyric() {
@@ -33,6 +35,7 @@ export default class Song {
 }
 
 export function createSong(musicData) {
+  console.log(musicData)
   return new Song({
     id: musicData.songid,
     mid: musicData.songmid,
@@ -41,7 +44,9 @@ export function createSong(musicData) {
     album: musicData.albumname,
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    url: `http://dl.stream.qqmusic.qq.com/M500${musicData.songmid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=1008611&fromtag=64`
+    mp3_128k: `http://dl.stream.qqmusic.qq.com/M500${musicData.songmid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
+    mp3_320k: `http://dl.stream.qqmusic.qq.com/M800${musicData.songmid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
+    flac: `http://streamoc.music.tc.qq.com/F000${musicData.songmid}.flac?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&&uin=0&fromtag=8`
   })
 }
 

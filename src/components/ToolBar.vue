@@ -18,9 +18,6 @@ export default {
     menuClick() {
       this.$emit('menu-click')
     },
-    settingClick() {
-      this.$emit('setting-click')
-    },
     musicClick() {
       this.$emit('music-click')
     }
