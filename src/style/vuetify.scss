@@ -1,20 +1,22 @@
-.theme--dark.v-navigation-drawer{
+.theme--dark.v-navigation-drawer {
   background-color: #000 !important;
 }
 
-.theme--dark.v-list{
+.theme--dark.v-list {
   padding: 0 !important;
 }
 
-.v-content{
-  background-image: linear-gradient(#1e3264,#04060c 130%);
+.v-content {
+  background-image: linear-gradient(#1e3264, #04060c 130%);
 }
 
 .navSide-wapper {
+  overflow-y: auto;
+  transition: width .5s ease-in-out;
   .v-list__tile__action, .v-list__tile__avatar {
     min-width: 32px !important;
   }
-  .v-list__tile__title{
+  .v-list__tile__title {
     font-size: 16px !important;
   }
 }
