@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <Progress v-if="show"/>
+  <v-app dark>
+    <Progress v-show="show"/>
     <div v-show="songList.length" class="albums-container">
       <header>
         <div class="header-image-container">
@@ -13,20 +13,14 @@
               <span class="album-name">{{ headerInfo.ListName }}</span>
               <span class="album-detail" v-html="headerInfo.info"/>
             </div>
-            <div class="album-button-container"/>
+            <div class="album-button-container">
+              <v-btn color="success">Success</v-btn>
+              <v-btn color="error">Error</v-btn>
+            </div>
           </div>
         </div>
       </header>
       <section>
-        <v-btn
-          dark
-          absolute
-          top
-          right
-          fab
-          @click="playAll">
-          <v-icon>play_arrow</v-icon>
-        </v-btn>
         <div class="tracklist">
           <SongList :data="songList" show-rank/>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <Progress :show="show"/>
     <div v-show="browseAlbumsList.length!==0&&browseSongList.length!==0" class="main-container">
       <div class="section-title">Top Albums</div>

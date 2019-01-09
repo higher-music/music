@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app id="inspire" dark>
+    <v-app dark>
       <navSide ref="nav"/>
       <tool-bar @menu-click="toggleNav"/>
       <v-content app>

@@ -1,26 +1,24 @@
 <template>
-  <div class="text-xs-center">
-    <v-bottom-sheet v-model="sheet">
-      <v-btn
-        slot="activator"
-        icon
-      >
-        <v-icon>settings</v-icon>
-      </v-btn>
-      <v-list>
-        <v-subheader>Bitrate</v-subheader>
-        <v-radio-group v-model="radioGroup">
-          <v-radio
-            v-for="r in radioGroupData"
-            :key="r.val"
-            :label="r.text"
-            :value="r.val"
-            color="green accent-2"
-          />
-        </v-radio-group>
-      </v-list>
-    </v-bottom-sheet>
-  </div>
+  <v-bottom-sheet v-model="sheet">
+    <v-btn
+      slot="activator"
+      icon
+    >
+      <v-icon>settings</v-icon>
+    </v-btn>
+    <v-list>
+      <v-subheader>Bitrate</v-subheader>
+      <v-radio-group v-model="radioGroup">
+        <v-radio
+          v-for="r in radioGroupData"
+          :key="r.val"
+          :label="r.text"
+          :value="r.val"
+          color="green accent-2"
+        />
+      </v-radio-group>
+    </v-list>
+  </v-bottom-sheet>
 </template>
 
 <script>
