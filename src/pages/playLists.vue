@@ -1,7 +1,7 @@
 <template>
   <div class="song-list-container">
     <div class="section-title">PlayLists</div>
-    <div v-for="(item,index) in playList" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
+    <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="index !== currentIndex" class="rank">{{ index+1 }}</div>
         <div v-else><v-icon>play_circle_outline</v-icon></div>
@@ -18,7 +18,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-btn v-show="index === songListfocus " slot="activator" dark icon @click="deleteSong(index)">
+        <v-btn slot="activator" class="menu" dark icon @click="deleteSong(index)">
           <v-icon>delete_outline</v-icon>
         </v-btn>
       </div>
@@ -29,12 +29,6 @@
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'PlayLists',
-  data() {
-    return {
-      songListfocus: null,
-      songListTimer: null
-    }
-  },
   computed: {
     ...mapGetters([
       'playList',
@@ -46,15 +40,6 @@ export default {
       'addSongToCurrentIndex',
       'delSong'
     ]),
-    mouseover(index){
-      if (this.songListTimer){
-        clearTimeout(this.songListTimer);
-      }
-      this.songListTimer = setTimeout(() => {
-        this.songListfocus = index
-        this.songListTimer = null
-      }, 30)
-    },
     playIndex(index) {
       this.addSongToCurrentIndex(this.playList[index])
     },
@@ -88,6 +73,12 @@ export default {
         display: flex;
         flex: 1;
         align-items: center;
+        &:hover{
+          background-color: rgba(255,255,255,.04);
+          .menu{
+            display: flex;
+          }
+        }
         .rank{
           text-align: center;
           width: 20px;
@@ -101,6 +92,9 @@ export default {
           border-radius: 2px;
           box-shadow: 0 0 10px rgba(0,0,0,.5);
           margin-left: 10px;
+        }
+        .menu {
+          display: none;
         }
         .track-info{
           white-space: nowrap;
@@ -120,9 +114,6 @@ export default {
           }
         }
       }
-    }
-    .song-list-wapper:hover{
-      background-color: rgba(255,255,255,.04);
     }
   }
 </style>
