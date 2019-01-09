@@ -51,3 +51,9 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+  @import url(../static/css/font.css);
+  #app{
+    font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
+  }
+</style>
