@@ -1,11 +1,5 @@
 <template>
   <div class="bg">
-    <v-progress-linear
-      :value="progress"
-      class="my-0"
-      height="3"
-    />
-
     <v-list two-line dark>
       <v-list-tile>
         <v-list-tile-content>
@@ -14,9 +8,7 @@
           <v-list-tile-sub-title v-if="currentSong">{{ currentSong.singer }}</v-list-tile-sub-title>
           <v-list-tile-sub-title v-else>未知歌手</v-list-tile-sub-title>
         </v-list-tile-content>
-
-        <v-spacer/>
-
+        <v-slider :max="duration" :value="currentTime" :height="3" @mousedown="isFromUser = true " @mouseup="isFromUser = false" @change="slideChange"/>
         <v-list-tile-action>
           <v-btn icon @click="prevSong">
             <v-icon>fast_rewind</v-icon>
@@ -25,8 +17,16 @@
 
         <v-list-tile-action :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
           <v-btn icon @click="play">
-            <v-icon v-if="isPlay">pause</v-icon>
-            <v-icon v-else>play_arrow</v-icon>
+            <template v-if="canPlay">
+              <v-icon v-if="isPlay">pause</v-icon>
+              <v-icon v-else>play_arrow</v-icon>
+            </template>
+            <template v-else>
+              <v-progress-circular
+                :width="3"
+                color="primary"
+                indeterminate/>
+            </template>
           </v-btn>
         </v-list-tile-action>
 
@@ -43,8 +43,11 @@
       autoplay
       @timeupdate="updateTime"
       @ended="end"
-      @pause="onPause"
-      @play="onPlay">
+      @pause="isPlay = false"
+      @play="isPlay = true"
+      @emptied="isPlay = false"
+      @canplay="onCanPlay"
+      @loadstart="canPlay = false">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
@@ -58,7 +61,10 @@ export default {
   data() {
     return {
       currentTime: 0,
-      isPlay: false
+      duration: 0,
+      isPlay: false,
+      canPlay: true,
+      isFromUser: false
     }
   },
   computed: {
@@ -68,15 +74,6 @@ export default {
       'currentIndex',
       'playList'
     ]),
-    progress() {
-      let duration
-      if (this.currentSong) {
-        duration = document.getElementById('audio').duration
-      } else {
-        duration = 0
-      }
-      return Math.round(this.currentTime / duration * 100)
-    },
     playUrl() {
       if (this.currentSong) {
         return this.currentSong.url
@@ -91,7 +88,9 @@ export default {
       'changeIndex'
     ]),
     updateTime(e) {
-      this.currentTime = e.target.currentTime
+      if (!this.isFromUser) {
+        this.currentTime = e.target.currentTime
+      }
     },
     play() {
       if (this.isPlay) {
@@ -111,11 +110,14 @@ export default {
         document.getElementById('audio').pause()
       }
     },
-    onPause() {
-      this.isPlay = false
+    onCanPlay() {
+      this.canPlay = true
+      this.duration = document.getElementById('audio').duration
     },
-    onPlay() {
-      this.isPlay = true
+    slideChange(i) {
+      if (!this.isFromUser) {
+        document.getElementById('audio').currentTime = i
+      }
     }
   }
 }
