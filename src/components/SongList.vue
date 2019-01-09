@@ -3,9 +3,9 @@
     <div v-show="loading">
       <Progress/>
     </div>
-    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
+    <div v-for="(item,index) in data" :key="index" class="song-list-wapper">
       <div class="song-list">
-        <div v-if="showRank" class="rank">{{ index+1 }}</div>
+        <div v-if="showRank" class="rank">{{ index + 1 }}</div>
         <img
           v-if="showAlbum"
           :src="item.image"
@@ -20,7 +20,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-menu v-show="index ===songListfocus " bottom left>
+        <v-menu class="menu" bottom left>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
@@ -28,7 +28,7 @@
             <v-list-tile
               v-for="(item, i) in items"
               :key="i"
-              @click="menuClick(i)">
+              @click="menuClick(index, i)">
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -68,9 +68,7 @@ export default {
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' }
-      ],
-      songListfocus: null,
-      songListTimer: null
+      ]
     }
   },
   methods: {
@@ -82,27 +80,18 @@ export default {
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
     },
-    mouseover(index){
-      if (this.songListTimer){
-        clearTimeout(this.songListTimer);
-      }
-      this.songListTimer = setTimeout(() => {
-        this.songListfocus = index
-        this.songListTimer = null
-      }, 10)
-    },
-    menuClick(index) {
-      if (index === 0) {
-        this.playNext()
+    menuClick(index, i) {
+      if (i === 0) {
+        this.playNext(index)
       } else {
-        this.playLatter()
+        this.playLatter(index)
       }
     },
-    playNext() {
-      this.addSongToNext(this.data[this.songListfocus])
+    playNext(index) {
+      this.addSongToNext(this.data[index])
     },
-    playLatter() {
-      this.addSongToLast(this.data[this.songListfocus])
+    playLatter(index) {
+      this.addSongToLast(this.data[index])
     }
   }
 }
@@ -122,6 +111,12 @@ export default {
         display: flex;
         flex: 1;
         align-items: center;
+        &:hover{
+          background-color: rgba(255,255,255,.04);
+          .menu{
+            display: flex;
+          }
+        }
         .rank{
           text-align: center;
           width: 20px;
@@ -135,6 +130,9 @@ export default {
           border-radius: 2px;
           box-shadow: 0 0 10px rgba(0,0,0,.5);
           margin-left: 10px;
+        }
+        .menu {
+          display: none;
         }
         .track-info{
           white-space: nowrap;
@@ -154,9 +152,6 @@ export default {
           }
         }
       }
-    }
-    .song-list-wapper:hover{
-      background-color: rgba(255,255,255,.04);
     }
   }
 </style>

@@ -2,7 +2,11 @@
   <div class="bg">
     <v-list two-line dark>
       <v-list-tile>
-        <v-list-tile-content>
+        <v-list-tile-avatar>
+          <v-img v-if="currentSong" :src="currentSong.image" />
+          <v-img v-else src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000" />
+        </v-list-tile-avatar>
+        <v-list-tile-content width="20%">
           <v-list-tile-title v-if="currentSong">{{ currentSong.name }}</v-list-tile-title>
           <v-list-tile-title v-else>暂无播放歌曲</v-list-tile-title>
           <v-list-tile-sub-title v-if="currentSong">{{ currentSong.singer }}</v-list-tile-sub-title>
@@ -24,16 +28,8 @@
 
         <v-list-tile-action :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
           <v-btn icon @click="play">
-            <template v-if="canPlay">
-              <v-icon v-if="isPlay">pause</v-icon>
-              <v-icon v-else>play_arrow</v-icon>
-            </template>
-            <template v-else>
-              <v-progress-circular
-                :width="3"
-                color="primary"
-                indeterminate/>
-            </template>
+            <v-icon v-if="isPlay">pause</v-icon>
+            <v-icon v-else>play_arrow</v-icon>
           </v-btn>
         </v-list-tile-action>
 
@@ -53,8 +49,7 @@
       @pause="isPlay = false"
       @play="isPlay = true"
       @emptied="isPlay = false"
-      @canplay="onCanPlay"
-      @loadstart="canPlay = false">
+      @canplay="onCanPlay">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
@@ -70,7 +65,6 @@ export default {
       currentTime: 0,
       duration: 0,
       isPlay: false,
-      canPlay: true,
       isFromUser: false
     }
   },
@@ -118,7 +112,6 @@ export default {
       }
     },
     onCanPlay() {
-      this.canPlay = true
       this.duration = document.getElementById('audio').duration
     },
     slideChange(i) {
