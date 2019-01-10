@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <Progress v-show="show"/>
-    <div v-show="songList.length" class="albums-container">
+    <div v-show="songList.length&&btnColor" class="albums-container">
       <header>
         <div class="header-image-container">
           <img :src="headerInfo.pic_album" :alt="headerInfo.ListName" class="header-image">
@@ -14,12 +14,12 @@
               <span class="album-detail" v-html="headerInfo.info"/>
             </div>
             <div class="album-button-container">
-              <v-btn color="success" @click="playAll"> Play </v-btn>
-              <v-btn color="error"> Shuffle </v-btn>
+              <v-btn :color="btnColor" @click="playAll"> Play</v-btn>
+              <v-btn :color="btnColor"> Shuffle</v-btn>
               <v-menu class="menu" bottom left>
                 <v-btn
                   slot="activator"
-                  color="primary"
+                  :color="btnColor"
                   dark
                 >
                   <v-icon>more_vert</v-icon>
@@ -29,7 +29,7 @@
                     v-for="(item, i) in items"
                     :key="i"
                     @click="menuClick(index, i)">
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    <v-list-tile-title >{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
               </v-menu>
@@ -60,6 +60,7 @@ export default {
     return {
       headerInfo: [],
       songList: [],
+      btnColor: null,
       show: true,
       items: [
         { title: 'Play Next' },
@@ -83,35 +84,35 @@ export default {
     ]),
     getRankList(data) {
       getMusicList(data.params.id).then(res => {
-        this.headerInfo = res.topinfo
-        this.getImageColor(this.headerInfo.pic_album)
-        const songs = []
-        const songList = (res.songlist).slice(0, 100)
-        songList.forEach((item) => {
-          songs.push(createSong(item.data))
+        this.getImageColor(res.topinfo.pic_album).then(res => {
+          this.btnColor = res
+        }).then(() => {
+          this.headerInfo = res.topinfo
+          const songs = []
+          const songList = (res.songlist).slice(0, 100)
+          songList.forEach((item) => {
+            songs.push(createSong(item.data))
+          })
+          this.songList = songs
+          this.show = false
         })
-        this.songList = songs
-        this.show = false
       })
     },
     // 获取图片主题色
     getImageColor(img) {
-      const host = location.host;
-      // canvas不允许获取跨域资源的数据，利用服务器代理的方法，解决跨域问题。
-      const URl = `http://${host}/api/img?0=${img}`;
-      // 把图片绘入canvas利用getImageData获取主题色
-      RGBaster.colors(URl, {
-        // 调色板大小
-        paletteSize: 20,
-        // 颜色排除
-        // exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
-        success: function(payload) {
-          console.log(payload)
-          // 设置背景色
-          // that.setColor = payload.dominant;
-          // 提取颜色R、G、B值，设置歌词背景颜色
-        }
-      });
+      return new Promise((resolve, reject) => {
+        // canvas不允许获取跨域资源的数据，利用服务器代理的方法，解决跨域问题。
+        const URl = `http://74.82.206.121:8888/api/img?0=${img}`;
+        RGBaster.colors(URl, {
+          // 调色板大小
+          paletteSize: 50,
+          exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
+          success: function(payload) {
+            const c = payload.dominant.match(/\d+/g);
+            resolve(`rgb(${c[0]},${c[1]},${c[2]})`)
+          }
+        });
+      })
     },
     playAll() {
       this.replacePlayList(this.songList)
@@ -172,27 +173,27 @@ export default {
           box-shadow: 0 0 10px rgba(0, 0, 0, .5);
           border-radius: 4px;
         }
-      .album-extras {
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 10px;
-        margin-left: 5px;
-        .track-text{
-          line-height: normal;
+        .album-extras {
           display: flex;
           flex-direction: column;
-          padding-bottom: 12px;
-          cursor: default;
-          .album-name{
-            font-weight: 500;
-            font-size: 38px;
-          }
-          .album-detail{
-            color: #b3b3b3;
-            padding-top: 3px;
+          padding-bottom: 10px;
+          margin-left: 5px;
+          .track-text {
+            line-height: normal;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 12px;
+            cursor: default;
+            .album-name {
+              font-weight: 500;
+              font-size: 38px;
+            }
+            .album-detail {
+              color: #b3b3b3;
+              padding-top: 3px;
+            }
           }
         }
-      }
       }
     }
     section {
