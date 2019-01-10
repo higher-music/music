@@ -18,7 +18,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-menu class="menu" bottom left>
+        <v-menu :class="menuClassName" bottom left>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
@@ -69,6 +69,15 @@ export default {
       ],
       songListfocus: null,
       songListTimer: null
+    }
+  },
+  computed: {
+    menuClassName() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 'menu_flex'
+        case 'sm': return 'menu_flex'
+        default: return 'menu'
+      }
     }
   },
   methods: {
@@ -142,6 +151,9 @@ export default {
         }
         .menu {
           display: none;
+        }
+        .menu_flex {
+          display: flex;
         }
         .track-info{
           white-space: nowrap;

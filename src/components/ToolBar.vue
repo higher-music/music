@@ -3,7 +3,7 @@
     <v-toolbar-side-icon @click.stop="menuClick"/>
     <v-spacer/>
     <Sheet/>
-    <v-btn icon @click.stop="musicClick">
+    <v-btn :to="{name: 'PlayLists'}" icon>
       <v-icon>queue_music</v-icon>
     </v-btn>
   </v-toolbar>
@@ -17,9 +17,6 @@ export default {
   methods: {
     menuClick() {
       this.$emit('menu-click')
-    },
-    musicClick() {
-      this.$emit('music-click')
     }
   }
 }

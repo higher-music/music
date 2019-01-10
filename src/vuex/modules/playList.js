@@ -1,4 +1,4 @@
-import { CHECK_PREV_NEXT, HAD_THE_SONG, FLAC } from '@/components/js/utils'
+import { CHECK_PREV_NEXT, HAD_THE_SONG, MP3_128K } from '@/components/js/utils'
 
 const state = {
   // 播放列表
@@ -14,7 +14,7 @@ const state = {
   // 是否还有下一首
   hasNext: false,
   // 音乐品质（1、flac，2、320K，3、128）
-  type: FLAC
+  type: MP3_128K
 }
 
 const actions = {

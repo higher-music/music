@@ -19,7 +19,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-btn slot="activator" class="menu" dark icon @click="deleteSong(index)">
+        <v-btn slot="activator" :class="menuClassName" dark icon @click="deleteSong(index)">
           <v-icon>delete_outline</v-icon>
         </v-btn>
       </div>
@@ -37,7 +37,14 @@ export default {
     ...mapGetters([
       'playList',
       'currentIndex'
-    ])
+    ]),
+    menuClassName() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 'menu_flex'
+        case 'sm': return 'menu_flex'
+        default: return 'menu'
+      }
+    }
   },
   methods: {
     ...mapActions([
@@ -99,6 +106,9 @@ export default {
         }
         .menu {
           display: none;
+        }
+        .menu_flex {
+          display: flex;
         }
         .track-info{
           white-space: nowrap;

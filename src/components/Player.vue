@@ -20,7 +20,7 @@
           @mousedown="isFromUser = true "
           @mouseup="isFromUser = false"
           @change="slideChange"/>
-        <Sheet style="margin-left: 30px"/>
+        <Sheet style="margin-left: 30px" class="hidden-sm-and-down"/>
         <v-list-tile-action>
           <v-btn icon @click="prevSong">
             <v-icon>fast_rewind</v-icon>
