@@ -110,7 +110,7 @@ const mutations = {
     CHECK_PREV_NEXT(state)
   },
   REPLACE_PLAY_LIST(state, list) {
-    state.list = list
+    state.list = [].concat(list)
     state.index = 0
     CHECK_PREV_NEXT(state)
   },
