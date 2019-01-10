@@ -37,7 +37,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      '@': resolve('src')
+      '@': resolve('src'),
+      'rgbaster':resolve('static/js/rgbaster.js')
     }
   },
   module: {
