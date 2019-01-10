@@ -8,7 +8,7 @@
 <script>
 import SongList from '@/components/SongList'
 import { search } from '@/api/search'
-import { createSong } from '@/components/js/song'
+import { createSong2 } from '@/components/js/song'
 import Progress from '@/components/Progress'
 
 export default {
@@ -34,11 +34,14 @@ export default {
   },
   methods: {
     getSearchList(){
+      console.log('lalalal')
       this.loading = true
       const songs = []
       search(this.text, 1, 50).then((res) => {
+        console.log(res)
         res.data.song.list.forEach((item) => {
-          songs.push(createSong(item))
+          console.log(item)
+          songs.push(createSong2(item))
         })
         this.songList = songs
         setTimeout(() => {

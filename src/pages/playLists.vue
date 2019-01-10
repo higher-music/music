@@ -1,34 +1,33 @@
 <template>
-  <v-container fill-height>
-    <div v-if="playList.length > 0" :key="0" class="song-list-container">
-      <div class="section-title">PlayLists</div>
-      <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
-        <div class="song-list">
-          <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
-          <div v-else><v-icon>play_circle_outline</v-icon></div>
-          <img
-            :src="item.image"
-            :alt="item.name"
-            :title="item.name"
-            @click="playIndex(index)">
-          <div class="track-info" @click="playIndex(index)">
-            <div class="song-name-container">
-              <span>{{ item.name }}</span>
-            </div>
-            <div class="secondary-info">
-              <span>{{ item.singer }}</span>
-            </div>
+  <div v-if="playList.length > 0" :key="0" class="song-list-container">
+    <div class="section-title">PlayLists</div>
+    <hr>
+    <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
+      <div class="song-list">
+        <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
+        <div v-else><v-icon>play_circle_outline</v-icon></div>
+        <img
+          :src="item.image"
+          :alt="item.name"
+          :title="item.name"
+          @click="playIndex(index)">
+        <div class="track-info" @click="playIndex(index)">
+          <div class="song-name-container">
+            <span>{{ item.name }}</span>
           </div>
-          <v-btn slot="activator" class="menu" dark icon @click="deleteSong(index)">
-            <v-icon>delete_outline</v-icon>
-          </v-btn>
+          <div class="secondary-info">
+            <span>{{ item.singer }}</span>
+          </div>
         </div>
+        <v-btn slot="activator" class="menu" dark icon @click="deleteSong(index)">
+          <v-icon>delete_outline</v-icon>
+        </v-btn>
       </div>
     </div>
-    <v-layout v-else align-center justify-center class="card">
-      Empty
-    </v-layout>
-  </v-container>
+  </div>
+  <div v-else class="card">
+    <span>Empty</span>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -122,6 +121,13 @@ export default {
     }
   }
   .card{
+    width: 100%;
+    height: 100%;
     font-size: 50px;
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

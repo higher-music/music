@@ -49,6 +49,21 @@ export function createSong(musicData) {
   })
 }
 
+export function createSong2(musicData) {
+  return new Song({
+    id: musicData.id,
+    mid: musicData.mid,
+    singer: filterSinger(musicData.singer),
+    name: musicData.name,
+    album: musicData.album.name,
+    duration: 0,
+    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.album.mid}.jpg?max_age=2592000`,
+    mp3_128k: `http://dl.stream.qqmusic.qq.com/M500${musicData.mid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
+    mp3_320k: `http://dl.stream.qqmusic.qq.com/M800${musicData.mid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
+    flac: `http://streamoc.music.tc.qq.com/F000${musicData.mid}.flac?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&&uin=0&fromtag=8`
+  })
+}
+
 function filterSinger(singer) {
   const ret = []
   if (!singer) {
