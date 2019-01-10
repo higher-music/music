@@ -14,7 +14,7 @@
               <span class="album-detail" v-html="headerInfo.info"/>
             </div>
             <div class="album-button-container">
-              <v-btn @click="playAll" color="success"> Play </v-btn>
+              <v-btn color="success" @click="playAll"> Play </v-btn>
               <v-btn color="error"> Shuffle </v-btn>
               <v-menu class="menu" bottom left>
                 <v-btn
