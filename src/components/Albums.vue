@@ -14,8 +14,25 @@
               <span class="album-detail" v-html="headerInfo.info"/>
             </div>
             <div class="album-button-container">
-              <v-btn color="success" @click="playAll">Success</v-btn>
-              <v-btn color="error">Error</v-btn>
+              <v-btn @click="playAll" color="success"> Play </v-btn>
+              <v-btn color="error"> Shuffle </v-btn>
+              <v-menu class="menu" bottom left>
+                <v-btn
+                  slot="activator"
+                  color="primary"
+                  dark
+                >
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+                <v-list>
+                  <v-list-tile
+                    v-for="(item, i) in items"
+                    :key="i"
+                    @click="menuClick(index, i)">
+                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
             </div>
           </div>
         </div>
@@ -35,6 +52,7 @@ import { createSong } from '@/components/js/song';
 import { getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 import { mapActions } from 'vuex'
+import RGBaster from 'rgbaster'
 
 export default {
   components: { SongList, Progress },
@@ -42,7 +60,11 @@ export default {
     return {
       headerInfo: [],
       songList: [],
-      show: true
+      show: true,
+      items: [
+        { title: 'Play Next' },
+        { title: 'Play Later' }
+      ]
     }
   },
   watch: {
@@ -62,6 +84,7 @@ export default {
     getRankList(data) {
       getMusicList(data.params.id).then(res => {
         this.headerInfo = res.topinfo
+        this.getImageColor(this.headerInfo.pic_album)
         const songs = []
         const songList = (res.songlist).slice(0, 100)
         songList.forEach((item) => {
@@ -70,6 +93,25 @@ export default {
         this.songList = songs
         this.show = false
       })
+    },
+    // 获取图片主题色
+    getImageColor(img) {
+      const host = location.host;
+      // canvas不允许获取跨域资源的数据，利用服务器代理的方法，解决跨域问题。
+      const URl = `http://${host}/api/img?0=${img}`;
+      // 把图片绘入canvas利用getImageData获取主题色
+      RGBaster.colors(URl, {
+        // 调色板大小
+        paletteSize: 20,
+        // 颜色排除
+        // exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
+        success: function(payload) {
+          console.log(payload)
+          // 设置背景色
+          // that.setColor = payload.dominant;
+          // 提取颜色R、G、B值，设置歌词背景颜色
+        }
+      });
     },
     playAll() {
       this.replacePlayList(this.songList)
