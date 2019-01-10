@@ -49,7 +49,7 @@
       @ended="end"
       @pause="isPlay = false"
       @play="isPlay = true"
-      @emptied="isPlay = false"
+      @error="onError"
       @canplay="onCanPlay">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
@@ -61,6 +61,7 @@
 import Sheet from '@/components/Sheet'
 import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapGetters, mapActions } from 'vuex'
+import store from '@/vuex/store'
 export default {
   name: 'Player',
   components: { Sheet },
@@ -69,7 +70,9 @@ export default {
       currentTime: 0,
       duration: 0,
       isPlay: false,
-      isFromUser: false
+      isFromUser: false,
+      errorTimes: 0,
+      currentType: store.state.playList.type
     }
   },
   computed: {
@@ -122,6 +125,7 @@ export default {
           document.getElementById('audio').play()
         }
       }
+      this.errorTimes = 0
     },
     end() {
       if (this.haveNext) {
@@ -132,6 +136,53 @@ export default {
     },
     onCanPlay() {
       this.duration = document.getElementById('audio').duration
+    },
+    onError() {
+      this.isPlay = false
+      // 如果playUrl不返回空，就代表当前有歌曲在播放
+      if (this.playUrl) {
+        // 如果错误次数大于1，就代表所有音质都试过了
+        if (this.errorTimes > 1) {
+          console.log('该音乐没有可用音质源')
+          // 重置错误次数
+          this.errorTimes = 0
+          // 如果是最后一首歌就暂停播放器
+          if (this.currentIndex === this.playList.length - 1) {
+            document.getElementById('audio').pause()
+          } else {
+            // 否则就播放下一首
+            this.nextSong()
+          }
+        }
+        // 根据当前播放的音质进行切换
+        switch (this.currentType) {
+          // 如果无损音质不行，就切换成高品质
+          case FLAC:
+            console.log('没有无损品质，切换成高品质')
+            this.currentType = MP3_320K
+            document.getElementById('audio').src = this.currentSong.mp3_320k
+            break
+          // 如果高品质不行就切换成普通品质
+          case MP3_320K:
+            console.log('没有高品质，切换成普通品质')
+            this.currentType = MP3_128K
+            document.getElementById('audio').src = this.currentSong.mp3_128k
+            break
+          // 如果普通品质不行就切换成无损品质
+          case MP3_128K:
+            console.log('没有普通品质，切换成无损品质')
+            this.currentType = FLAC
+            document.getElementById('audio').src = this.currentSong.flac
+            break
+          default:
+            break
+        }
+        // 错误次数记一次
+        this.errorTimes++
+      } else {
+        // 如果当前没有歌曲播放，就重置错误次数
+        this.errorTimes = 0
+      }
     },
     slideChange(i) {
       if (!this.isFromUser) {
