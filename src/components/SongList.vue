@@ -21,7 +21,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-menu :class="menuClassName" bottom left>
+        <v-menu v-if="showMenu" :class="menuClassName" bottom left>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
@@ -50,6 +50,10 @@ export default {
       default: false
     },
     showAlbum: {
+      type: Boolean,
+      default: true
+    },
+    showMenu: {
       type: Boolean,
       default: true
     },
