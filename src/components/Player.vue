@@ -41,6 +41,10 @@
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
+    <v-snackbar v-model="snackbar" :timeout="3000" bottom>
+      该歌曲没有有效音质源
+      <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
     <audio
       id="audio"
       :src="playUrl"
@@ -70,7 +74,8 @@ export default {
       duration: 0,
       isPlay: false,
       isFromUser: false,
-      errorTimes: 0
+      errorTimes: 0,
+      snackbar: false
     }
   },
   computed: {
@@ -159,7 +164,7 @@ export default {
             this.errorTimes = 3
             break
           default:
-            alert('当前歌曲没有有效音质源')
+            this.snackbar = true
             this.end()
             break
         }

@@ -3,7 +3,10 @@
     <Progress v-show="loading"/>
     <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
       <div class="song-list">
-        <div v-if="showRank" class="rank">{{ index + 1 }}</div>
+        <div v-if="showRank">
+          <div v-if="item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
+          <div v-else class="rank">{{ index + 1 }}</div>
+        </div>
         <img
           v-if="showAlbum"
           :src="item.image"
@@ -37,7 +40,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Progress from '@/components/Progress'
 export default {
   components: { Progress },
@@ -72,6 +75,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'currentSong'
+    ]),
     menuClassName() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 'menu_flex'

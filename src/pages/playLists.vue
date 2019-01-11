@@ -1,11 +1,17 @@
 <template>
   <div v-if="playList.length > 0" :key="0" class="song-list-container">
-    <div class="section-title">PlayLists</div>
+    <div class="header">
+      <span style="font-size: 30px;font-weight: bold;">PlayList</span>
+      <v-btn slot="activator" :class="menuClassName" dark icon @click="clearAllSong">
+        <v-icon>delete</v-icon>
+        ClearAll
+      </v-btn>
+    </div>
     <hr>
     <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
-        <div v-else><v-icon>play_circle_outline</v-icon></div>
+        <div v-else class="rank"><v-icon>play_circle_outline</v-icon></div>
         <img
           :src="item.image"
           :alt="item.name"
@@ -49,7 +55,8 @@ export default {
   methods: {
     ...mapActions([
       'addSongToCurrentIndex',
-      'delSong'
+      'delSong',
+      'clearAllSong'
     ]),
     playIndex(index) {
       this.addSongToCurrentIndex(this.playList[index])
@@ -62,14 +69,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .section-title{
-    cursor: default;
-    line-height: normal;
-    font-size: 24px;
-    font-weight: 500;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    padding-top: 5px;
+  .header {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
   }
   .song-list-container{
     padding-left: 10px;
