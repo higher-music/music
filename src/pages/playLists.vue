@@ -20,7 +20,7 @@
           </div>
         </div>
         <v-btn slot="activator" :class="menuClassName" dark icon @click="deleteSong(index)">
-          <v-icon>delete_outline</v-icon>
+          <v-icon>delete</v-icon>
         </v-btn>
       </div>
     </div>
