@@ -4,7 +4,7 @@
     <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
       <div class="song-list">
         <div v-if="showRank">
-          <div v-if="item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
+          <div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
           <div v-else class="rank">{{ index + 1 }}</div>
         </div>
         <img
