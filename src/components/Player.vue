@@ -54,6 +54,13 @@
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
+
+
+    <v-snackbar
+      v-model="snackbar"
+    >
+      当前歌曲没有有效音质源
+    </v-snackbar>
   </div>
 </template>
 
@@ -66,6 +73,7 @@ export default {
   components: { Sheet },
   data() {
     return {
+      snackbar: false,
       currentTime: 0,
       duration: 0,
       isPlay: false,
@@ -159,7 +167,8 @@ export default {
             this.errorTimes = 3
             break
           default:
-            alert('当前歌曲没有有效音质源')
+            this.snackbar = true
+            // alert('当前歌曲没有有效音质源')
             this.end()
             break
         }
