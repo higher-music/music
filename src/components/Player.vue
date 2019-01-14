@@ -48,7 +48,7 @@
     <audio
       id="audio"
       :src="playUrl"
-      autoplay
+      :autoplay="autoplay"
       @timeupdate="updateTime"
       @ended="end"
       @pause="isPlay = false"
@@ -68,6 +68,12 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Player',
   components: { Sheet },
+  props: {
+    autoplay: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       currentTime: 0,
