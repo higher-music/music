@@ -11,7 +11,7 @@
           <div class="album-extras">
             <div class="track-text">
               <span class="album-name">{{ headerInfo.ListName }}</span>
-              <span class="album-detail" v-html="headerInfo.info"/>
+              <!--<span class="album-detail" v-html="headerInfo.info"/>-->
             </div>
             <div class="album-button-container">
               <v-btn :color="btnColor" @click="playAll"> Play</v-btn>
@@ -28,28 +28,16 @@
                   <v-list-tile
                     v-for="(item, i) in items"
                     :key="i"
-                    @click="menuClick(index, i)">
+                    @click="menuClick(item, i)">
                     <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
+                <v-list>
+                  <v-list-tile ref="copy" @click="copyLink">
+                    <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
               </v-menu>
-              <!--<v-menu class="menu" bottom left>-->
-              <!--<v-btn-->
-              <!--slot="activator"-->
-              <!--:color="btnColor"-->
-              <!--dark-->
-              <!--&gt;-->
-              <!--<v-icon>more_vert</v-icon>-->
-              <!--</v-btn>-->
-              <!--<v-list>-->
-              <!--<v-list-tile-->
-              <!--v-for="(item, i) in items"-->
-              <!--:key="i"-->
-              <!--@click="menuClick(index, i)">-->
-              <!--<v-list-tile-title >{{ item.title }}</v-list-tile-title>-->
-              <!--</v-list-tile>-->
-              <!--</v-list>-->
-              <!--</v-menu>-->
             </div>
           </div>
         </div>
@@ -60,6 +48,17 @@
         </div>
       </section>
     </div>
+    <v-dialog v-model="dialog" width="700">
+      <v-card>
+        <v-card-title style="padding-bottom: 0">
+          <span class="headline">{{ headerInfo.ListName }}</span>
+        </v-card-title>
+        <div style="padding: 24px" v-html="headerInfo.info"/>
+      </v-card>
+    </v-dialog>
+    <v-snackbar v-model="copySnackBar" :timeout="1500" bottom>
+      Link copied to clipboard
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -70,18 +69,22 @@ import { getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 import { mapActions } from 'vuex'
 import RGBaster from 'rgbaster'
+import Clipboard from 'clipboard';
 
 export default {
   components: { SongList, Progress },
   data() {
     return {
       headerInfo: [],
+      dialog: false,
       songList: [],
+      copySnackBar: false,
       btnColor: null,
       show: true,
       items: [
         { title: 'Play Next' },
-        { title: 'Play Later' }
+        { title: 'Play Later' },
+        { title: 'Get Info' }
       ]
     }
   },
@@ -99,6 +102,21 @@ export default {
     ...mapActions([
       'replacePlayList'
     ]),
+    copyLink() {
+      const copy = this.$refs.copy.$el
+      const clipboard = new Clipboard(copy, {
+        text: (trigger) => {
+          return `${location.href}`;
+        }
+      });
+      clipboard.on('success', (e) => {
+        this.copySnackBar = true
+        clipboard.destroy()
+      });
+      clipboard.on('error', (e) => {
+        clipboard.destroy()
+      });
+    },
     getRankList(data) {
       getMusicList(data.params.id).then(res => {
         this.getImageColor(res.topinfo.pic_album).then(res => {
@@ -130,6 +148,11 @@ export default {
           }
         });
       })
+    },
+    menuClick(data, i){
+      if (data.title === 'Get Info'){
+        this.dialog = true
+      }
     },
     playAll() {
       this.replacePlayList(this.songList)
