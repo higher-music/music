@@ -73,6 +73,9 @@ const actions = {
   },
   changeType({ commit }, type) {
     commit('CHANGE_TYPE', type)
+  },
+  clearAllSong({ commit }) {
+    commit('CLEAR_ALL_SONG')
   }
 }
 
@@ -125,10 +128,18 @@ const mutations = {
     CHECK_PREV_NEXT(state)
   },
   DEL_SONG(state, index) {
-    if (index === state.index) {
+    if (index < state.index) {
+      state.index--
+    } else if (index === state.list.length - 1 && index === state.index) {
       state.index = index - 1
+    } else if (index === 0 && index === state.index) {
+      state.index = -1
     }
     state.list.splice(index, 1)
+  },
+  CLEAR_ALL_SONG(state) {
+    state.list = []
+    state.index = -1
   },
   ADD_SONG_TO_NEXT(state, song) {
     if ((state.list.length > 0 && state.list.length - 1 === state.index) || state.list.length === 0) {

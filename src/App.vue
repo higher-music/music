@@ -1,37 +1,15 @@
 <template>
   <div id="app">
-    <v-app dark>
-      <navSide ref="nav"/>
-      <tool-bar @menu-click="toggleNav"/>
-      <v-content app>
-        <div class="hidden-md-and-up tool_bar_height"/>
-        <keep-alive>
-          <router-view v-if="$route.meta.keepAlive"/>
-        </keep-alive>
-        <router-view v-if="!$route.meta.keepAlive"/>
-      </v-content>
-      <v-footer height="64" app fixed>
-        <player/>
-      </v-footer>
-    </v-app>
+    <router-view />
   </div>
 </template>
 
 <script>
-import NavSide from '@/components/NavSide'
-import ToolBar from '@/components/ToolBar'
-import Player from '@/components/Player'
 import { getVKey } from '@/api/song'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: { NavSide, ToolBar, Player },
-  data() {
-    return {
-      visible: true
-    }
-  },
   created() {
     getVKey().then((res) => {
       if (res.code === 0) {
@@ -44,10 +22,7 @@ export default {
   methods: {
     ...mapActions([
       'setVKey'
-    ]),
-    toggleNav() {
-      this.$refs.nav.toggle()
-    }
+    ])
   }
 };
 </script>
