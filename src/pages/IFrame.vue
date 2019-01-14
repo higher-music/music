@@ -1,11 +1,11 @@
 <template>
   <v-app dark>
-    <v-layout fixed>
-      <Player/>
-    </v-layout>
-    <v-layout>
+    <v-content app>
       <SongList :data="list" :show-menu="false" show-rank/>
-    </v-layout>
+    </v-content>
+    <v-footer height="64" app fixed>
+      <Player :autoplay="autoplay"/>
+    </v-footer>
   </v-app>
 </template>
 
@@ -24,6 +24,14 @@ export default {
   data() {
     return {
       list: []
+    }
+  },
+  computed: {
+    autoplay() {
+      if (this.$route.params.autoplay === 'true') {
+        return true
+      }
+      return false
     }
   },
   created() {

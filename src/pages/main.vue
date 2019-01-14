@@ -3,7 +3,7 @@
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav"/>
     <v-content app>
-      <div class="hidden-md-and-up tool_bar_height"/>
+      <v-toolbar class="hidden-md-and-up"/>
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive"/>
       </keep-alive>

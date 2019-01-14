@@ -5,7 +5,7 @@ Vue.use(Router);
 
 export const constantRouterMap = [
   {
-    path: '/iframe/:id',
+    path: '/iframe/:id/:autoplay',
     name: 'IFrame',
     component: () => import('@/pages/IFrame.vue')
   },
@@ -15,7 +15,7 @@ export const constantRouterMap = [
     children: [
       {
         path: '/',
-        component: () => import('@/pages/browse.vue')
+        redirect: '/browse'
       },
       {
         path: '/search',
