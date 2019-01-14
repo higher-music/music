@@ -28,10 +28,7 @@ export default {
   },
   computed: {
     autoplay() {
-      if (this.$route.params.autoplay === 'true') {
-        return true
-      }
-      return false
+      return this.$route.params.autoplay === 'true';
     }
   },
   created() {
