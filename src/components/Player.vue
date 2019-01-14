@@ -8,7 +8,7 @@
         </v-list-tile-avatar>
         <v-list-tile-content width="20%">
           <v-list-tile-title v-if="currentSong">{{ currentSong.name }}</v-list-tile-title>
-          <v-list-tile-title v-else>暂无播放歌曲</v-list-tile-title>
+          <v-list-tile-title v-else class="body-2">暂无播放歌曲</v-list-tile-title>
           <v-list-tile-sub-title v-if="currentSong">{{ currentSong.singer }}</v-list-tile-sub-title>
           <v-list-tile-sub-title v-else>未知歌手</v-list-tile-sub-title>
         </v-list-tile-content>

@@ -21,7 +21,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-menu v-if="showMenu" :class="menuClassName" bottom left>
+        <v-menu v-if="showMenu" :class="menuClassName" transition="scale-transition" offset-y right>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
@@ -30,7 +30,7 @@
               v-for="(item, i) in items"
               :key="i"
               @click="menuClick(index, i)">
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>

@@ -16,23 +16,40 @@
             <div class="album-button-container">
               <v-btn :color="btnColor" @click="playAll"> Play</v-btn>
               <v-btn :color="btnColor"> Shuffle</v-btn>
-              <v-menu class="menu" bottom left>
+              <v-menu offset-y transition="scale-transition">
                 <v-btn
                   slot="activator"
                   :color="btnColor"
                   dark
                 >
-                  <v-icon>more_vert</v-icon>
+                  <v-icon>more_horiz</v-icon>
                 </v-btn>
                 <v-list>
                   <v-list-tile
                     v-for="(item, i) in items"
                     :key="i"
                     @click="menuClick(index, i)">
-                    <v-list-tile-title >{{ item.title }}</v-list-tile-title>
+                    <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
               </v-menu>
+              <!--<v-menu class="menu" bottom left>-->
+              <!--<v-btn-->
+              <!--slot="activator"-->
+              <!--:color="btnColor"-->
+              <!--dark-->
+              <!--&gt;-->
+              <!--<v-icon>more_vert</v-icon>-->
+              <!--</v-btn>-->
+              <!--<v-list>-->
+              <!--<v-list-tile-->
+              <!--v-for="(item, i) in items"-->
+              <!--:key="i"-->
+              <!--@click="menuClick(index, i)">-->
+              <!--<v-list-tile-title >{{ item.title }}</v-list-tile-title>-->
+              <!--</v-list-tile>-->
+              <!--</v-list>-->
+              <!--</v-menu>-->
             </div>
           </div>
         </div>
