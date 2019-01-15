@@ -11,7 +11,8 @@
           <div class="album-extras">
             <div class="track-text">
               <span class="album-name">{{ headerInfo.ListName }}</span>
-              <!--<span class="album-detail" v-html="headerInfo.info"/>-->
+              <span class="album-update">{{ update_time }}</span>
+              <span class="album-runtime">{{ total_song_num }} songs </span>
             </div>
             <div class="album-button-container">
               <v-btn :color="btnColor" @click="playAll"> Play</v-btn>
@@ -24,15 +25,15 @@
                 >
                   <v-icon>more_horiz</v-icon>
                 </v-btn>
-                <v-list>
+                <v-list :style="{backgroundColor: `${btnColor}`}">
                   <v-list-tile
                     v-for="(item, i) in items"
                     :key="i"
                     @click="menuClick(item, i)">
-                    <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
+                    <v-list-tile-title :color="btnColor" class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
-                <v-list>
+                <v-list :style="{backgroundColor: `${btnColor}`}">
                   <v-list-tile ref="copy" @click="copyLink">
                     <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
                   </v-list-tile>
@@ -123,6 +124,8 @@ export default {
           this.btnColor = res
         }).then(() => {
           this.headerInfo = res.topinfo
+          this.update_time = res.update_time
+          this.total_song_num = res.total_song_num
           const songs = []
           const songList = (res.songlist).slice(0, 100)
           songList.forEach((item) => {
@@ -228,7 +231,11 @@ export default {
               font-weight: 500;
               font-size: 38px;
             }
-            .album-detail {
+            .album-update {
+              font-size: 18px;
+              font-weight: 500;
+            }
+            .album-runtime{
               color: #b3b3b3;
               padding-top: 3px;
             }
