@@ -1,5 +1,4 @@
-import jsonp from './jsonp'
-import { jsonp2 } from './jsonp'
+import jsonp, { jsonp2 } from './jsonp'
 import { commonParams, options } from './config'
 
 // 获取验证用的秘钥

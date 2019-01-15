@@ -12,5 +12,9 @@ export const options = {
   param: 'jsonpCallback'
 }
 
+export const options2 = {
+  param: 'callback'
+}
+
 // 代表返回结果成功
 export const ERR_OK = 0
