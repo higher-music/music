@@ -4,6 +4,8 @@
     <div v-show="browseAlbumsList.length!==0&&browseSongList.length!==0" class="main-container">
       <div class="section-title">Top Albums</div>
       <AlbumsPicList :data="browseAlbumsList"/>
+      <div class="section-title">Top Playlists</div>
+      <AlbumsPicList :data="browseAlbumsList"/>
       <div class="section-title">Top Songs</div>
       <SongList :data="browseSongList" show-rank/>
     </div>
@@ -14,7 +16,7 @@
 <script>
 import AlbumsPicList from '@/components/AlbumsPicList'
 import Progress from '@/components/Progress'
-import { getTopList, getMusicList } from '@/api/rank'
+import { getTopList, getMusicList, getAlbumList } from '@/api/rank'
 import SongList from '@/components/SongList'
 import { createSong } from '@/components/js/song';
 
@@ -34,6 +36,10 @@ export default {
     getBrowseData() {
       getTopList().then((res) => {
         this.browseAlbumsList = res.data.topList
+      })
+
+      getAlbumList().then((res) => {
+        console.log(res, 1111)
       })
 
       getMusicList(26).then(res => {
