@@ -38,7 +38,7 @@ export function getAlbumList() {
 }
 
 // 根据专辑ID获取专辑详情
-export function getAlbumVyID(albummid) {
+export function getAlbumByID(albummid) {
   const url = `https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg?ct=24&albummid=${albummid}_tk=37988991&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0`
   return jsonp2(url, options)
 }
