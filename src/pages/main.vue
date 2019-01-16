@@ -9,7 +9,7 @@
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive"/>
     </v-content>
-    <v-footer height="64" app fixed>
+    <v-footer height="80" app fixed>
       <player/>
     </v-footer>
   </v-app>

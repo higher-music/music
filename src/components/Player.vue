@@ -1,46 +1,50 @@
 <template>
   <div class="bg">
-    <v-list two-line dark>
-      <v-list-tile>
-        <v-list-tile-avatar>
-          <v-img v-if="currentSong" :src="currentSong.image" />
-          <v-img v-else src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000" />
-        </v-list-tile-avatar>
-        <v-list-tile-content width="20%">
-          <v-list-tile-title v-if="currentSong">{{ currentSong.name }}</v-list-tile-title>
-          <v-list-tile-title v-else class="body-2">暂无播放歌曲</v-list-tile-title>
-          <v-list-tile-sub-title v-if="currentSong">{{ currentSong.singer }}</v-list-tile-sub-title>
-          <v-list-tile-sub-title v-else>未知歌手</v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-slider
-          :max="duration"
-          :value="currentTime"
-          :height="3"
-          class="hidden-sm-and-down"
-          @mousedown="isFromUser = true "
-          @mouseup="isFromUser = false"
-          @change="slideChange"/>
-        <Sheet style="margin-left: 30px" class="hidden-sm-and-down"/>
-        <v-list-tile-action>
-          <v-btn icon @click="prevSong">
-            <v-icon>fast_rewind</v-icon>
-          </v-btn>
-        </v-list-tile-action>
+    <div class="show">
+      <div class="img">
+        <v-img v-if="currentSong" :src="currentSong.image" />
+        <v-img v-else src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000" />
+      </div>
+      <div class="title">
+        <span v-if="currentSong" class="song">{{ currentSong.name }}</span>
+        <span v-else class="song">Higher Music</span>
+        <span v-if="currentSong" class="singer">{{ currentSong.singer }}</span>
+      </div>
+    </div>
+    <div :style="'flex:' + flexSize" class="controller">
+      <div class="btn">
+        <v-btn icon @click="prevSong">
+          <v-icon>skip_previous</v-icon>
+        </v-btn>
 
-        <v-list-tile-action :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
-          <v-btn icon @click="play">
-            <v-icon v-if="isPlay">pause</v-icon>
-            <v-icon v-else>play_arrow</v-icon>
-          </v-btn>
-        </v-list-tile-action>
+        <v-btn icon @click="play">
+          <v-icon v-if="isPlay">pause</v-icon>
+          <v-icon v-else>play_arrow</v-icon>
+        </v-btn>
 
-        <v-list-tile-action :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }">
-          <v-btn icon @click="nextSong">
-            <v-icon>fast_forward</v-icon>
-          </v-btn>
-        </v-list-tile-action>
-      </v-list-tile>
-    </v-list>
+        <v-btn icon @click="nextSong">
+          <v-icon>skip_next</v-icon>
+        </v-btn>
+      </div>
+      <v-slider
+        :max="duration"
+        :value="currentTime"
+        :height="3"
+        class="hidden-sm-and-down"
+        @mousedown="isFromUser = true "
+        @mouseup="isFromUser = false"
+        @change="slideChange"/>
+    </div>
+    <div class="hidden-sm-and-down setting">
+      <Sheet/>
+      <v-slider
+        :max="1"
+        :step="0.1"
+        v-model="media"
+        prepend-icon="volume_up"
+        @change="volumeChange"/>
+    </div>
+
     <v-snackbar v-model="snackbar" :timeout="3000" bottom>
       该歌曲没有有效音质源
       <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
@@ -81,7 +85,8 @@ export default {
       isPlay: false,
       isFromUser: false,
       errorTimes: 0,
-      snackbar: false
+      snackbar: false,
+      media: 0.5
     }
   },
   computed: {
@@ -92,6 +97,13 @@ export default {
       'playList',
       'getType'
     ]),
+    flexSize() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 1
+        case 'sm': return 1
+        default: return 4
+      }
+    },
     playUrl() {
       if (this.currentSong) {
         let playUrl
@@ -182,13 +194,62 @@ export default {
       if (!this.isFromUser) {
         document.getElementById('audio').currentTime = i
       }
+    },
+    volumeChange(i) {
+      document.getElementById('audio').volume = i
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .bg{
   width: 100%;
+  display: flex;
+  height: 80px;
+  .show{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding-left: 7px;
+    margin: 0 5px 0 5px;
+    .img{
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+    .title{
+      display: flex;
+      flex-direction: column;
+      margin-left: 17px;
+      .song{
+        font-size: 15px;
+      }
+      .singer{
+        font-size: 10px;
+        margin-top: 5px;
+      }
+    }
+  }
+  .controller{
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px 0 5px;
+    padding: 10px 0 10px 0;
+    .btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .setting{
+    display: flex;
+    margin: 0 5px 0 5px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
 }
 </style>
