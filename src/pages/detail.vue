@@ -24,10 +24,11 @@ export default {
   created() {
     if (this.$route.params.type === 'list') {
       getMusicList(this.$route.params.id).then(res => {
+        console.log(res, 'list')
         getImageColor(res.topinfo.pic_album).then(res => {
           this.data.btnColor = res
         }).then(() => {
-          this.data.info = res.topinfo
+          this.data.info = res.topinfo.info
           this.data.img = res.topinfo.pic_album
           const songs = []
           const songList = (res.songlist).slice(0, 100)
@@ -40,6 +41,7 @@ export default {
       })
     } else {
       getAlbumByID(this.$route.params.id).then(res => {
+        console.log(res, 'nolist')
         const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
         getImageColor(imgUrl).then(res => {
           this.data.btnColor = res
