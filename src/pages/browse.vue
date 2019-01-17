@@ -36,26 +36,20 @@ export default {
   },
   methods: {
     getBrowseData() {
-      getTopList().then((res) => {
-        res[0].List.forEach((item) => {
+      getTopList().then(res => {
+        res[0].List.forEach(item => {
           this.browseSummitList.push(createList(item))
         })
-        res[1].List.forEach((item) => {
+        res[1].List.forEach(item => {
           this.browseGlobalList.push(createList(item))
         })
-      })
-
-      getMusicList(26).then(res => {
-        const songList = (res.songlist).slice(0, 100)
-        songList.forEach((item) => {
-          this.browseSongList.push(createSong(item.data))
-        })
-      })
-
-      Promise.all([getTopList(), getMusicList()]).then(() => {
-        setTimeout(() => {
+        getMusicList(26).then(res => {
+          const songList = (res.songlist).slice(0, 100)
+          songList.forEach((item) => {
+            this.browseSongList.push(createSong(item.data))
+          })
           this.show = false
-        }, 1500)
+        })
       })
     }
   }

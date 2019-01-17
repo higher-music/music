@@ -1,20 +1,22 @@
 import jsonp, { jsonp2 } from './jsonp'
-import $ from 'jquery'
 import { commonParams, options, options2 } from './config'
 import RGBaster from 'rgbaster'
 
 // 获取Top榜单
 export function getTopList() {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg?page=index&format=html&tpl=macv4&v8debug=1',
-      type: 'get',
-      dataType: 'jsonp',
-      jsonpCallback: 'jsonCallback',
-      success: resolve,
-      error: reject
-    })
-  })
+  const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg?page=index&format=html&tpl=macv4&v8debug=1&jsonCallback=jsonCallback'
+  return jsonp2(url, { name: 'jsonCallback', param: 'jsonCallback', prefix: 'jsonCallback' })
+  // return jsonp2(url, { name: 'jsonCallback', param: 'jsonCallback', prefix: 'jsonCallback' })
+  // return new Promise((resolve, reject) => {
+  //   $.ajax({
+  //     url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg?page=index&format=html&tpl=macv4&v8debug=1',
+  //     type: 'get',
+  //     dataType: 'jsonp',
+  //     jsonpCallback: 'jsonCallback',
+  //     success: resolve,
+  //     error: reject
+  //   })
+  // })
 }
 
 // 根据top榜单id获取榜单中音乐列表
