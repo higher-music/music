@@ -28,7 +28,7 @@
       </div>
       <v-slider
         :max="duration"
-        :value="currentTime"
+        v-model="currentTime"
         :height="3"
         class="hidden-sm-and-down"
         @mousedown="isFromUser = true "
@@ -41,8 +41,7 @@
         :max="1"
         :step="0.1"
         v-model="media"
-        prepend-icon="volume_up"
-        @change="volumeChange"/>
+        prepend-icon="volume_up"/>
     </div>
 
     <v-snackbar v-model="snackbar" :timeout="3000" bottom>
@@ -125,6 +124,11 @@ export default {
       return ''
     }
   },
+  watch: {
+    media() {
+      document.getElementById('audio').volume = this.media
+    }
+  },
   methods: {
     ...mapActions([
       'nextSong',
@@ -194,9 +198,6 @@ export default {
       if (!this.isFromUser) {
         document.getElementById('audio').currentTime = i
       }
-    },
-    volumeChange(i) {
-      document.getElementById('audio').volume = i
     }
   }
 }
