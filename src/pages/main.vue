@@ -3,7 +3,7 @@
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav"/>
     <v-content app>
-      <v-toolbar class="hidden-md-and-up"/>
+      <v-toolbar class="hidden-lg-and-up"/>
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive"/>
       </keep-alive>
@@ -29,7 +29,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="visible" class="navSide-wapper" width="220" app>
+  <v-navigation-drawer v-model="visible" fixed class="navSide-wapper" width="220" app>
     <v-list>
       <v-list-tile v-for="i in topItems" :key="i.icon" :to="{name: i.title}" ripple active-class="active-link">
         <v-list-tile-action>
@@ -40,8 +40,7 @@ export default {
         { title: 'Albums', icon: 'album' },
         { title: 'Songs', icon: 'music_note' }
       ],
-      right: null,
-      visible: true
+      visible: null
     }
   },
   methods: {

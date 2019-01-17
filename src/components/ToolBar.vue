@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar :clipped-left="true" class="hidden-md-and-up" fixed>
+  <v-toolbar :clipped-left="true" class="hidden-lg-and-up" fixed>
     <v-toolbar-side-icon @click.stop="menuClick"/>
     <v-spacer/>
     <Sheet/>
