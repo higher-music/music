@@ -1,18 +1,20 @@
 <template>
+  <!--<div class="layout-container">-->
   <v-app dark>
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav"/>
-    <v-content app>
+    <v-content>
       <v-toolbar class="hidden-lg-and-up"/>
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive"/>
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive"/>
     </v-content>
-    <v-footer height="80" app fixed>
+    <v-footer height="100" app fixed>
       <player/>
     </v-footer>
   </v-app>
+  <!--</div>-->
 </template>
 
 <script>
@@ -29,3 +31,9 @@ export default {
   }
 }
 </script>
+<style>
+  /*.layout-container{*/
+    /*width: 100%;*/
+    /*height: calc(100vh - 100px);*/
+  /*}*/
+</style>
