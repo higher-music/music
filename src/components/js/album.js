@@ -24,3 +24,12 @@ export function createList(itemData) {
     img: itemData.pic_v12
   })
 }
+
+export function createSinger(itemData) {
+  return new Album({
+    id: itemData.Fsinger_id,
+    mid: itemData.Fsinger_mid,
+    name: itemData.Fsinger_name,
+    img: `https://y.gtimg.cn/music/photo_new/T001R300x300M000${itemData.Fsinger_mid}.jpg?max_age=2592000`
+  })
+}

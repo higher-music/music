@@ -1,8 +1,7 @@
 <template>
   <v-app dark>
     <Progress :show="show"/>
-    <div class="section-title">Albums</div>
-    <AlbumsPicList :data="browseAlbumsList" type="albums"/>
+    <AlbumsPicList :data="browseAlbumsList" type="albums" style="margin-top: 20px"/>
   </v-app>
 </template>
 
@@ -32,13 +31,4 @@ export default {
 </script>
 
 <style scoped>
-  .section-title {
-    cursor: default;
-    line-height: normal;
-    font-size: 24px;
-    font-weight: 500;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    padding-top: 5px;
-  }
 </style>

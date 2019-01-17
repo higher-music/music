@@ -1,11 +1,11 @@
 <template>
   <div class="song-list-container">
     <Progress v-show="loading"/>
-    <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
+    <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank">
-          <!--<div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>-->
-          <div class="rank">{{ index + 1 }}</div>
+          <div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
+          <div v-else class="rank">{{ index + 1 }}</div>
         </div>
         <img
           v-if="showAlbum"
@@ -73,9 +73,7 @@ export default {
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' }
-      ],
-      songListfocus: null,
-      songListTimer: null
+      ]
     }
   },
   computed: {
@@ -98,15 +96,6 @@ export default {
     ]),
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
-    },
-    mouseover(index){
-      if (this.songListTimer){
-        clearTimeout(this.songListTimer);
-      }
-      this.songListTimer = setTimeout(() => {
-        this.songListfocus = index
-        this.songListTimer = null
-      }, 10)
     },
     menuClick(index, i) {
       if (i === 0) {

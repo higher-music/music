@@ -8,7 +8,7 @@
       </v-btn>
     </div>
     <hr>
-    <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
+    <div v-for="(item,index) in playList" :key="index" :class="{activeSongBG:index === currentIndex}" class="song-list-wapper">
       <div class="song-list">
         <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
         <div v-else class="rank"><v-icon>play_circle_outline</v-icon></div>
@@ -19,7 +19,7 @@
           @click="playIndex(index)">
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
-            <span>{{ item.name }}</span>
+            <span :class="{activeSong:index === currentIndex}">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
             <span>{{ item.singer }}</span>
@@ -133,7 +133,13 @@ export default {
             font-size: 14px;
           }
         }
+        .activeSong{
+          color: rgb(105, 240, 174);
+        }
       }
+    }
+    .activeSongBG{
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
   .card{
