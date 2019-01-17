@@ -4,10 +4,10 @@
       <div class="list-container" @click="toAlbums(item)">
         <div class="list-wapper">
           <div class="image-wapper">
-            <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle">
+            <img :src="item.img" :alt="item.name" :title="item.name">
           </div>
           <div class="text-wapper">
-            <span>{{ item.topTitle }}</span>
+            <span>{{ item.name }}</span>
           </div>
         </div>
       </div>
@@ -23,11 +23,19 @@ export default {
       default: () => {
         return []
       }
+    },
+    type: {
+      type: String,
+      default: ''
     }
   },
   methods: {
     toAlbums(data){
-      this.$router.push({ path: '/albums/' + data.id });
+      if (this.type === 'list') {
+        this.$router.push({ path: `/detail/${this.type}/${data.id}` })
+      } else {
+        this.$router.push({ path: `/detail/${this.type}/${data.mid}` });
+      }
     }
   }
 }

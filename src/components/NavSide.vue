@@ -37,7 +37,7 @@ export default {
       bottomItems: [
         { title: 'PlayLists', icon: 'playlist_play' },
         { title: 'Artists', icon: 'person' },
-        // { title: 'Albums', icon: 'album' },
+        { title: 'Albums', icon: 'album' },
         { title: 'Songs', icon: 'music_note' }
       ],
       right: null,

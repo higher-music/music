@@ -1,17 +1,20 @@
 import jsonp, { jsonp2 } from './jsonp'
+import $ from 'jquery'
 import { commonParams, options, options2 } from './config'
+import RGBaster from 'rgbaster'
 
 // 获取Top榜单
 export function getTopList() {
-  const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg'
-
-  const data = Object.assign({}, commonParams, {
-    uin: 0,
-    needNewCode: 1,
-    platform: 'h5'
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg?page=index&format=html&tpl=macv4&v8debug=1',
+      type: 'get',
+      dataType: 'jsonp',
+      jsonpCallback: 'jsonCallback',
+      success: resolve,
+      error: reject
+    })
   })
-
-  return jsonp(url, data, options)
 }
 
 // 根据top榜单id获取榜单中音乐列表
@@ -39,6 +42,23 @@ export function getAlbumList() {
 
 // 根据专辑ID获取专辑详情
 export function getAlbumByID(albummid) {
-  const url = `https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg?ct=24&albummid=${albummid}_tk=37988991&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0`
+  const url = `https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg?ct=24&albummid=${albummid}&_tk=37988991&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0`
   return jsonp2(url, options)
+}
+
+// 获取图片主题色
+export function getImageColor(img) {
+  return new Promise((resolve, reject) => {
+    // canvas不允许获取跨域资源的数据，利用服务器代理的方法，解决跨域问题。
+    const URl = `http://74.82.206.121:8888/api/img?0=${img}`;
+    RGBaster.colors(URl, {
+      // 调色板大小
+      paletteSize: 50,
+      exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
+      success: function(payload) {
+        const c = payload.dominant.match(/\d+/g);
+        resolve(`rgb(${c[0]},${c[1]},${c[2]})`)
+      }
+    });
+  })
 }

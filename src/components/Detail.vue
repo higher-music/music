@@ -1,25 +1,25 @@
 <template>
   <v-app dark>
     <Progress v-show="show"/>
-    <div v-show="songList.length&&btnColor" class="albums-container">
+    <div v-show="data.songList.length&&data.btnColor" class="albums-container">
       <header>
         <div class="header-image-container">
-          <img :src="headerInfo.pic_album" :alt="headerInfo.ListName" class="header-image">
+          <img :src="data.img" :alt="data.name" class="header-image">
         </div>
         <div class="header">
-          <div :style="{backgroundImage:`url(${headerInfo.pic_album})`}" class="artwork"/>
+          <div :style="{backgroundImage:`url(${data.img})`}" class="artwork"/>
           <div class="album-extras">
             <div class="track-text">
-              <span class="album-name">{{ headerInfo.ListName }}</span>
+              <span class="album-name">{{ data.name }}</span>
               <!--<span class="album-detail" v-html="headerInfo.info"/>-->
             </div>
             <div class="album-button-container">
-              <v-btn :color="btnColor" @click="playAll"> Play </v-btn>
-              <v-btn :color="btnColor"> Shuffle</v-btn>
+              <v-btn :color="data.btnColor" @click="playAll"> Play </v-btn>
+              <v-btn :color="data.btnColor"> Shuffle</v-btn>
               <v-menu offset-y transition="scale-transition">
                 <v-btn
                   slot="activator"
-                  :color="btnColor"
+                  :color="data.btnColor"
                   dark
                 >
                   <v-icon>more_horiz</v-icon>
@@ -44,16 +44,16 @@
       </header>
       <section>
         <div class="tracklist">
-          <SongList :data="songList" show-rank/>
+          <SongList :data="data.songList" show-rank/>
         </div>
       </section>
     </div>
     <v-dialog v-model="dialog" width="700">
       <v-card>
         <v-card-title style="padding-bottom: 0">
-          <span class="headline">{{ headerInfo.ListName }}</span>
+          <span class="headline">{{ data.name }}</span>
         </v-card-title>
-        <div style="padding: 24px" v-html="headerInfo.info"/>
+        <div style="padding: 24px" v-html="data.info"/>
       </v-card>
     </v-dialog>
     <v-snackbar v-model="copySnackBar" :timeout="1500" bottom>
@@ -64,38 +64,39 @@
 
 <script>
 import Progress from '@/components/Progress'
-import { createSong } from '@/components/js/song';
-import { getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 import { mapActions } from 'vuex'
-import RGBaster from 'rgbaster'
 import Clipboard from 'clipboard';
 
 export default {
   components: { SongList, Progress },
+  props: {
+    data: {
+      type: Object,
+      default() {
+        return {
+          info: '',
+          name: '',
+          songList: [],
+          img: '',
+          btnColor: '#3399ff'
+        }
+      }
+    },
+    show: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
-      headerInfo: [],
       dialog: false,
-      songList: [],
       copySnackBar: false,
-      btnColor: null,
-      show: true,
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' },
         { title: 'Get Info' }
       ]
-    }
-  },
-  watch: {
-    $route: {
-      immediate: true,
-      handler: function(to, from) {
-        this.$nextTick(() => {
-          this.getRankList(to)
-        })
-      }
     }
   },
   methods: {
@@ -117,45 +118,13 @@ export default {
         clipboard.destroy()
       });
     },
-    getRankList(data) {
-      getMusicList(data.params.id).then(res => {
-        this.getImageColor(res.topinfo.pic_album).then(res => {
-          this.btnColor = res
-        }).then(() => {
-          this.headerInfo = res.topinfo
-          const songs = []
-          const songList = (res.songlist).slice(0, 100)
-          songList.forEach((item) => {
-            songs.push(createSong(item.data))
-          })
-          this.songList = songs
-          this.show = false
-        })
-      })
-    },
-    // 获取图片主题色
-    getImageColor(img) {
-      return new Promise((resolve, reject) => {
-        // canvas不允许获取跨域资源的数据，利用服务器代理的方法，解决跨域问题。
-        const URl = `http://74.82.206.121:8888/api/img?0=${img}`;
-        RGBaster.colors(URl, {
-          // 调色板大小
-          paletteSize: 50,
-          exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
-          success: function(payload) {
-            const c = payload.dominant.match(/\d+/g);
-            resolve(`rgb(${c[0]},${c[1]},${c[2]})`)
-          }
-        });
-      })
-    },
     menuClick(data, i){
       if (data.title === 'Get Info'){
         this.dialog = true
       }
     },
     playAll() {
-      this.replacePlayList(this.songList)
+      this.replacePlayList(this.data.songList)
     }
   }
 }

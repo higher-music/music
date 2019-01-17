@@ -29,7 +29,12 @@ export const constantRouterMap = [
         meta: { keepAlive: true }
       },
       {
-        path: '/albums/:id',
+        path: '/detail/:type/:id',
+        component: () => import('@/pages/detail.vue')
+      },
+      {
+        path: '/albums',
+        name: 'Albums',
         component: () => import('@/pages/albums.vue')
       },
       {
@@ -42,11 +47,6 @@ export const constantRouterMap = [
         name: 'Artists',
         component: () => import('@/pages/artists.vue')
       },
-      // {
-      //   path: '/albums',
-      //   name: 'Albums',
-      //   component: () => import('@/pages/albums.vue')
-      // },
       {
         path: '/songs',
         name: 'Songs',

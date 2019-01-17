@@ -1,11 +1,11 @@
 <template>
   <v-app dark>
     <Progress :show="show"/>
-    <div v-show="browseAlbumsList.length!==0&&browseSongList.length!==0" class="main-container">
-      <div class="section-title">Top Albums</div>
-      <AlbumsPicList :data="browseAlbumsList"/>
-      <div class="section-title">Top Playlists</div>
-      <AlbumsPicList :data="browseAlbumsList"/>
+    <div v-show="browseSummitList.length!==0&&browseGlobalList.length!==0&&browseSongList.length!==0" class="main-container">
+      <div class="section-title">Summit Lists</div>
+      <AlbumsPicList :data="browseSummitList" type="list"/>
+      <div class="section-title">Global Lists</div>
+      <AlbumsPicList :data="browseGlobalList" type="list"/>
       <div class="section-title">Top Songs</div>
       <SongList :data="browseSongList" show-rank/>
     </div>
@@ -16,15 +16,17 @@
 <script>
 import AlbumsPicList from '@/components/AlbumsPicList'
 import Progress from '@/components/Progress'
-import { getTopList, getMusicList, getAlbumList } from '@/api/rank'
+import { getTopList, getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
-import { createSong } from '@/components/js/song';
+import { createSong } from '@/components/js/song'
+import { createList } from '@/components/js/album'
 
 export default {
   components: { AlbumsPicList, SongList, Progress },
   data() {
     return {
-      browseAlbumsList: [],
+      browseSummitList: [],
+      browseGlobalList: [],
       browseSongList: [],
       show: true
     }
@@ -35,20 +37,19 @@ export default {
   methods: {
     getBrowseData() {
       getTopList().then((res) => {
-        this.browseAlbumsList = res.data.topList
-      })
-
-      getAlbumList().then((res) => {
-        console.log(res, 1111)
+        res[0].List.forEach((item) => {
+          this.browseSummitList.push(createList(item))
+        })
+        res[1].List.forEach((item) => {
+          this.browseGlobalList.push(createList(item))
+        })
       })
 
       getMusicList(26).then(res => {
-        const songs = []
         const songList = (res.songlist).slice(0, 100)
         songList.forEach((item) => {
-          songs.push(createSong(item.data))
+          this.browseSongList.push(createSong(item.data))
         })
-        this.browseSongList = songs
       })
 
       Promise.all([getTopList(), getMusicList()]).then(() => {

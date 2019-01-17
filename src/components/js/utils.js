@@ -9,7 +9,7 @@ export function CHECK_PREV_NEXT(state) {
 export function HAD_THE_SONG(state, songId) {
   let i = -1
   state.list.forEach((item, index) => {
-    if (item.id === songId) {
+    if (item && item.id === songId) {
       i = index
     }
   })
