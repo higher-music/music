@@ -97,9 +97,6 @@ export default {
       'addSongToLast'
     ]),
     playIndex(index) {
-      setTimeout(() => {
-        document.title = `${this.currentSong.name} • ${this.currentSong.singer}`;
-      }, 0)
       this.addSongToCurrentIndex(this.data[index])
     },
     mouseover(index){

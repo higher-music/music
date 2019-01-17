@@ -7,7 +7,7 @@
       <div class="section-title">Top Playlists</div>
       <AlbumsPicList :data="browseAlbumsList"/>
       <div class="section-title">Top Songs</div>
-      <SongList :data="browseSongList" show-rank/>
+      <SongList ref="songList" :data="browseSongList" show-rank/>
     </div>
   </v-app>
 

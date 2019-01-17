@@ -20,6 +20,9 @@ const state = {
 const actions = {
   // 在当前播放位置播放点击的音乐
   addSongToCurrentIndex({ commit, state }, song){
+    setTimeout(() => {
+      document.title = `${song.name} • ${song.singer}`;
+    }, 0)
     const i = HAD_THE_SONG(state, song.id)
     if (i < 0) {
       commit('ADD_SONG_TO_CURRENT_INDEX', song)
