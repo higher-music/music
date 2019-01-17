@@ -29,7 +29,7 @@ export const constantRouterMap = [
         meta: { keepAlive: true }
       },
       {
-        path: '/detail/:type/:id',
+        path: '/:type/:id',
         component: () => import('@/pages/detail.vue')
       },
       {

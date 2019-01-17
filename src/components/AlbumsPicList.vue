@@ -31,11 +31,7 @@ export default {
   },
   methods: {
     toAlbums(data){
-      if (this.type === 'list') {
-        this.$router.push({ path: `/detail/${this.type}/${data.id}` })
-      } else {
-        this.$router.push({ path: `/detail/${this.type}/${data.mid}` });
-      }
+      this.$router.push({ path: `/${this.type}/${data.id}` })
     }
   }
 }
