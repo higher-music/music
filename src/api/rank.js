@@ -6,17 +6,6 @@ import RGBaster from 'rgbaster'
 export function getTopList() {
   const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg?page=index&format=html&tpl=macv4&v8debug=1&jsonCallback=jsonCallback'
   return jsonp2(url, { name: 'jsonCallback', param: 'jsonCallback', prefix: 'jsonCallback' })
-  // return jsonp2(url, { name: 'jsonCallback', param: 'jsonCallback', prefix: 'jsonCallback' })
-  // return new Promise((resolve, reject) => {
-  //   $.ajax({
-  //     url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_opt.fcg?page=index&format=html&tpl=macv4&v8debug=1',
-  //     type: 'get',
-  //     dataType: 'jsonp',
-  //     jsonpCallback: 'jsonCallback',
-  //     success: resolve,
-  //     error: reject
-  //   })
-  // })
 }
 
 // 根据top榜单id获取榜单中音乐列表
