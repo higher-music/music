@@ -3,14 +3,14 @@
   <v-app dark>
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav"/>
-    <v-content>
+    <v-content app>
       <v-toolbar class="hidden-lg-and-up"/>
       <keep-alive>
         <router-view v-if="$route.meta.keepAlive"/>
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive"/>
     </v-content>
-    <v-footer height="100" app fixed>
+    <v-footer height="100" app>
       <player/>
     </v-footer>
   </v-app>

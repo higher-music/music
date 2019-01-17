@@ -1,22 +1,22 @@
 .application--wrap{
+  //max-height: calc(100vh - 100px) !important
+  min-height: auto !important;
+  height: calc(100vh - 100px) !important;
   //max-height: calc(100vh - 100px) !important;
-  overflow: auto;
+  //overflow: auto;
 }
 .theme--dark.v-navigation-drawer {
   background-color: #000 !important;
 }
 .v-content{
-  max-height: calc(100vh - 100px) !important;
-  //padding: 0 !important;
-  overflow: auto;
+  overflow: auto !important;
+  //padding: 0 0 0 220px !important;
+
+  //padding: 0 0 0 220px !important;
 }
 .theme--dark.v-list {
   padding: 0 !important;
 }
-//.application theme--dark{
-//  max-height: calc(100vh - 100px) !important;
-//  overflow: auto;
-//}
 .application--wrap {
   background-image: linear-gradient(#1e3264, #04060c 130%);
 }
