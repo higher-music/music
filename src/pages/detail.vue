@@ -26,10 +26,11 @@ export default {
     switch (this.$route.params.type) {
       case 'list':
         getMusicList(this.$route.params.id).then(res => {
+          console.log(res)
           getImageColor(res.topinfo.pic_album).then(res => {
             this.data.btnColor = res
           }).then(() => {
-            this.data.info = res.topinfo
+            this.data.info = res.topinfo.info
             this.data.img = res.topinfo.pic_album
             const songs = []
             const songList = (res.songlist).slice(0, 100)
@@ -58,6 +59,7 @@ export default {
         break
       default:
         getSingerDetail(this.$route.params.id).then(res => {
+          console.log(res)
           const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
           getImageColor(imgUrl).then(res => {
             this.data.btnColor = res

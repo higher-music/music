@@ -69,6 +69,7 @@ export const constantRouterMap = [
 
 const router = new Router({
   linkActiveClass: 'active-link',
+  mode: 'history',
   routes: constantRouterMap
 });
 
