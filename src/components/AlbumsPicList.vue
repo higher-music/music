@@ -1,7 +1,7 @@
 <template>
   <div class="grid-container">
     <div v-for="item in data" :key="item.id">
-      <div class="list-container" @click="toAlbums(item)">
+      <div class="list-container" @click="toDetail(item.id)">
         <div class="list-wapper">
           <div class="image-wapper">
             <img :src="item.img" :alt="item.name" :title="item.name">
@@ -30,8 +30,8 @@ export default {
     }
   },
   methods: {
-    toAlbums(data){
-      this.$router.push({ path: `/${this.type}/${data.id}` })
+    toDetail(id){
+      this.$router.push({ path: `/${this.type}/${id}` })
     }
   }
 }
@@ -82,7 +82,6 @@ export default {
         }
       }
     }
-
-    }
+  }
 
 </style>

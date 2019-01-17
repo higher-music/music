@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <Progress :show="show"/>
-    <AlbumsPicList :data="browseAlbumsList" type="albums" style="margin-top: 20px"/>
+    <AlbumsPicList :data="browseAlbumsList" type="album" style="margin-top: 20px"/>
   </v-app>
 </template>
 
