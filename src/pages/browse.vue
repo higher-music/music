@@ -7,7 +7,7 @@
       <div class="section-title">Global Lists</div>
       <AlbumsPicList :data="browseGlobalList" type="list"/>
       <div class="section-title">Top Songs</div>
-      <SongList :data="browseSongList" show-rank/>
+      <SongList ref="songList" :data="browseSongList" show-rank/>
     </div>
   </v-app>
 

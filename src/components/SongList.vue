@@ -1,11 +1,11 @@
 <template>
   <div class="song-list-container">
     <Progress v-show="loading"/>
-    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
+    <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
       <div class="song-list">
         <div v-if="showRank">
-          <div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
-          <div v-else class="rank">{{ index + 1 }}</div>
+          <!--<div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>-->
+          <div class="rank">{{ index + 1 }}</div>
         </div>
         <img
           v-if="showAlbum"
@@ -15,7 +15,7 @@
           @click="playIndex(index)">
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
-            <span>{{ item.name }}</span>
+            <span :class="{activeSong:currentSong && item.id === currentSong.id}">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
             <span>{{ item.singer }}</span>
@@ -175,14 +175,25 @@ export default {
           .song-name-container{
             display: flex;
             align-items: center;
+            span{
+              font-size: 16px;
+            }
           }
           .secondary-info{
             display: flex;
-            color: #b3b3b3;
-            font-size: 14px;
+            span{
+              color: #b3b3b3;
+              font-size: 14px;
+            }
           }
         }
       }
+    }
+    .activeSongBG{
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    .activeSong{
+      color: rgb(105, 240, 174);
     }
   }
 </style>
