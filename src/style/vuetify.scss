@@ -5,6 +5,7 @@
   padding: 0 !important;
 }
 .application--wrap {
+  min-height:calc(100vh - 156px) !important;
   background-image: linear-gradient(#1e3264, #04060c 130%);
 }
 .navSide-wapper {
