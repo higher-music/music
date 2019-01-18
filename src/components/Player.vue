@@ -36,7 +36,10 @@
         @change="slideChange"/>
     </div>
     <div class="hidden-sm-and-down setting">
-      <Sheet/>
+      <Sheet class="hidden-md-and-down"/>
+      <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
+        <v-icon>queue_music</v-icon>
+      </v-btn>
       <v-slider
         :max="1"
         :step="0.1"

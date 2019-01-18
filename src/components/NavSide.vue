@@ -35,10 +35,10 @@ export default {
         { title: 'For You', icon: 'favorite' }
       ],
       bottomItems: [
-        { title: 'PlayLists', icon: 'playlist_play' },
-        { title: 'Artists', icon: 'person' },
-        { title: 'Albums', icon: 'album' },
-        { title: 'Songs', icon: 'music_note' }
+        // { title: 'PlayLists', icon: 'playlist_play' },
+        { title: 'Hot Artists', icon: 'person' },
+        { title: 'New Albums', icon: 'album' },
+        { title: 'New Songs', icon: 'music_note' }
       ],
       visible: null
     }

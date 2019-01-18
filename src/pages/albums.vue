@@ -21,7 +21,7 @@ export default {
   },
   created() {
     getAlbumList().then((res) => {
-      res.albumlib.data.list.forEach((item) => {
+      res.new_album.data.list.forEach((item) => {
         this.browseAlbumsList.push(createAlbum(item))
         this.show = false
       })

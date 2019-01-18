@@ -29,3 +29,11 @@ export function createSinger(itemData) {
     img: `https://y.gtimg.cn/music/photo_new/T001R300x300M000${itemData.Fsinger_mid}.jpg?max_age=2592000`
   })
 }
+
+export function createPlayList(itemData) {
+  return new Album({
+    id: itemData.tid,
+    name: itemData.title,
+    img: itemData.cover_url_big
+  })
+}

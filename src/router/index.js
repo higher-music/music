@@ -33,8 +33,8 @@ export const constantRouterMap = [
         component: () => import('@/pages/detail.vue')
       },
       {
-        path: '/albums',
-        name: 'Albums',
+        path: '/new_albums',
+        name: 'New Albums',
         component: () => import('@/pages/albums.vue')
       },
       {
@@ -43,20 +43,20 @@ export const constantRouterMap = [
         component: () => import('@/pages/forYou.vue')
       },
       {
-        path: '/artists',
-        name: 'Artists',
+        path: '/hot_artists',
+        name: 'Hot Artists',
         component: () => import('@/pages/artists.vue')
       },
       {
-        path: '/songs',
-        name: 'Songs',
+        path: '/new_songs',
+        name: 'New Songs',
         component: () => import('@/pages/songs.vue')
       },
-      {
-        path: '/play_lists',
-        name: 'PlayLists',
-        component: () => import('@/pages/playLists.vue')
-      },
+      // {
+      //   path: '/play_lists',
+      //   name: 'PlayLists',
+      //   component: () => import('@/pages/playLists.vue')
+      // },
       {
         path: '*',
         name: 'NotFound',
