@@ -116,8 +116,8 @@ export default {
 
 <style lang="scss" scoped>
   .song-list-container{
-    padding-left: 10px;
-    padding-right: 10px;
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
     .song-list-wapper {
       display: flex;
       height: 60px;

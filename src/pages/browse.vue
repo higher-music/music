@@ -7,7 +7,9 @@
       <div class="section-title">Global Lists</div>
       <AlbumsPicList :data="browseGlobalList" type="list"/>
       <div class="section-title">Top Songs</div>
-      <SongList ref="songList" :data="browseSongList" show-rank/>
+      <div class="top-songs-container">
+        <SongList ref="songList" :data="browseSongList" show-rank/>
+      </div>
     </div>
   </v-app>
 </template>
@@ -54,6 +56,10 @@ export default {
 </script>
 
 <style scoped>
+  .top-songs-container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   .section-title {
     cursor: default;
     line-height: normal;

@@ -132,10 +132,8 @@ export default {
 
 <style lang="scss" scoped>
   .albums-container {
-    overflow-y: hidden;
-    padding-bottom: 100px;
     background-color: #000;
-    height: 100%;
+    height:calc(100vh - 100px) !important;
     overflow-x: hidden;
     perspective: 1px;
     perspective-origin: center top;
