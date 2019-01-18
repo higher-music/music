@@ -10,7 +10,6 @@
       <SongList ref="songList" :data="browseSongList" show-rank/>
     </div>
   </v-app>
-
 </template>
 
 <script>

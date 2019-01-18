@@ -1,5 +1,4 @@
 <template>
-  <!--<div class="layout-container">-->
   <v-app dark>
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav"/>
@@ -14,7 +13,6 @@
       <player/>
     </v-footer>
   </v-app>
-  <!--</div>-->
 </template>
 
 <script>
@@ -31,9 +29,3 @@ export default {
   }
 }
 </script>
-<style>
-  /*.layout-container{*/
-    /*width: 100%;*/
-    /*height: calc(100vh - 100px);*/
-  /*}*/
-</style>

@@ -4,6 +4,7 @@
   box-sizing: content-box !important;
 }
 
+
 .active-link{
   color: #69f0ae !important;
 }
@@ -13,8 +14,6 @@
 }
 
 .main-container{
-  //min-height: calc(100vh - 100px) !important;
-  //overflow: auto;
   padding-top: 15px;
   padding-bottom: 20px;
   animation: .7s fadein;

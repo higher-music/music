@@ -29,13 +29,9 @@ export default {
 <style lang="scss">
   @import url(../static/css/font.css);
   body, html {
-    height: 100%;
+    width: 100%;
+    min-height: 100%;
     margin: 0;
-    overflow: hidden;
-  }
-  #app{
-    /*width: 100%;*/
-    /*min-height: 100%;*/
     background-color: #303030;
     color: #fff;
   }
