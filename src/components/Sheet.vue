@@ -5,8 +5,9 @@
       icon>
       <v-icon>settings</v-icon>
     </v-btn>
-    <v-list>
-      <v-subheader>Bitrate</v-subheader>
+
+    <v-list class="sheet-container">
+      <div class="bitrate-text">Bitrate</div>
       <v-radio-group v-model="radioGroup">
         <v-radio
           v-for="r in radioGroupData"
@@ -17,6 +18,7 @@
         />
       </v-radio-group>
     </v-list>
+
   </v-bottom-sheet>
 </template>
 
@@ -24,6 +26,7 @@
 import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapActions } from 'vuex'
 import store from '@/vuex/store'
+
 export default {
   name: 'Sheet',
   data() {
@@ -51,5 +54,18 @@ export default {
 </script>
 
 <style scoped>
+  .sheet-container {
+    padding: 8px 16px !important;
+    min-width: 100vw;
+    box-sizing: border-box;
+    display: block;
+    outline: 0;
+    max-height: 80vh;
+    overflow: auto;
+  }
 
+  .bitrate-text {
+    font-size: 18px;
+    font-weight: 500;
+  }
 </style>
