@@ -177,6 +177,7 @@ export default {
       }
     },
     onPlay() {
+      document.title = `${this.currentSong.name}  ${this.currentSong.singer}`
       this.isPlay = true
       this.errorTimes = 0
     },
