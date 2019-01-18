@@ -22,7 +22,11 @@
         <v-btn icon class="hidden-md-and-down" @click="prevSong">
           <v-icon>skip_previous</v-icon>
         </v-btn>
-        <v-btn icon @click="play">
+        <v-btn v-if="currentSong" :loading="loading" icon @click="play">
+          <v-icon v-if="isPlay">pause</v-icon>
+          <v-icon v-else>play_arrow</v-icon>
+        </v-btn>
+        <v-btn v-else icon @click="play">
           <v-icon v-if="isPlay">pause</v-icon>
           <v-icon v-else>play_arrow</v-icon>
         </v-btn>
@@ -67,6 +71,8 @@
       @timeupdate="updateTime"
       @ended="end"
       @pause="isPlay = false"
+      @loadstart="loadStart"
+      @loadedmetadata="loadEdmetaData"
       @play="onPlay"
       @error="onError"
       @canplay="onCanPlay">
@@ -77,22 +83,6 @@
       该歌曲没有有效音质源
       <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
-    <!--<div class="hidden-sm-and-down setting">-->
-    <!--<Sheet class="hidden-md-and-down"/>-->
-    <!--<v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">-->
-    <!--<v-icon>queue_music</v-icon>-->
-    <!--</v-btn>-->
-    <!--<v-slider-->
-    <!--:max="1"-->
-    <!--:step="0.1"-->
-    <!--v-model="media"-->
-    <!--prepend-icon="volume_up"/>-->
-    <!--</div>-->
-    <!--<v-snackbar v-model="snackbar" :timeout="3000" bottom>-->
-    <!--该歌曲没有有效音质源-->
-    <!--<v-btn color="pink" flat @click="snackbar = false">Close</v-btn>-->
-    <!--</v-snackbar>-->
-
   </div>
 </template>
 
@@ -118,7 +108,8 @@ export default {
       isFromUser: false,
       errorTimes: 0,
       snackbar: false,
-      media: 0.5
+      media: 0.5,
+      loading: true
     }
   },
   computed: {
@@ -171,6 +162,12 @@ export default {
       'prevSong',
       'changeIndex'
     ]),
+    loadStart(){
+      this.loading = true
+    },
+    loadEdmetaData(){
+      this.loading = false
+    },
     updateTime(e) {
       if (!this.isFromUser) {
         this.currentTime = e.target.currentTime
