@@ -1,56 +1,65 @@
 <template>
-  <div class="bg">
-    <div class="show">
-      <div class="img">
-        <v-img v-if="currentSong" :src="currentSong.image" />
-        <v-img v-else src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000" />
+  <div class="footer-container">
+    <div class="track-info">
+      <div class="album-artwork">
+        <v-img v-if="currentSong" :src="currentSong.image"/>
+        <v-img v-else src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000"/>
       </div>
-      <div class="title">
-        <span v-if="currentSong" class="song">{{ currentSong.name }}</span>
-        <span v-else class="song">Higher Music</span>
-        <span v-if="currentSong" class="singer">{{ currentSong.singer }}</span>
+      <div class="track-text">
+        <div v-if="currentSong" class="track-title">
+          {{ currentSong.name }}
+        </div>
+        <div v-else class="track-title">
+          Higher Music
+        </div>
+        <div v-if="currentSong" class="track-artist">
+          {{ currentSong.singer }}
+        </div>
       </div>
     </div>
-    <div :style="'flex:' + flexSize" class="controller">
-      <div class="btn">
-        <v-btn icon @click="prevSong">
+    <div class="playback-controls">
+      <div class="playback-buttons">
+        <v-btn icon class="hidden-md-and-down" @click="prevSong">
           <v-icon>skip_previous</v-icon>
         </v-btn>
-
         <v-btn icon @click="play">
           <v-icon v-if="isPlay">pause</v-icon>
           <v-icon v-else>play_arrow</v-icon>
         </v-btn>
-
         <v-btn icon @click="nextSong">
           <v-icon>skip_next</v-icon>
         </v-btn>
       </div>
-      <v-slider
-        :max="duration"
-        v-model="currentTime"
-        :height="3"
-        class="hidden-sm-and-down"
-        @mousedown="isFromUser = true "
-        @mouseup="isFromUser = false"
-        @change="slideChange"/>
+      <div class="scrubber">
+        <v-slider
+          :max="duration"
+          v-model="currentTime"
+          :height="3"
+          color="#69f0ae"
+          class="hidden-sm-and-down"
+          @mousedown="isFromUser = true "
+          @mouseup="isFromUser = false"
+          @change="slideChange"/>
+      </div>
     </div>
-    <div class="hidden-sm-and-down setting">
+    <div class="misc-controls hidden-sm-and-down">
       <Sheet class="hidden-md-and-down"/>
       <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
         <v-icon>queue_music</v-icon>
       </v-btn>
-      <v-slider
-        :max="1"
-        :step="0.1"
-        v-model="media"
-        prepend-icon="volume_up"/>
-    </div>
+      <v-btn icon class="hidden-md-and-down">
+        <v-icon>volume_up</v-icon>
+      </v-btn>
+      <v-flex xs4>
+        <v-slider
+          :max="1"
+          :step="0.1"
+          v-model="media"
+          color="#69f0ae"
+        />
+      </v-flex>
 
-    <v-snackbar v-model="snackbar" :timeout="3000" bottom>
-      该歌曲没有有效音质源
-      <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
-    </v-snackbar>
+    </div>
     <audio
       id="audio"
       :src="playUrl"
@@ -64,6 +73,26 @@
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
+    <v-snackbar v-model="snackbar" :timeout="3000" bottom>
+      该歌曲没有有效音质源
+      <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
+    <!--<div class="hidden-sm-and-down setting">-->
+    <!--<Sheet class="hidden-md-and-down"/>-->
+    <!--<v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">-->
+    <!--<v-icon>queue_music</v-icon>-->
+    <!--</v-btn>-->
+    <!--<v-slider-->
+    <!--:max="1"-->
+    <!--:step="0.1"-->
+    <!--v-model="media"-->
+    <!--prepend-icon="volume_up"/>-->
+    <!--</div>-->
+    <!--<v-snackbar v-model="snackbar" :timeout="3000" bottom>-->
+    <!--该歌曲没有有效音质源-->
+    <!--<v-btn color="pink" flat @click="snackbar = false">Close</v-btn>-->
+    <!--</v-snackbar>-->
+
   </div>
 </template>
 
@@ -71,6 +100,7 @@
 import Sheet from '@/components/Sheet'
 import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'Player',
   components: { Sheet },
@@ -101,9 +131,12 @@ export default {
     ]),
     flexSize() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 1
-        case 'sm': return 1
-        default: return 4
+        case 'xs':
+          return 1
+        case 'sm':
+          return 1
+        default:
+          return 4
       }
     },
     playUrl() {
@@ -207,53 +240,128 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg{
-  width: 100%;
-  display: flex;
-  height: 80px;
-  .show{
+  .footer-container {
+    box-sizing: inherit !important;
+    width: 100%;
+    height: 100px;
     display: flex;
-    flex: 1;
+    padding: 0 16px;
+    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    padding-left: 7px;
-    margin: 0 5px 0 5px;
-    .img{
-      width: 50px;
-      height: 50px;
-      overflow: hidden;
-      border-radius: 5px;
-    }
-    .title{
-      display: flex;
-      flex-direction: column;
-      margin-left: 17px;
-      .song{
-        font-size: 15px;
-      }
-      .singer{
-        font-size: 10px;
-        margin-top: 5px;
-      }
-    }
-  }
-  .controller{
-    display: flex;
-    flex-direction: column;
-    margin: 0 5px 0 5px;
-    padding: 10px 0 10px 0;
-    .btn{
+    .track-info {
+      width: 30%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      .album-artwork {
+        height: 60px;
+        min-width: 60px;
+        width: 60px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+        border-radius: 5%;
+        margin-right: 10px;
+        background-size: cover;
+      }
+      .track-text {
+        width: 100%;
+        cursor: default;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: normal;
+        padding-right: 10%;
+        .track-title {
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .track-artist {
+          font-size: 14px;
+          color: #b3b3b3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    .playback-controls {
+      width: 40%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .playback-buttons {
+        display: flex;
+        justify-content: center;
+      }
+      .scrubber{
+        display: flex;
+        width: 100%;
+        align-items: center;
+      }
+    }
+    .misc-controls {
+      width: 30%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape) {
+      .track-info {
+        flex: 1;
+      }
+      .playback-controls{
+        width: unset;
+        flex: unset;
+      }
     }
   }
-  .setting{
-    display: flex;
-    margin: 0 5px 0 5px;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-  }
-}
+
+  /*.bg{*/
+  /*width: 100%;*/
+  /*display: flex;*/
+  /*height: 80px;*/
+  /*.show{*/
+  /*display: flex;*/
+  /*flex: 1;*/
+  /*align-items: center;*/
+  /*padding-left: 7px;*/
+  /*margin: 0 5px 0 5px;*/
+  /*.img{*/
+  /*width: 50px;*/
+  /*height: 50px;*/
+  /*overflow: hidden;*/
+  /*border-radius: 5px;*/
+  /*}*/
+  /*.title{*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*margin-left: 17px;*/
+  /*.song{*/
+  /*font-size: 15px;*/
+  /*}*/
+  /*.singer{*/
+  /*font-size: 10px;*/
+  /*margin-top: 5px;*/
+  /*}*/
+  /*}*/
+  /*}*/
+  /*.controller{*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*margin: 0 5px 0 5px;*/
+  /*padding: 10px 0 10px 0;*/
+  /*.btn{*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  /*}*/
+  /*}*/
+  /*.setting{*/
+  /*display: flex;*/
+  /*margin: 0 5px 0 5px;*/
+  /*flex: 1;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*padding: 10px;*/
+  /*}*/
+  /*}*/
 </style>

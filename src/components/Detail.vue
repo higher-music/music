@@ -11,7 +11,6 @@
           <div class="album-extras">
             <div class="track-text">
               <span class="album-name">{{ data.name }}</span>
-              <!--<span class="album-detail" v-html="headerInfo.info"/>-->
             </div>
             <div class="album-button-container">
               <v-btn :color="data.btnColor" @click="playAll"> Play </v-btn>

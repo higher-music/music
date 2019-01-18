@@ -1,10 +1,5 @@
 @import "vuetify";
 
-*, :after, :before{
-  box-sizing: content-box !important;
-}
-
-
 .active-link{
   color: #69f0ae !important;
 }
@@ -45,3 +40,4 @@
     height: 150px !important;
   }
 }
+
