@@ -23,7 +23,7 @@
                 >
                   <v-icon>more_horiz</v-icon>
                 </v-btn>
-                <v-list>
+                <v-list :style="{backgroundColor: `${data.btnColor}`}">
                   <v-list-tile
                     v-for="(item, i) in items"
                     :key="i"
@@ -31,7 +31,7 @@
                     <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
-                <v-list>
+                <v-list :style="{backgroundColor: `${data.btnColor}`}">
                   <v-list-tile ref="copy" @click="copyLink">
                     <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
                   </v-list-tile>
