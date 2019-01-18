@@ -108,7 +108,7 @@ export default {
       isFromUser: false,
       errorTimes: 0,
       snackbar: false,
-      media: 0.5,
+      media: 1,
       loading: true
     }
   },
@@ -174,7 +174,7 @@ export default {
       }
     },
     onPlay() {
-      document.title = `${this.currentSong.name}  ${this.currentSong.singer}`
+      document.title = `${this.currentSong.name} • ${this.currentSong.singer}`
       this.isPlay = true
       this.errorTimes = 0
     },
