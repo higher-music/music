@@ -132,6 +132,8 @@ export default {
 
 <style lang="scss" scoped>
   .albums-container {
+    overflow-y: hidden;
+    padding-bottom: 100px;
     background-color: #000;
     height: 100%;
     overflow-x: hidden;
