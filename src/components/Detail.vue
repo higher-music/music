@@ -137,13 +137,9 @@ export default {
     background-color: #000;
     height: 100%;
     overflow-x: hidden;
-    -webkit-perspective: 1px;
     perspective: 1px;
-    -webkit-perspective-origin: center top;
     perspective-origin: center top;
-    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-animation: .7s fadein;
     animation: .7s fadein;
     header {
       min-height: 190px;
@@ -151,9 +147,7 @@ export default {
       height: 50%;
       position: relative;
       vertical-align: top;
-      -webkit-transform-origin: center top;
       transform-origin: center top;
-      -webkit-transform: translateZ(-.6px) scale(1.6);
       transform: translateZ(-.6px) scale(1.6);
       .header-image-container {
         width: 100%;
@@ -164,9 +158,7 @@ export default {
         .header-image {
           width: 100%;
           height: 100%;
-          -o-object-position: center 30%;
           object-position: center 30%;
-          -o-object-fit: cover;
           object-fit: cover;
           opacity: .45;
         }
@@ -223,7 +215,6 @@ export default {
     section {
       box-shadow: 0 0 20px 0 #000;
       background-image: linear-gradient(#04060c, #1e3264 120%);
-      -webkit-transform: translateZ(0);
       transform: translateZ(0);
       min-height: calc(100% - 300px);
       .tracklist {
