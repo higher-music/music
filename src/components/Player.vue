@@ -19,7 +19,7 @@
     </div>
     <div class="playback-controls">
       <div class="playback-buttons">
-        <v-btn icon class="hidden-md-and-down" @click="prevSong">
+        <v-btn icon class="hidden-sm-and-down" @click="prevSong">
           <v-icon>skip_previous</v-icon>
         </v-btn>
         <v-btn v-if="currentSong" :loading="loading" icon @click="play">
@@ -51,18 +51,16 @@
       <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
         <v-icon>queue_music</v-icon>
       </v-btn>
-      <v-btn icon class="hidden-md-and-down">
-        <v-icon>volume_up</v-icon>
-      </v-btn>
-      <v-flex xs4>
+      <v-flex xs4 >
         <v-slider
           :max="1"
           :step="0.1"
           v-model="media"
-          color="#69f0ae"
-        />
+          class="hidden-md-and-down"
+          prepend-icon="volume_up"
+          style="margin-left: 10px"
+          color="#69f0ae"/>
       </v-flex>
-
     </div>
     <audio
       id="audio"
