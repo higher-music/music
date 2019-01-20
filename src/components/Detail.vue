@@ -41,7 +41,7 @@
           </div>
         </div>
       </header>
-      <section>
+      <section :style="{backgroundImage:`linear-gradient(rgb(4, 6, 12), ${data.btnColor} 180%)` }">
         <div class="tracklist">
           <SongList :data="data.songList" show-rank/>
         </div>
