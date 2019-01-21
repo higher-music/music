@@ -35,7 +35,7 @@
         </v-btn>
       </div>
       <div class="scrubber">
-        <div class="time">0:00</div>
+        <div class="time">{{ currentTimeStr }}</div>
         <v-slider
           :max="duration"
           v-model="currentTime"
@@ -45,7 +45,7 @@
           @mousedown="isFromUser = true "
           @mouseup="isFromUser = false"
           @change="slideChange"/>
-        <div class="time">0:00</div>
+        <div class="time">{{ durationStr }}</div>
       </div>
     </div>
     <div class="misc-controls hidden-sm-and-down">
@@ -98,6 +98,7 @@ import Sheet from '@/components/Sheet'
 import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapGetters, mapActions } from 'vuex'
 import { ORDER, RANDOM, SINGLE } from '@/components/js/utils'
+import { formatDate } from '@/components/js/utils'
 
 export default {
   name: 'Player',
@@ -151,6 +152,18 @@ export default {
     },
     isLoop() {
       return this.getPlayType === SINGLE
+    },
+    currentTimeStr() {
+      if (this.currentTime > 0) {
+        return formatDate(this.currentTime)
+      }
+      return '00:00'
+    },
+    durationStr() {
+      if (this.duration > 0) {
+        return formatDate(this.duration)
+      }
+      return '00:00'
     }
   },
   watch: {
