@@ -35,7 +35,7 @@
         </v-btn>
       </div>
       <div class="scrubber">
-        <div class="time">{{ currentTimeStr }}</div>
+        <div class="time hidden-sm-and-down">{{ currentTimeStr }}</div>
         <v-slider
           :max="duration"
           v-model="currentTime"
@@ -45,7 +45,7 @@
           @mousedown="isFromUser = true "
           @mouseup="isFromUser = false"
           @change="slideChange"/>
-        <div class="time">{{ durationStr }}</div>
+        <div class="time hidden-sm-and-down">{{ durationStr }}</div>
       </div>
     </div>
     <div class="misc-controls hidden-sm-and-down">

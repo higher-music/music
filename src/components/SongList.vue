@@ -15,7 +15,7 @@
           @click="playIndex(index)">
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
-            <span :class="{activeSong:currentSong && item.id === currentSong.id}">{{ item.name }}</span>
+            <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
             <span>{{ item.singer }}</span>
