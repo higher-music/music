@@ -35,6 +35,7 @@
         </v-btn>
       </div>
       <div class="scrubber">
+        <div class="time">0:00</div>
         <v-slider
           :max="duration"
           v-model="currentTime"
@@ -44,6 +45,7 @@
           @mousedown="isFromUser = true "
           @mouseup="isFromUser = false"
           @change="slideChange"/>
+        <div class="time">0:00</div>
       </div>
     </div>
     <div class="misc-controls hidden-sm-and-down">
@@ -308,6 +310,10 @@ export default {
         display: flex;
         width: 100%;
         align-items: center;
+        .time{
+          font-size: 11px;
+          color: #b3b3b3;
+        }
       }
     }
     .misc-controls {

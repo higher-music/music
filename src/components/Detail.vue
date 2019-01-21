@@ -13,17 +13,18 @@
               <span class="album-name">{{ data.name }}</span>
             </div>
             <div class="album-button-container">
-              <v-btn :color="data.btnColor" @click.stop="playAll(false)"> Play </v-btn>
-              <v-btn :color="data.btnColor" @click.stop="playAll(true)"> Shuffle</v-btn>
+              <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
+              <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
               <v-menu offset-y transition="scale-transition">
                 <v-btn
                   slot="activator"
+                  :class="{'black--text': data.diffColor}"
                   :color="data.btnColor"
                   dark
                 >
                   <v-icon>more_horiz</v-icon>
                 </v-btn>
-                <v-list :style="{backgroundColor: `${data.btnColor}`}">
+                <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
                   <v-list-tile
                     v-for="(item, i) in items"
                     :key="i"
@@ -31,7 +32,7 @@
                     <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
-                <v-list :style="{backgroundColor: `${data.btnColor}`}">
+                <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
                   <v-list-tile ref="copy" @click="copyLink">
                     <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
                   </v-list-tile>

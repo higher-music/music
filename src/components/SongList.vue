@@ -21,7 +21,7 @@
             <span>{{ item.singer }}</span>
           </div>
         </div>
-        <v-menu v-if="showMenu" :class="menuClassName" transition="scale-transition" offset-y right>
+        <v-menu v-if="showMenu" :class="menuClassName" offset-y>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>

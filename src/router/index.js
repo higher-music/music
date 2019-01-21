@@ -11,7 +11,7 @@ export const constantRouterMap = [
   },
   {
     path: '/',
-    component: () => import('@/pages/main.vue'),
+    component: () => import('@/pages/layout.vue'),
     children: [
       {
         path: '/',

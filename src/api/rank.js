@@ -43,11 +43,20 @@ export function getImageColor(img) {
     const URl = `http://74.82.206.121:8888/api/img?0=${img}`;
     RGBaster.colors(URl, {
       // 调色板大小
-      paletteSize: 50,
+      paletteSize: 20,
       exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
       success: function(payload) {
+        const color = {}
         const c = payload.dominant.match(/\d+/g);
-        resolve(`rgb(${c[0]},${c[1]},${c[2]})`)
+        color.btnColor = `rgb(${c[0]},${c[1]},${c[2]})`
+        // 转换成灰度值判断颜色深浅
+        const grayLevel = c[0] * 0.299 + c[1] * 0.587 + c[2] * 0.114;
+        if (grayLevel >= 192) {
+          color.diffColor = true
+        } else {
+          color.diffColor = false
+        }
+        resolve(color)
       }
     });
   })

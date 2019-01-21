@@ -17,7 +17,8 @@ export default {
         name: '',
         songList: [],
         img: '',
-        btnColor: ''
+        btnColor: '',
+        diffColor: false
       },
       show: true
     }
@@ -27,7 +28,8 @@ export default {
       case 'list':
         getMusicList(this.$route.params.id).then(res => {
           getImageColor(res.topinfo.pic_album).then(res => {
-            this.data.btnColor = res
+            this.data.btnColor = res.btnColor
+            this.data.diffColor = res.diffColor
           }).then(() => {
             this.data.info = res.topinfo.info
             this.data.img = res.topinfo.pic_album
@@ -45,7 +47,8 @@ export default {
         getAlbumByID(this.$route.params.id).then(res => {
           const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
           getImageColor(imgUrl).then(res => {
-            this.data.btnColor = res
+            this.data.btnColor = res.btnColor
+            this.data.diffColor = res.diffColor
           }).then(() => {
             this.data.name = res.data.name
             this.data.info = res.data.desc
@@ -60,7 +63,8 @@ export default {
         getSingerDetail(this.$route.params.id).then(res => {
           const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
           getImageColor(imgUrl).then(res => {
-            this.data.btnColor = res
+            this.data.btnColor = res.btnColor
+            this.data.diffColor = res.diffColor
           }).then(() => {
             this.data.name = res.data.singer_name
             this.data.info = '暂无简介'
