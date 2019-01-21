@@ -6,7 +6,7 @@
           <div class="image-wapper">
             <img :src="item.img" :alt="item.name" :title="item.name">
           </div>
-          <div class="text-wapper">
+          <div class="text-wapper text-truncate">
             <span>{{ item.name }}</span>
           </div>
         </div>
