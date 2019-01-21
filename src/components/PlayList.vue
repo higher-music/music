@@ -1,5 +1,5 @@
 <template>
-  <div v-if="playList.length > 0" :key="0" class="all">
+  <div class="all">
     <div class="head">
       <v-btn icon dark @click="$emit('close-click')">
         <v-icon>close</v-icon>
@@ -9,7 +9,7 @@
         ClearAll
       </v-btn>
     </div>
-    <div class="content">
+    <div v-if="playList.length > 0" class="content">
       <div v-for="(item,index) in playList" :key="index" :class="{activeSongBG:index === currentIndex}" class="song-list">
         <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
         <div v-else class="rank"><v-icon>play_circle_outline</v-icon></div>
@@ -31,9 +31,9 @@
         </v-btn>
       </div>
     </div>
-  </div>
-  <div v-else class="card">
-    <span>Empty</span>
+    <div v-else class="card">
+      <span>Empty</span>
+    </div>
   </div>
 </template>
 <script>
@@ -143,16 +143,15 @@ export default {
         background-color: rgba(0, 0, 0, 0.3);
       }
     }
-  }
-  .card{
-    width: 100%;
-    height: 100%;
-    font-size: 50px;
-    display: flex;
-    display: -webkit-flex;
-    display: -moz-flex;
-    justify-content: center;
-    align-items: center;
-    background: #212121;
+    .card{
+      flex: 1;
+      width: 100%;
+      font-size: 50px;
+      display: flex;
+      display: -webkit-flex;
+      display: -moz-flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 </style>
