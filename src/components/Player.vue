@@ -51,6 +51,11 @@
       <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
         <v-icon>queue_music</v-icon>
       </v-btn>
+      <v-btn icon class="hidden-md-and-down" @click.stop="changePlayMode">
+        <v-icon v-if="getPlayType === 1">repeat</v-icon>
+        <v-icon v-else-if="getPlayType === 2">shuffle</v-icon>
+        <v-icon v-else>repeat_one</v-icon>
+      </v-btn>
       <v-flex xs4 >
         <v-slider
           :max="1"
@@ -66,6 +71,7 @@
       id="audio"
       :src="playUrl"
       :autoplay="autoplay"
+      :loop="isLoop"
       @timeupdate="updateTime"
       @ended="end"
       @pause="isPlay = false"
@@ -88,6 +94,7 @@
 import Sheet from '@/components/Sheet'
 import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapGetters, mapActions } from 'vuex'
+import { ORDER, RANDOM, SINGLE } from '@/components/js/utils'
 
 export default {
   name: 'Player',
@@ -116,18 +123,9 @@ export default {
       'haveNext',
       'currentIndex',
       'playList',
-      'getType'
+      'getType',
+      'getPlayType'
     ]),
-    flexSize() {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          return 1
-        case 'sm':
-          return 1
-        default:
-          return 4
-      }
-    },
     playUrl() {
       if (this.currentSong) {
         let playUrl
@@ -147,6 +145,9 @@ export default {
         return playUrl
       }
       return ''
+    },
+    isLoop() {
+      return this.getPlayType === SINGLE
     }
   },
   watch: {
@@ -158,7 +159,8 @@ export default {
     ...mapActions([
       'nextSong',
       'prevSong',
-      'changeIndex'
+      'changeIndex',
+      'changePlayType'
     ]),
     loadStart(){
       this.loading = true
@@ -229,6 +231,19 @@ export default {
     slideChange(i) {
       if (!this.isFromUser) {
         document.getElementById('audio').currentTime = i
+      }
+    },
+    changePlayMode() {
+      switch (this.getPlayType) {
+        case ORDER:
+          this.changePlayType(RANDOM)
+          break
+        case RANDOM:
+          this.changePlayType(SINGLE)
+          break
+        default:
+          this.changePlayType(ORDER)
+          break
       }
     }
   }

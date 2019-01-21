@@ -13,8 +13,8 @@
               <span class="album-name">{{ data.name }}</span>
             </div>
             <div class="album-button-container">
-              <v-btn :color="data.btnColor" @click="playAll"> Play </v-btn>
-              <v-btn :color="data.btnColor"> Shuffle</v-btn>
+              <v-btn :color="data.btnColor" @click.stop="playAll(false)"> Play </v-btn>
+              <v-btn :color="data.btnColor" @click.stop="playAll(true)"> Shuffle</v-btn>
               <v-menu offset-y transition="scale-transition">
                 <v-btn
                   slot="activator"
@@ -65,7 +65,8 @@
 import Progress from '@/components/Progress'
 import SongList from '@/components/SongList'
 import { mapActions } from 'vuex'
-import Clipboard from 'clipboard';
+import Clipboard from 'clipboard'
+import { RANDOM } from '@/components/js/utils'
 
 export default {
   components: { SongList, Progress },
@@ -100,7 +101,8 @@ export default {
   methods: {
     ...mapActions([
       'replacePlayList',
-      'contactPlayList'
+      'contactPlayList',
+      'changePlayType'
     ]),
     copyLink() {
       const copy = this.$refs.copy.$el
@@ -129,8 +131,11 @@ export default {
           break
       }
     },
-    playAll() {
+    playAll(isShuffle) {
       this.replacePlayList(this.data.songList)
+      if (isShuffle) {
+        this.changePlayType(RANDOM)
+      }
     }
   }
 }

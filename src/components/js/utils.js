@@ -16,6 +16,13 @@ export function HAD_THE_SONG(state, songId) {
   return i
 }
 
+/**
+ * @return {number}
+ */
+export function GET_RANDOM_NUM(begin, end) {
+  return Math.round(Math.random() * (end - begin) + begin)
+}
+
 export const FLAC = 1
 
 export const MP3_320K = 2

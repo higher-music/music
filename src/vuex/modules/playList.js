@@ -1,4 +1,4 @@
-import { CHECK_PREV_NEXT, HAD_THE_SONG, MP3_128K, ORDER } from '@/components/js/utils'
+import { CHECK_PREV_NEXT, HAD_THE_SONG, MP3_128K, ORDER, RANDOM, GET_RANDOM_NUM } from '@/components/js/utils'
 
 const state = {
   // 播放列表
@@ -16,7 +16,7 @@ const state = {
   // 音乐品质（1、flac，2、320K，3、128）
   type: MP3_128K,
   // 列表播放类型：顺序，随机，单曲循环
-  PlayType: ORDER
+  playType: ORDER
 }
 
 const actions = {
@@ -82,6 +82,10 @@ const actions = {
   },
   clearAllSong({ commit }) {
     commit('CLEAR_ALL_SONG')
+  },
+  // 改变歌单播放模式
+  changePlayType({ commit }, playType) {
+    commit('CHANGE_PLAY_TYPE', playType)
   }
 }
 
@@ -92,7 +96,8 @@ const getters = {
   getVKey: state => state.vkey,
   haveNext: state => state.hasNext,
   havePrev: state => state.hasPrev,
-  getType: state => state.type
+  getType: state => state.type,
+  getPlayType: state => state.playType
 }
 
 const mutations = {
@@ -107,8 +112,17 @@ const mutations = {
   },
   NEXT_SONG(state) {
     const length = state.list.length
-    if (state.index < length - 1){
-      state.index++
+    switch (state.playType) {
+      case ORDER:
+        if (state.index < length - 1){
+          state.index++
+        }
+        break
+      case RANDOM:
+        state.index = GET_RANDOM_NUM(0, length - 1)
+        break
+      default:
+        break
     }
     CHECK_PREV_NEXT(state)
   },
@@ -167,6 +181,9 @@ const mutations = {
   },
   CHANGE_TYPE(state, type) {
     state.type = type
+  },
+  CHANGE_PLAY_TYPE(state, type) {
+    state.playType = type
   }
 }
 
