@@ -56,14 +56,15 @@
         <v-icon v-else-if="getPlayType === 2">shuffle</v-icon>
         <v-icon v-else>repeat_one</v-icon>
       </v-btn>
-      <v-flex xs4 >
+      <v-flex xs4 class="hidden-md-and-down" style="display: flex;align-items: center">
+        <v-btn icon @click.stop="media = media === 0 ? 1 : 0">
+          <v-icon v-if="media > 0">volume_up</v-icon>
+          <v-icon v-else>volume_off</v-icon>
+        </v-btn>
         <v-slider
           :max="1"
           :step="0.1"
           v-model="media"
-          class="hidden-md-and-down"
-          prepend-icon="volume_up"
-          style="margin-left: 10px"
           color="#69f0ae"/>
       </v-flex>
     </div>
