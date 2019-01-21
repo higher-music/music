@@ -1,4 +1,4 @@
-import { CHECK_PREV_NEXT, HAD_THE_SONG, MP3_128K } from '@/components/js/utils'
+import { CHECK_PREV_NEXT, HAD_THE_SONG, MP3_128K, ORDER } from '@/components/js/utils'
 
 const state = {
   // 播放列表
@@ -14,7 +14,9 @@ const state = {
   // 是否还有下一首
   hasNext: false,
   // 音乐品质（1、flac，2、320K，3、128）
-  type: MP3_128K
+  type: MP3_128K,
+  // 列表播放类型：顺序，随机，单曲循环
+  PlayType: ORDER
 }
 
 const actions = {
@@ -42,6 +44,10 @@ const actions = {
   // 替换播放列表
   replacePlayList({ commit }, list) {
     commit('REPLACE_PLAY_LIST', list)
+  },
+  // 连接播放列表，即播放列表PlayLatter
+  contactPlayList({ commit }, list) {
+    commit('CONCAT_PLAY_LIST', list)
   },
   // 配置VKey
   setVKey({ commit }, vkey) {
@@ -116,6 +122,12 @@ const mutations = {
     state.list = [].concat(list)
     state.index = 0
     CHECK_PREV_NEXT(state)
+  },
+  CONCAT_PLAY_LIST(state, list) {
+    state.list = state.list.concat(list)
+    if (state.index < 0) {
+      state.index = 0
+    }
   },
   SET_VKEY(state, vkey) {
     state.vkey = vkey

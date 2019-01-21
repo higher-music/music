@@ -21,3 +21,9 @@ export const FLAC = 1
 export const MP3_320K = 2
 
 export const MP3_128K = 3
+
+export const ORDER = 1
+
+export const RANDOM = 2
+
+export const SINGLE = 3

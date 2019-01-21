@@ -27,7 +27,7 @@
                   <v-list-tile
                     v-for="(item, i) in items"
                     :key="i"
-                    @click="menuClick(item, i)">
+                    @click="menuClick(item)">
                     <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
@@ -92,7 +92,6 @@ export default {
       dialog: false,
       copySnackBar: false,
       items: [
-        { title: 'Play Next' },
         { title: 'Play Later' },
         { title: 'Get Info' }
       ]
@@ -100,7 +99,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'replacePlayList'
+      'replacePlayList',
+      'contactPlayList'
     ]),
     copyLink() {
       const copy = this.$refs.copy.$el
@@ -117,9 +117,16 @@ export default {
         clipboard.destroy()
       });
     },
-    menuClick(data, i){
-      if (data.title === 'Get Info'){
-        this.dialog = true
+    menuClick(data){
+      switch (data.title) {
+        case 'Get Info':
+          this.dialog = true
+          break
+        case 'Play Later':
+          this.contactPlayList(this.data.songList)
+          break
+        default:
+          break
       }
     },
     playAll() {

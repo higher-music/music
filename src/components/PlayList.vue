@@ -1,5 +1,5 @@
 <template>
-  <div v-if="playList.length > 0" :key="0" class="song-list-container">
+  <div v-if="playList.length > 0" :key="0" class="all">
     <div class="head">
       <v-btn icon dark @click="$emit('close-click')">
         <v-icon>close</v-icon>
@@ -9,9 +9,8 @@
         ClearAll
       </v-btn>
     </div>
-    <hr>
-    <div v-for="(item,index) in playList" :key="index" :class="{activeSongBG:index === currentIndex}" class="song-list-wapper">
-      <div class="song-list">
+    <div class="content">
+      <div v-for="(item,index) in playList" :key="index" :class="{activeSongBG:index === currentIndex}" class="song-list">
         <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
         <div v-else class="rank"><v-icon>play_circle_outline</v-icon></div>
         <img
@@ -71,21 +70,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .head {
+  .all{
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
     background: #212121;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: flex;
-    align-items: center;
-  }
-  .song-list-container{
-    background: #212121;
-    .song-list-wapper {
+    .head {
+      background: #212121;
+      height: 50px;
       display: flex;
-      height: 60px;
-      border-radius: 5px;
-      cursor: pointer;
+      justify-content: space-around;
+    }
+    .content {
+      flex: 1;
+      overflow-y: scroll;
       .song-list{
+        height: 60px;
+        cursor: pointer;
         overflow: hidden;
         display: flex;
         flex: 1;
@@ -98,8 +99,9 @@ export default {
         }
         .rank{
           text-align: center;
-          width: 20px;
-          padding-left: 10px;
+          width: 30px;
+          overflow: hidden;
+          text-overflow: ellipsis;
           font-weight: 600;
         }
         img{
@@ -137,9 +139,9 @@ export default {
           color: rgb(105, 240, 174);
         }
       }
-    }
-    .activeSongBG{
-      background-color: rgba(0, 0, 0, 0.3);
+      .activeSongBG{
+        background-color: rgba(0, 0, 0, 0.3);
+      }
     }
   }
   .card{

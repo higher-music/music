@@ -2,7 +2,7 @@
   <v-app dark>
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav" @list-click="toggleDialog"/>
-    <v-dialog v-model="dialog" transition="dialog-bottom-transition" width="80%" height="50%">
+    <v-dialog v-model="dialog" transition="dialog-bottom-transition" fullscreen>
       <PlayList @close-click="dialog = false"/>
     </v-dialog>
     <v-content app>
