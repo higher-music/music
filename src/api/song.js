@@ -4,7 +4,7 @@ import { jsonp2 } from './jsonp'
 
 // 根据歌曲mid获取歌词
 export function getLyric(mid) {
-  return null
+  return jsonp2(`http://musicapi.tx114.5644.pw/api/getMusicLyric.php?id=${this.$route.params.id}`, { name: 'callback' })
 }
 
 // 获取VKey
