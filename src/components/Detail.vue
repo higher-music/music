@@ -146,6 +146,7 @@ export default {
   .albums-container {
     background-color: #000;
     height:calc(100vh - 100px) !important;
+    -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     perspective: 1px;
     perspective-origin: center top;
