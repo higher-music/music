@@ -12,7 +12,7 @@
     </v-list>
     <v-subheader>Library</v-subheader>
     <v-list>
-      <v-list-tile v-for="i in bottomItems" :key="i.icon" :to="{name: i.title}" active-class="active-link">
+      <v-list-tile v-for="i in bottomItems" :key="i.icon" :to="{name: i.title}" ripple active-class="active-link">
         <v-list-tile-action>
           <v-icon>{{ i.icon }}</v-icon>
         </v-list-tile-action>

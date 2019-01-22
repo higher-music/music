@@ -56,7 +56,7 @@ export const constantRouterMap = [
         path: '/new_songs',
         name: 'New Songs',
         component: () => import('@/pages/songs.vue')
-      },
+      }
       // {
       //   path: '/play_lists',
       //   name: 'PlayLists',
