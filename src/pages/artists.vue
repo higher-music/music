@@ -5,10 +5,10 @@
   </v-app>
 </template>
 <script>
-import Progress from '@/components/Progress'
-import AlbumsPicList from '@/components/AlbumsPicList'
-import { getSingerList } from '@/api/singer'
-import { createSinger } from '@/components/js/album'
+import Progress from '../components/Progress'
+import AlbumsPicList from '../components/AlbumsPicList'
+import { getSingerList } from '../api/singer'
+import { createSinger } from '../components/js/album'
 
 export default {
   name: 'Artists',

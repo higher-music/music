@@ -95,9 +95,8 @@
 
 <script>
 import Sheet from '@/components/Sheet'
-import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
 import { mapGetters, mapActions } from 'vuex'
-import { ORDER, RANDOM, SINGLE } from '@/components/js/utils'
+import { ORDER, RANDOM, SINGLE, FLAC, MP3_320K, MP3_128K } from '@/api/config'
 import { formatDate } from '@/components/js/utils'
 
 export default {

@@ -29,15 +29,3 @@ export function formatDate(now) {
 export function GET_RANDOM_NUM(begin, end) {
   return Math.round(Math.random() * (end - begin) + begin)
 }
-
-export const FLAC = 1
-
-export const MP3_320K = 2
-
-export const MP3_128K = 3
-
-export const ORDER = 1
-
-export const RANDOM = 2
-
-export const SINGLE = 3

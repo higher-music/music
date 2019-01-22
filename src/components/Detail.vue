@@ -63,11 +63,11 @@
 </template>
 
 <script>
-import Progress from '@/components/Progress'
-import SongList from '@/components/SongList'
+import Progress from '../components/Progress'
+import SongList from '../components/SongList'
 import { mapActions } from 'vuex'
 import Clipboard from 'clipboard'
-import { RANDOM } from '@/components/js/utils'
+import { RANDOM } from '../api/config'
 
 export default {
   components: { SongList, Progress },
