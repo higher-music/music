@@ -27,17 +27,16 @@ export default {
     this.getMusic(this.$route.params.type)
   },
   methods: {
-    async getColor(imgUrl){
-      await getImageColor(imgUrl).then(res => {
-        this.data.btnColor = res.btnColor
-        this.data.diffColor = res.diffColor
-      })
+    async getMusic(type){
+      const imgUrl = await this.getDiffMusic(type)
+      await this.getColor(imgUrl)
+      this.show = false
     },
-    getMusic(type){
-      switch (type) {
-        case 'list':
-          getMusicList(this.$route.params.id).then(res => {
-            this.getColor(res.topinfo.pic_album).then(() => {
+    getDiffMusic(type){
+      return new Promise((resolve, reject) => {
+        const paramsType = {
+          'list': () => {
+            getMusicList(this.$route.params.id).then(res => {
               this.data.info = res.topinfo.info
               this.data.img = res.topinfo.pic_album
               const songs = []
@@ -46,38 +45,42 @@ export default {
                 songs.push(createSong(item.data))
               })
               this.data.songList = songs
-              this.show = false
+              resolve(res.topinfo.pic_album)
             })
-          })
-          break
-        case 'album':
-          getAlbumByID(this.$route.params.id).then(res => {
-            const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
-            this.getColor(imgUrl).then(() => {
+          },
+          'album': () => {
+            getAlbumByID(this.$route.params.id).then(res => {
+              const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
               this.data.name = res.data.name
               this.data.info = res.data.desc
               this.data.img = imgUrl
               res.data.list.forEach(item => {
                 this.data.songList.push(createSong(item))
               })
+              resolve(imgUrl)
             })
-          })
-          break
-        default:
-          getSingerDetail(this.$route.params.id).then(res => {
-            const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
-            this.getColor(imgUrl).then(() => {
+          },
+          'singer': () => {
+            getSingerDetail(this.$route.params.id).then(res => {
+              const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
               this.data.name = res.data.singer_name
               this.data.info = '暂无简介'
               this.data.img = imgUrl
               res.data.list.forEach(item => {
                 this.data.songList.push(createSong(item.musicData))
               })
-              this.show = false
+              resolve(imgUrl)
             })
-          })
-          break
-      }
+          }
+        }
+        paramsType[type]()
+      })
+    },
+    getColor(imgUrl){
+      return getImageColor(imgUrl).then(res => {
+        this.data.btnColor = res.btnColor
+        this.data.diffColor = res.diffColor
+      })
     }
   }
 }
