@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { FLAC, MP3_320K, MP3_128K } from '@/components/js/utils'
+import { FLAC, MP3_320K, MP3_128K } from '@/api/config'
 import { mapActions } from 'vuex'
 import store from '@/vuex/store'
 
