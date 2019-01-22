@@ -1,7 +1,6 @@
 <template>
-  <v-app dark>
-    <Progress :show="show"/>
-    <div v-show="browseSummitList.length!==0&&browseGlobalList.length!==0&&browseSongList.length!==0" class="main-container">
+  <div v-show="browseSummitList.length!==0&&browseGlobalList.length!==0&&browseSongList.length!==0" class="main-container">
+    <div class="scroll-container">
       <div class="section-title">Summit Lists</div>
       <AlbumsPicList :data="browseSummitList" type="list"/>
       <div class="section-title">Global Lists</div>
@@ -11,7 +10,7 @@
         <SongList ref="songList" :data="browseSongList" show-rank/>
       </div>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -66,7 +65,7 @@ export default {
     font-size: 24px;
     font-weight: 500;
     padding-left: 20px;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
     padding-top: 5px;
   }
 </style>

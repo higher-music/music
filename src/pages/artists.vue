@@ -1,8 +1,9 @@
 <template>
-  <v-app dark>
-    <Progress :show="show"/>
-    <AlbumsPicList :data="singerList" type="singer" style="margin-top: 20px"/>
-  </v-app>
+  <div class="main-container">
+    <div class="scroll-container">
+      <AlbumsPicList :data="singerList" type="singer"/>
+    </div>
+  </div>
 </template>
 <script>
 import Progress from '../components/Progress'
@@ -12,7 +13,7 @@ import { createSinger } from '../components/js/album'
 
 export default {
   name: 'Artists',
-  components: { AlbumsPicList, Progress },
+  components: { AlbumsPicList },
   data() {
     return {
       show: true,

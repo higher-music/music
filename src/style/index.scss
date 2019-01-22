@@ -4,14 +4,17 @@
   color: #69f0ae !important;
 }
 
-//.image-wapper img:hover {
-//  opacity: .7;
-//}
-
 .main-container{
-  padding-top: 15px;
-  animation: .7s fadein;
-  min-height: 100%;
+  height: calc(100vh - 156px);
+  margin-top: 56px;
+}
+.scroll-container{
+  position: relative;
+  z-index: 1;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  overflow: auto;
 }
 
 @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape){

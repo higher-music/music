@@ -1,8 +1,9 @@
 <template>
-  <v-app dark>
-    <Progress :show="show"/>
-    <AlbumsPicList :data="browseAlbumsList" type="album" style="margin-top: 20px"/>
-  </v-app>
+  <div class="main-container">
+    <div class="scroll-container">
+      <AlbumsPicList :data="browseAlbumsList" type="album" />
+    </div>
+  </div>
 </template>
 
 <script>

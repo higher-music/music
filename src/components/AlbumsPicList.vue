@@ -46,6 +46,7 @@ export default {
 
 <style lang="scss" scoped>
   .grid-container{
+    padding-top: 15px;
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(186px,1fr));
     padding-left: 12px;

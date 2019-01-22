@@ -31,6 +31,7 @@ export default {
   body, html {
     width: 100%;
     min-height: 100%;
+    overflow: hidden !important;
     margin: 0;
     background-color: #303030;
     color: #fff;
