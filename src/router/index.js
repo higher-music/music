@@ -5,6 +5,11 @@ Vue.use(Router);
 
 export const constantRouterMap = [
   {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue')
+  },
+  {
     path: '/iframe/:id/:autoplay',
     name: 'IFrame',
     component: () => import('@/pages/IFrame.vue')
@@ -57,11 +62,6 @@ export const constantRouterMap = [
       //   name: 'PlayLists',
       //   component: () => import('@/pages/playLists.vue')
       // },
-      {
-        path: '*',
-        name: 'NotFound',
-        component: () => import('@/pages/NotFound.vue')
-      }
     ]
   }
 ];

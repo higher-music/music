@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="track-info">
       <div class="album-artwork">
-        <v-img v-if="currentSong" :src="currentSong.image"/>
+        <v-img v-if="currentSong" :src="currentSong.image" lazy-src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000"/>
         <v-img v-else src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000"/>
       </div>
       <div class="track-text">

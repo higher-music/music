@@ -1,6 +1,8 @@
 <template>
   <div style="padding: 20px">
-    <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keydown.enter="getSearchList"/>
+    <form action="javascript:getSearchList">
+      <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keydown.enter="getSearchList"/>
+    </form>
     <div class="hotkey">
       <span style="font-size: large;font-weight: bolder">HotKeys:</span>
       <v-chip v-for="(item, index) in hotkeys" :key="index" outline text-color="#fff" @click="searchHotKey(item.k)">{{ item.k }}</v-chip>
@@ -22,19 +24,7 @@ export default {
       text: '',
       loading: false,
       songList: [],
-      searchTimer: null,
       hotkeys: []
-    }
-  },
-  watch: {
-    text(){
-      if (this.searchTimer){
-        clearTimeout(this.searchTimer);
-      }
-      this.searchTimer = setTimeout(() => {
-        this.getSearchList()
-        this.searchTimer = null
-      }, 2000)
     }
   },
   created() {
@@ -44,7 +34,6 @@ export default {
   },
   methods: {
     getSearchList(){
-      console.log('lalalal')
       this.loading = true
       const songs = []
       search(this.text, 1, 50).then((res) => {
@@ -59,6 +48,7 @@ export default {
     },
     searchHotKey(hotkey) {
       this.text = hotkey
+      this.getSearchList()
     }
   }
 }
