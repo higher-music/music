@@ -5,6 +5,7 @@
 </template>
 
 <script>
+require('inobounce')
 import { getVKey } from '@/api/song'
 import { mapActions } from 'vuex'
 

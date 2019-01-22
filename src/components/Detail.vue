@@ -1,7 +1,8 @@
 <template>
-  <v-app dark>
+  <!--<div class="main-container">-->
+    <v-app dark>
     <Progress v-show="show"/>
-    <div v-show="data.songList.length&&data.btnColor" class="albums-container">
+    <div v-show="data.songList.length&&data.btnColor" class="main-container albums-container">
       <header>
         <div class="header-image-container">
           <img :src="data.img" :alt="data.name" class="header-image">
@@ -60,6 +61,7 @@
       Link copied to clipboard
     </v-snackbar>
   </v-app>
+  <!--</div>-->
 </template>
 
 <script>
@@ -145,10 +147,9 @@ export default {
 <style lang="scss" scoped>
   .albums-container {
     background-color: #000;
-    height:calc(100vh - 100px) !important;
-    -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     perspective: 1px;
+    -webkit-overflow-scrolling: touch;
     perspective-origin: center top;
     transform-style: preserve-3d;
     animation: .7s fadein;

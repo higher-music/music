@@ -39,7 +39,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
       '@': resolve('src'),
       'static': resolve('static'),
-      'rgbaster':resolve('static/js/rgbaster.js')
+      'inobounce':resolve('static/js/inobounce.js'),
+      'rgbaster':resolve('static/js/rgbaster.js'),
     }
   },
   module: {

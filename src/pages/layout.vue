@@ -8,9 +8,9 @@
     <v-content app>
       <!--<v-toolbar class="hidden-lg-and-up"/>-->
       <keep-alive>
-        <router-view v-if="!$route.meta.keepAlive"/>
+        <router-view v-if="$route.meta.keepAlive"/>
       </keep-alive>
-      <router-view v-if="$route.meta.keepAlive"/>
+      <router-view v-if="!$route.meta.keepAlive"/>
     </v-content>
     <!--<div style="width: 100%;height: 100px"></div>-->
     <v-footer height="100" app>
