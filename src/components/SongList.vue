@@ -14,7 +14,7 @@
           :max-width="40"
           :max-height="40"
           class="image"
-          lazy-src="https://y.gtimg.cn/music/photo_new/T002R300x300M000001ZaCQY2OxVMg.jpg?max_age=2592000"
+          lazy-src="static/img/default.jpeg"
           @click="playIndex(index)" />
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">

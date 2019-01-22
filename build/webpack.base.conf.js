@@ -38,6 +38,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       '@': resolve('src'),
+      'static': resolve('static'),
       'rgbaster':resolve('static/js/rgbaster.js')
     }
   },

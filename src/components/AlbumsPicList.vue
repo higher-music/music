@@ -1,10 +1,17 @@
 <template>
   <div class="grid-container">
     <div v-for="item in data" :key="item.id">
-      <div class="list-container" @click="toDetail(item.id)">
+      <div class="list-container">
         <div class="list-wapper">
           <div class="image-wapper">
-            <img :src="item.img" :alt="item.name" :title="item.name">
+            <!--<img :src="item.img" :alt="item.name" :title="item.name">-->
+            <v-img
+              :src="item.img"
+              :alt="item.name"
+              :title="item.name"
+              lazy-src="static/img/default.jpeg"
+              @click="toDetail(item.id)"
+            />
           </div>
           <div class="text-wapper text-truncate">
             <span>{{ item.name }}</span>
@@ -62,22 +69,22 @@ export default {
           border-radius: 5px;
           cursor: pointer;
           overflow: hidden;
-        }
-        img{
-          border-radius: 5px;
-          width: 100%;
-          height: 100%;
-          transition: opacity .3s;
+          div:hover {
+            transition: opacity .3s;
+            opacity: .7;
+          }
+          /*img{*/
+            /*border-radius: 5px;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*transition: opacity .3s;*/
+          /*}*/
         }
         .text-wapper{
           span{
             font-weight: 500;
-            cursor: pointer;
             outline: 0;
             flex: 1;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
           }
         }
       }
