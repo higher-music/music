@@ -7,7 +7,9 @@
       <span style="font-size: large;font-weight: bolder">HotKeys:</span>
       <v-chip v-for="(item, index) in hotkeys" :key="index" outline text-color="#fff" @click="searchHotKey(item.k)">{{ item.k }}</v-chip>
     </div>
-    <SongList :data="songList" :loading="loading"/>
+    <div class="scroll-container">
+      <SongList :data="songList" :loading="loading"/>
+    </div>
   </div>
 </template>
 
