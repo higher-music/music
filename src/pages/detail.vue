@@ -28,7 +28,9 @@ export default {
   },
   methods: {
     async getMusic(type){
-      const imgUrl = await this.getDiffMusic(type)
+      const imgUrl = await this.getDiffMusic(type).catch((err) => {
+        console.log(err)
+      })
       await this.getColor(imgUrl)
       this.show = false
     },
