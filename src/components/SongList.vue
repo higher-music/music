@@ -21,7 +21,7 @@
             <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <span v-for="(one, i) in item.singer" :key="i" @click.stop="test(one)">
+            <span v-for="(one, i) in item.singer" :key="i">
               {{ one.name }}
               <span v-if="i !== item.singer.length - 1">•&nbsp;</span>
             </span>
@@ -100,9 +100,6 @@ export default {
       'addSongToNext',
       'addSongToLast'
     ]),
-    test(one){
-      console.log(one,'111111')
-    },
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
     },

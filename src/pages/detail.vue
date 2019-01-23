@@ -63,7 +63,7 @@ export default {
             getAlbumByID(this.$route.params.id).then(res => {
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
               this.data.name = res.data.name
-              this.data.mid = res.data.mid
+              this.data.singermid = res.data.singermid
               this.data.singername = res.data.singername
               this.data.info = res.data.desc
               this.data.img = imgUrl

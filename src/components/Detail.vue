@@ -92,8 +92,7 @@ export default {
       'changePlayType'
     ]),
     toSinger(item) {
-      console.log(item)
-      this.$router.push('/singer/' + item.mid)
+      this.$router.push('/singer/' + item.singermid)
     },
     copyLink() {
       const copy = this.$refs.copy.$el
