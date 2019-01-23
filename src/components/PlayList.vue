@@ -27,7 +27,10 @@
             <span :class="{activeSong:index === currentIndex}">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <span>{{ item.singer }}</span>
+            <span v-for="(one, i) in item.singer" :key="i" @click.stop="toSinger(one)">
+              {{ one.name }}
+              <span v-if="i !== item.singer.length - 1">•&nbsp;</span>
+            </span>
           </div>
         </div>
         <v-btn slot="activator" :class="menuClassName" dark icon @click="deleteSong(index)">
@@ -68,6 +71,10 @@ export default {
     },
     deleteSong(index) {
       this.delSong(index)
+    },
+    toSinger(item) {
+      this.$router.push('/singer/' + item.mid)
+      this.$emit('close-click')
     }
   }
 }

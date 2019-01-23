@@ -13,7 +13,10 @@
           Higher Music
         </div>
         <div v-if="currentSong" class="track-artist">
-          {{ currentSong.singer }}
+          <span v-for="(one, i) in currentSong.singer" :key="i" @click.stop="toSinger(one)">
+            {{ one.name }}
+            <span v-if="i !== currentSong.singer.length - 1">•&nbsp;</span>
+          </span>
         </div>
       </div>
     </div>
@@ -189,7 +192,11 @@ export default {
       }
     },
     onPlay() {
-      document.title = `${this.currentSong.name} • ${this.currentSong.singer}`
+      let singer = ''
+      this.currentSong.singer.forEach(t => {
+        singer += t.name + ' '
+      })
+      document.title = `${this.currentSong.name} • ${singer}`
       this.isPlay = true
       this.errorTimes = 0
     },
@@ -260,6 +267,9 @@ export default {
           this.changePlayType(ORDER)
           break
       }
+    },
+    toSinger(item) {
+      this.$router.push('/singer/' + item.mid)
     }
   }
 }
@@ -301,6 +311,7 @@ export default {
           text-overflow: ellipsis;
         }
         .track-artist {
+          cursor: pointer;
           font-size: 14px;
           color: #b3b3b3;
           overflow: hidden;

@@ -66,12 +66,12 @@ export function createSong2(musicData) {
 
 function filterSinger(singer) {
   const ret = []
-  if (!singer) {
-    return ''
-  }
   singer.forEach((s) => {
-    ret.push(s.name)
+    const singer = {
+      name: s.name,
+      mid: s.mid
+    }
+    ret.push(singer)
   })
-  return ret.join(' • ')
+  return ret
 }
-

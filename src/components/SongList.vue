@@ -21,7 +21,10 @@
             <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <span>{{ item.singer }}</span>
+            <span v-for="(one, i) in item.singer" :key="i" @click.stop="toSinger(one)">
+              {{ one.name }}
+              <span v-if="i !== item.singer.length - 1">•&nbsp;</span>
+            </span>
           </div>
         </div>
         <v-menu v-if="showMenu" :class="menuClassName" offset-y>
@@ -112,6 +115,9 @@ export default {
     },
     playLatter(index) {
       this.addSongToLast(this.data[index])
+    },
+    toSinger(item) {
+      this.$router.push('/singer/' + item.mid)
     }
   }
 }

@@ -23,11 +23,17 @@ export default {
       show: true
     }
   },
+  watch: {
+    $route() {
+      this.getMusic(this.$route.params.type)
+    }
+  },
   created() {
     this.getMusic(this.$route.params.type)
   },
   methods: {
     async getMusic(type){
+      this.show = true
       const imgUrl = await this.getDiffMusic(type).catch((err) => {
         console.log(err)
       })
@@ -56,9 +62,11 @@ export default {
               this.data.name = res.data.name
               this.data.info = res.data.desc
               this.data.img = imgUrl
+              const songs = []
               res.data.list.forEach(item => {
-                this.data.songList.push(createSong(item))
+                songs.push(createSong(item))
               })
+              this.data.songList = songs
               resolve(imgUrl)
             })
           },
@@ -68,9 +76,11 @@ export default {
               this.data.name = res.data.singer_name
               this.data.info = '暂无简介'
               this.data.img = imgUrl
+              const songs = []
               res.data.list.forEach(item => {
-                this.data.songList.push(createSong(item.musicData))
+                songs.push(createSong(item.musicData))
               })
+              this.data.songList = songs
               resolve(imgUrl)
             })
           }
