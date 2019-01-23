@@ -1,7 +1,5 @@
 <template>
-  <!--<div class="main-container">-->
-    <v-app dark>
-    <Progress v-show="show"/>
+  <v-app dark>
     <div v-show="data.songList.length&&data.btnColor" class="main-container albums-container">
       <header>
         <div class="header-image-container">
@@ -12,6 +10,9 @@
           <div class="album-extras">
             <div class="track-text">
               <span class="album-name">{{ data.name }}</span>
+              <div>
+                <span :class="{ linkable:data.singername}" class="artist-name" @click="toSinger(data)">{{ data.singername }}</span>
+              </div>
             </div>
             <div class="album-button-container">
               <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
@@ -61,35 +62,18 @@
       Link copied to clipboard
     </v-snackbar>
   </v-app>
-  <!--</div>-->
 </template>
 
 <script>
-import Progress from '../components/Progress'
 import SongList from '../components/SongList'
 import { mapActions } from 'vuex'
 import Clipboard from 'clipboard'
 import { RANDOM } from '../api/config'
 
 export default {
-  components: { SongList, Progress },
+  components: { SongList },
   props: {
-    data: {
-      type: Object,
-      default() {
-        return {
-          info: '',
-          name: '',
-          songList: [],
-          img: '',
-          btnColor: '#3399ff'
-        }
-      }
-    },
-    show: {
-      type: Boolean,
-      default: true
-    }
+    data: Object
   },
   data() {
     return {
@@ -107,6 +91,10 @@ export default {
       'contactPlayList',
       'changePlayType'
     ]),
+    toSinger(item) {
+      console.log(item)
+      this.$router.push('/singer/' + item.mid)
+    },
     copyLink() {
       const copy = this.$refs.copy.$el
       const clipboard = new Clipboard(copy, {
@@ -202,6 +190,17 @@ export default {
             .album-name {
               font-weight: 500;
               font-size: 38px;
+            }
+            .artist-name{
+              font-size: 18px;
+              font-weight: 500;
+            }
+            .linkable{
+              cursor: pointer;
+              outline: 0;
+            }
+            .linkable:hover{
+              text-decoration: underline;
             }
             .album-detail {
               color: #b3b3b3;

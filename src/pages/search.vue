@@ -53,9 +53,7 @@ export default {
           songs.push(createSong2(item))
         })
         this.songList = songs
-        setTimeout(() => {
-          this.loading = false
-        }, 1000)
+        this.loading = false
       })
     },
     searchHotKey(hotKey) {
@@ -65,5 +63,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-</style>

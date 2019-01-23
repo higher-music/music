@@ -1,6 +1,6 @@
 <template>
   <div class="song-list-container">
-    <Progress v-show="loading"/>
+    <Progress :show="loading"/>
     <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank">
@@ -21,7 +21,7 @@
             <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <span v-for="(one, i) in item.singer" :key="i" @click.stop="toSinger(one)">
+            <span v-for="(one, i) in item.singer" :key="i" @click.stop="test(one)">
               {{ one.name }}
               <span v-if="i !== item.singer.length - 1">•&nbsp;</span>
             </span>
@@ -46,8 +46,8 @@
 </template>
 
 <script>
+import Progress from '@/components/Progress.vue'
 import { mapGetters, mapActions } from 'vuex'
-import Progress from '@/components/Progress'
 export default {
   components: { Progress },
   props: {
@@ -100,6 +100,9 @@ export default {
       'addSongToNext',
       'addSongToLast'
     ]),
+    test(one){
+      console.log(one,'111111')
+    },
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
     },
@@ -115,9 +118,6 @@ export default {
     },
     playLatter(index) {
       this.addSongToLast(this.data[index])
-    },
-    toSinger(item) {
-      this.$router.push('/singer/' + item.mid)
     }
   }
 }

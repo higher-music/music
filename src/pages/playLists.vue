@@ -1,29 +1,27 @@
 <template>
   <v-app dark>
-    <Progress :show="show"/>
     <AlbumsPicList :data="playLists" type="album" style="margin-top: 20px"/>
   </v-app>
 </template>
 <script>
-import Progress from '@/components/Progress'
 import AlbumsPicList from '@/components/AlbumsPicList'
 import { getPlayList } from '@/api/rank'
 import { createPlayList } from '@/components/js/album'
 
 export default {
   name: 'PlayLists',
-  components: { AlbumsPicList, Progress },
+  components: { AlbumsPicList },
   data() {
     return {
-      show: true,
       playLists: []
     }
   },
   created() {
+    this.$loading.show()
     getPlayList().then((res) => {
       res.playlist.data.v_playlist.forEach(t => {
         this.playLists.push(createPlayList(t))
-        this.show = false
+        this.$loading.hide()
       })
     })
   }

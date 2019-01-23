@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-import Progress from '../components/Progress'
 import AlbumsPicList from '../components/AlbumsPicList'
 import { getSingerList } from '../api/singer'
 import { createSinger } from '../components/js/album'
@@ -16,15 +15,15 @@ export default {
   components: { AlbumsPicList },
   data() {
     return {
-      show: true,
       singerList: []
     }
   },
   created() {
+    this.$loading.show()
     getSingerList().then(res => {
       res.data.list.forEach(t => {
         this.singerList.push(createSinger(t))
-        this.show = false
+        this.$loading.hide()
       })
     })
   }

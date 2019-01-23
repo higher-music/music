@@ -15,16 +15,16 @@
 
 <script>
 import AlbumsPicList from '@/components/AlbumsPicList'
-import Progress from '@/components/Progress'
 import { getTopList, getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 import { createSong } from '@/components/js/song'
 import { createList } from '@/components/js/album'
 
 export default {
-  components: { AlbumsPicList, SongList, Progress },
+  components: { AlbumsPicList, SongList },
   data() {
     return {
+      loading: true,
       browseSummitList: [],
       browseGlobalList: [],
       browseSongList: [],
@@ -32,6 +32,7 @@ export default {
     }
   },
   created() {
+    this.$loading.show()
     this.getBrowseData()
   },
   methods: {
@@ -47,7 +48,7 @@ export default {
         songList.forEach(t => {
           this.browseSongList.push(createSong(t.data))
         })
-        this.show = false
+        this.$loading.hide()
       })
     }
   }

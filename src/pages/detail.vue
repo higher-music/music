@@ -1,5 +1,5 @@
 <template>
-  <Detail :data="data" :show="show"/>
+  <Detail :data="data"/>
 </template>
 
 <script>
@@ -15,12 +15,13 @@ export default {
       data: {
         info: '',
         name: '',
+        singername: '',
+        mid: '',
         songList: [],
         img: '',
         btnColor: '',
         diffColor: false
-      },
-      show: true
+      }
     }
   },
   watch: {
@@ -29,22 +30,24 @@ export default {
     }
   },
   created() {
+    this.$loading.show()
     this.getMusic(this.$route.params.type)
   },
   methods: {
     async getMusic(type){
-      this.show = true
       const imgUrl = await this.getDiffMusic(type).catch((err) => {
         console.log(err)
       })
       await this.getColor(imgUrl)
-      this.show = false
+      this.$loading.hide()
     },
     getDiffMusic(type){
       return new Promise((resolve, reject) => {
         const paramsType = {
           'list': () => {
             getMusicList(this.$route.params.id).then(res => {
+              console.log(res)
+              this.data.name = res.topinfo.ListName
               this.data.info = res.topinfo.info
               this.data.img = res.topinfo.pic_album
               const songs = []
@@ -60,6 +63,8 @@ export default {
             getAlbumByID(this.$route.params.id).then(res => {
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
               this.data.name = res.data.name
+              this.data.mid = res.data.mid
+              this.data.singername = res.data.singername
               this.data.info = res.data.desc
               this.data.img = imgUrl
               const songs = []
@@ -71,10 +76,10 @@ export default {
             })
           },
           'singer': () => {
+            console.log(this.$route.params.id)
             getSingerDetail(this.$route.params.id).then(res => {
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
               this.data.name = res.data.singer_name
-              this.data.info = '暂无简介'
               this.data.img = imgUrl
               const songs = []
               res.data.list.forEach(item => {

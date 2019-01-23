@@ -1,6 +1,5 @@
 <template>
   <v-app dark>
-    <Progress :show="show"/>
     <div class="section-title">
       New Songs
       <v-spacer/>
@@ -14,7 +13,6 @@
 </template>
 
 <script>
-import Progress from '@/components/Progress'
 import SongList from '@/components/SongList'
 import { getNewSong } from '@/api/song'
 import { createSong2 } from '@/components/js/song'
@@ -22,18 +20,18 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Songs',
-  components: { SongList, Progress },
+  components: { SongList },
   data() {
     return {
-      show: true,
       songList: []
     }
   },
   created() {
+    this.$loading.show()
     getNewSong().then(res => {
       res.new_song.data.song_list.forEach(t => {
         this.songList.push(createSong2(t))
-        this.show = false
+        this.$loading.hide()
       })
     })
   },
