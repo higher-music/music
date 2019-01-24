@@ -23,6 +23,12 @@
   }
 }
 
+@media screen and (max-width: 1264px){
+  .main-iframe{
+    height: calc(100vh - 100px);
+  }
+}
+
 @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape){
   .header{
     padding-left: 10px;

@@ -53,7 +53,7 @@
     </div>
     <div class="misc-controls hidden-sm-and-down">
       <Sheet class="hidden-md-and-down"/>
-      <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
+      <v-btn v-if="showListMenu" icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
         <v-icon>queue_music</v-icon>
       </v-btn>
       <v-btn icon class="hidden-md-and-down" @click.stop="changePlayMode">
@@ -107,6 +107,10 @@ export default {
   components: { Sheet },
   props: {
     autoplay: {
+      type: Boolean,
+      default: true
+    },
+    showListMenu: {
       type: Boolean,
       default: true
     }
