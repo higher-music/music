@@ -8,9 +8,11 @@ import router from './router'
 // import RavenVue from 'raven-js/plugins/vue'
 import Vuetify from 'vuetify'
 import store from './vuex/store'
+import FastClick from 'fastclick'
 import Loading from '@/components/Loading'
 import '@/style/index.scss'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+FastClick.attach(document.body);
 Vue.use(Vuetify)
 Vue.use(Loading)
 Vue.config.productionTip = false;
