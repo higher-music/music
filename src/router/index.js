@@ -30,7 +30,7 @@ export const constantRouterMap = [
       {
         path: '/browse',
         name: 'Browse',
-        component: () => import('@/pages/browse.vue'),
+        component: () => import('@/pages/browse.vue')
         // meta: { keepAlive: true }
       },
       {
@@ -74,7 +74,6 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  // console.log(to)
   next()
 })
 

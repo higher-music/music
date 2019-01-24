@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <div v-show="data.songList.length" class="main-container albums-container">
+    <div v-show="data.songList.length&&data.btnColor" class="main-container albums-container">
       <header>
         <div class="header-image-container">
           <img :src="data.img" :alt="data.name" class="header-image">

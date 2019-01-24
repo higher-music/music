@@ -7,6 +7,7 @@ import Detail from '@/components/Detail'
 import { getMusicList, getImageColor, getAlbumByID } from '@/api/rank'
 import { createSong } from '@/components/js/song'
 import { getSingerDetail } from '../api/singer'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: { Detail },
@@ -21,31 +22,61 @@ export default {
         img: '',
         btnColor: '',
         diffColor: false
-      }
+      },
+      paramsType: '',
+      paramsId: '',
+      mapKey: ''
     }
   },
-  watch: {
-    $route() {
-      this.getMusic(this.$route.params.type)
-    }
+  computed: {
+    ...mapGetters([
+      'singer',
+      'list',
+      'album'
+    ])
   },
   created() {
-    this.$loading.show()
-    this.getMusic(this.$route.params.type)
+    this.paramsType = this.$route.params.type
+    this.paramsId = this.$route.params.id
+    this.mapKey = location.href
+    if (this.checkSavedMusic()) {
+      this.$loading.show()
+      this.getMusic()
+    }
   },
   methods: {
-    async getMusic(type){
-      const imgUrl = await this.getDiffMusic(type).catch((err) => {
+    ...mapActions([
+      'addSinger',
+      'addList',
+      'addAlbum'
+    ]),
+    checkSavedMusic(){
+      if (this[this.paramsType].has(this.mapKey)) {
+        this.data = this[this.paramsType].get(this.mapKey)
+        return false
+      }
+      return true
+    },
+    async getMusic(){
+      const imgUrl = await this.getDiffMusic(this.paramsType).catch((err) => {
         console.log(err)
       })
-      await this.getColor(imgUrl)
+      const { btnColor, diffColor } = await getImageColor(imgUrl)
+      this.data = {
+        ...this.data,
+        ...{
+          btnColor,
+          diffColor
+        }
+      }
+      this[`add${this.firstWordUpperCase(this.paramsType)}`]([this.mapKey, this.data])
       this.$loading.hide()
     },
-    getDiffMusic(type){
+    getDiffMusic(){
       return new Promise((resolve, reject) => {
         const paramsType = {
           'list': () => {
-            getMusicList(this.$route.params.id).then(res => {
+            getMusicList(this.paramsId).then(res => {
               this.data.name = res.topinfo.ListName
               this.data.info = res.topinfo.info
               this.data.img = res.topinfo.pic_album
@@ -59,7 +90,7 @@ export default {
             })
           },
           'album': () => {
-            getAlbumByID(this.$route.params.id).then(res => {
+            getAlbumByID(this.paramsId).then(res => {
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
               this.data.name = res.data.name
               this.data.singermid = res.data.singermid
@@ -75,7 +106,7 @@ export default {
             })
           },
           'singer': () => {
-            getSingerDetail(this.$route.params.id).then(res => {
+            getSingerDetail(this.paramsId).then(res => {
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
               this.data.name = res.data.singer_name
               this.data.img = imgUrl
@@ -88,14 +119,11 @@ export default {
             })
           }
         }
-        paramsType[type]()
+        paramsType[this.paramsType]()
       })
     },
-    getColor(imgUrl){
-      return getImageColor(imgUrl).then(res => {
-        this.data.btnColor = res.btnColor
-        this.data.diffColor = res.diffColor
-      })
+    firstWordUpperCase(str){
+      return str.toLowerCase().replace(/(\s|^)[a-z]/g, char => char.toUpperCase())
     }
   }
 }
