@@ -1,9 +1,9 @@
 <template>
-  <v-toolbar :clipped-left="true" class="hidden-md-and-up" fixed>
+  <v-toolbar :clipped-left="true" height="56" class="hidden-lg-and-up" fixed>
     <v-toolbar-side-icon @click.stop="menuClick"/>
     <v-spacer/>
     <Sheet/>
-    <v-btn :to="{name: 'PlayLists'}" icon>
+    <v-btn icon @click.stop="listClick">
       <v-icon>queue_music</v-icon>
     </v-btn>
   </v-toolbar>
@@ -17,6 +17,9 @@ export default {
   methods: {
     menuClick() {
       this.$emit('menu-click')
+    },
+    listClick() {
+      this.$emit('list-click')
     }
   }
 }

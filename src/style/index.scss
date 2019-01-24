@@ -1,22 +1,26 @@
 @import "vuetify";
 
-*, :after, :before{
-  box-sizing: content-box !important;
-}
-
 .active-link{
   color: #69f0ae !important;
 }
 
-.image-wapper img:hover {
-  opacity: .7;
+.main-container{
+  height: calc(100vh - 100px);
+}
+.scroll-container{
+  position: relative;
+  z-index: 1;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  overflow: auto;
 }
 
-.main-container{
-  padding-top: 15px;
-  padding-bottom: 20px;
-  animation: .7s fadein;
-  min-height: 100%;
+@media screen and (max-width: 1264px){
+  .main-container{
+    margin-top: 56px;
+    height: calc(100vh - 156px);
+  }
 }
 
 @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape){
@@ -30,10 +34,6 @@
   .artwork{
     display: none;
   }
-}
-
-
-@media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape){
   .grid-container{
     grid-template-columns: repeat(auto-fill,minmax(156px,1fr)) !important;
   }

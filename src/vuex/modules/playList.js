@@ -1,4 +1,5 @@
-import { CHECK_PREV_NEXT, HAD_THE_SONG, MP3_128K } from '@/components/js/utils'
+import { CHECK_PREV_NEXT, HAD_THE_SONG, GET_RANDOM_NUM } from '@/components/js/utils'
+import { MP3_128K, ORDER, RANDOM } from '@/api/config'
 
 const state = {
   // 播放列表
@@ -14,7 +15,9 @@ const state = {
   // 是否还有下一首
   hasNext: false,
   // 音乐品质（1、flac，2、320K，3、128）
-  type: MP3_128K
+  type: MP3_128K,
+  // 列表播放类型：顺序，随机，单曲循环
+  playType: ORDER
 }
 
 const actions = {
@@ -42,6 +45,10 @@ const actions = {
   // 替换播放列表
   replacePlayList({ commit }, list) {
     commit('REPLACE_PLAY_LIST', list)
+  },
+  // 连接播放列表，即播放列表PlayLatter
+  contactPlayList({ commit }, list) {
+    commit('CONCAT_PLAY_LIST', list)
   },
   // 配置VKey
   setVKey({ commit }, vkey) {
@@ -76,6 +83,10 @@ const actions = {
   },
   clearAllSong({ commit }) {
     commit('CLEAR_ALL_SONG')
+  },
+  // 改变歌单播放模式
+  changePlayType({ commit }, playType) {
+    commit('CHANGE_PLAY_TYPE', playType)
   }
 }
 
@@ -86,7 +97,8 @@ const getters = {
   getVKey: state => state.vkey,
   haveNext: state => state.hasNext,
   havePrev: state => state.hasPrev,
-  getType: state => state.type
+  getType: state => state.type,
+  getPlayType: state => state.playType
 }
 
 const mutations = {
@@ -101,8 +113,17 @@ const mutations = {
   },
   NEXT_SONG(state) {
     const length = state.list.length
-    if (state.index < length - 1){
-      state.index++
+    switch (state.playType) {
+      case ORDER:
+        if (state.index < length - 1){
+          state.index++
+        }
+        break
+      case RANDOM:
+        state.index = GET_RANDOM_NUM(0, length - 1)
+        break
+      default:
+        break
     }
     CHECK_PREV_NEXT(state)
   },
@@ -116,6 +137,12 @@ const mutations = {
     state.list = [].concat(list)
     state.index = 0
     CHECK_PREV_NEXT(state)
+  },
+  CONCAT_PLAY_LIST(state, list) {
+    state.list = state.list.concat(list)
+    if (state.index < 0) {
+      state.index = 0
+    }
   },
   SET_VKEY(state, vkey) {
     state.vkey = vkey
@@ -155,6 +182,9 @@ const mutations = {
   },
   CHANGE_TYPE(state, type) {
     state.type = type
+  },
+  CHANGE_PLAY_TYPE(state, type) {
+    state.playType = type
   }
 }
 

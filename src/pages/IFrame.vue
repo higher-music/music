@@ -10,11 +10,12 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Player from '@/components/Player'
 import SongList from '@/components/SongList'
 import { createSong } from '@/components/js/song'
 import { mapActions } from 'vuex'
+import { jsonp2 } from '@/api/jsonp'
+
 export default {
   name: 'Iframe',
   components: {
@@ -28,15 +29,12 @@ export default {
   },
   computed: {
     autoplay() {
-      if (this.$route.params.autoplay === 'true') {
-        return true
-      }
-      return false
+      return this.$route.params.autoplay === 'true';
     }
   },
   created() {
-    axios.get(`http://musicapi.tx114.5644.pw/api/getMusicList.php?id=${this.$route.params.id}`).then((res) => {
-      res.data.data.forEach((item) => {
+    jsonp2(`http://musicapi.tx114.5644.pw/api/getMusicList.php?id=${this.$route.params.id}`, { name: 'callback' }).then((res) => {
+      res.data.forEach((item) => {
         this.list.push(createSong(item))
         this.playAll()
       })

@@ -5,13 +5,18 @@ Vue.use(Router);
 
 export const constantRouterMap = [
   {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue')
+  },
+  {
     path: '/iframe/:id/:autoplay',
     name: 'IFrame',
     component: () => import('@/pages/IFrame.vue')
   },
   {
     path: '/',
-    component: () => import('@/pages/main.vue'),
+    component: () => import('@/pages/layout.vue'),
     children: [
       {
         path: '/',
@@ -29,7 +34,12 @@ export const constantRouterMap = [
         meta: { keepAlive: true }
       },
       {
-        path: '/albums/:id',
+        path: '/:type/:id',
+        component: () => import('@/pages/detail.vue')
+      },
+      {
+        path: '/new_albums',
+        name: 'New Albums',
         component: () => import('@/pages/albums.vue')
       },
       {
@@ -38,30 +48,20 @@ export const constantRouterMap = [
         component: () => import('@/pages/forYou.vue')
       },
       {
-        path: '/artists',
-        name: 'Artists',
+        path: '/hot_artists',
+        name: 'Hot Artists',
         component: () => import('@/pages/artists.vue')
       },
-      // {
-      //   path: '/albums',
-      //   name: 'Albums',
-      //   component: () => import('@/pages/albums.vue')
-      // },
       {
-        path: '/songs',
-        name: 'Songs',
+        path: '/new_songs',
+        name: 'New Songs',
         component: () => import('@/pages/songs.vue')
-      },
-      {
-        path: '/play_lists',
-        name: 'PlayLists',
-        component: () => import('@/pages/playLists.vue')
-      },
-      {
-        path: '*',
-        name: 'NotFound',
-        component: () => import('@/pages/NotFound.vue')
       }
+      // {
+      //   path: '/play_lists',
+      //   name: 'PlayLists',
+      //   component: () => import('@/pages/playLists.vue')
+      // },
     ]
   }
 ];
@@ -69,6 +69,7 @@ export const constantRouterMap = [
 
 const router = new Router({
   linkActiveClass: 'active-link',
+  // mode: 'history',
   routes: constantRouterMap
 });
 

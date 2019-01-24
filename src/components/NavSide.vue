@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="visible" class="navSide-wapper" width="220" app>
+  <v-navigation-drawer v-model="visible" fixed class="navSide-wapper" width="220" app>
     <v-list>
       <v-list-tile v-for="i in topItems" :key="i.icon" :to="{name: i.title}" ripple active-class="active-link">
         <v-list-tile-action>
@@ -12,7 +12,7 @@
     </v-list>
     <v-subheader>Library</v-subheader>
     <v-list>
-      <v-list-tile v-for="i in bottomItems" :key="i.icon" :to="{name: i.title}">
+      <v-list-tile v-for="i in bottomItems" :key="i.icon" :to="{name: i.title}" ripple active-class="active-link">
         <v-list-tile-action>
           <v-icon>{{ i.icon }}</v-icon>
         </v-list-tile-action>
@@ -35,13 +35,12 @@ export default {
         { title: 'For You', icon: 'favorite' }
       ],
       bottomItems: [
-        { title: 'PlayLists', icon: 'playlist_play' },
-        { title: 'Artists', icon: 'person' },
-        // { title: 'Albums', icon: 'album' },
-        { title: 'Songs', icon: 'music_note' }
+        // { title: 'PlayLists', icon: 'playlist_play' },
+        { title: 'Hot Artists', icon: 'person' },
+        { title: 'New Albums', icon: 'album' },
+        { title: 'New Songs', icon: 'music_note' }
       ],
-      right: null,
-      visible: true
+      visible: null
     }
   },
   methods: {

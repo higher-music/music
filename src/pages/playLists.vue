@@ -1,69 +1,29 @@
 <template>
-  <div v-if="playList.length > 0" :key="0" class="song-list-container">
-    <div class="header">
-      <span style="font-size: 30px;font-weight: bold;">PlayList</span>
-      <v-btn slot="activator" :class="menuClassName" dark icon @click="clearAllSong">
-        <v-icon>delete</v-icon>
-        ClearAll
-      </v-btn>
-    </div>
-    <hr>
-    <div v-for="(item,index) in playList" :key="index" class="song-list-wapper">
-      <div class="song-list">
-        <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
-        <div v-else class="rank"><v-icon>play_circle_outline</v-icon></div>
-        <img
-          :src="item.image"
-          :alt="item.name"
-          :title="item.name"
-          @click="playIndex(index)">
-        <div class="track-info" @click="playIndex(index)">
-          <div class="song-name-container">
-            <span>{{ item.name }}</span>
-          </div>
-          <div class="secondary-info">
-            <span>{{ item.singer }}</span>
-          </div>
-        </div>
-        <v-btn slot="activator" :class="menuClassName" dark icon @click="deleteSong(index)">
-          <v-icon>delete</v-icon>
-        </v-btn>
-      </div>
-    </div>
-  </div>
-  <div v-else class="card">
-    <span>Empty</span>
-  </div>
+  <v-app dark>
+    <AlbumsPicList :data="playLists" type="album" style="margin-top: 20px"/>
+  </v-app>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import AlbumsPicList from '@/components/AlbumsPicList'
+import { getPlayList } from '@/api/rank'
+import { createPlayList } from '@/components/js/album'
+
 export default {
   name: 'PlayLists',
-  computed: {
-    ...mapGetters([
-      'playList',
-      'currentIndex'
-    ]),
-    menuClassName() {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 'menu_flex'
-        case 'sm': return 'menu_flex'
-        default: return 'menu'
-      }
+  components: { AlbumsPicList },
+  data() {
+    return {
+      playLists: []
     }
   },
-  methods: {
-    ...mapActions([
-      'addSongToCurrentIndex',
-      'delSong',
-      'clearAllSong'
-    ]),
-    playIndex(index) {
-      this.addSongToCurrentIndex(this.playList[index])
-    },
-    deleteSong(index) {
-      this.delSong(index)
-    }
+  created() {
+    this.$loading.show()
+    getPlayList().then((res) => {
+      res.playlist.data.v_playlist.forEach(t => {
+        this.playLists.push(createPlayList(t))
+        this.$loading.hide()
+      })
+    })
   }
 }
 </script>
@@ -133,7 +93,13 @@ export default {
             font-size: 14px;
           }
         }
+        .activeSong{
+          color: rgb(105, 240, 174);
+        }
       }
+    }
+    .activeSongBG{
+      background-color: rgba(0, 0, 0, 0.3);
     }
   }
   .card{

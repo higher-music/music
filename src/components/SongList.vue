@@ -1,27 +1,33 @@
 <template>
   <div class="song-list-container">
-    <Progress v-show="loading"/>
-    <div v-for="(item,index) in data" :key="index" class="song-list-wapper" @mouseover="mouseover(index)">
+    <Progress :show="loading"/>
+    <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank">
           <div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
           <div v-else class="rank">{{ index + 1 }}</div>
         </div>
-        <img
+        <v-img
           v-if="showAlbum"
           :src="item.image"
           :alt="item.name"
-          :title="item.name"
-          @click="playIndex(index)">
+          :max-width="40"
+          :max-height="40"
+          class="image"
+          lazy-src="static/img/default.jpeg"
+          @click="playIndex(index)" />
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
-            <span>{{ item.name }}</span>
+            <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <span>{{ item.singer }}</span>
+            <span v-for="(one, i) in item.singer" :key="i">
+              {{ one.name }}
+              <span v-if="i !== item.singer.length - 1">•&nbsp;</span>
+            </span>
           </div>
         </div>
-        <v-menu v-if="showMenu" :class="menuClassName" transition="scale-transition" offset-y right>
+        <v-menu v-if="showMenu" :class="menuClassName" offset-y>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
@@ -40,8 +46,8 @@
 </template>
 
 <script>
+import Progress from '@/components/Progress.vue'
 import { mapGetters, mapActions } from 'vuex'
-import Progress from '@/components/Progress'
 export default {
   components: { Progress },
   props: {
@@ -73,9 +79,7 @@ export default {
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' }
-      ],
-      songListfocus: null,
-      songListTimer: null
+      ]
     }
   },
   computed: {
@@ -99,15 +103,6 @@ export default {
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
     },
-    mouseover(index){
-      if (this.songListTimer){
-        clearTimeout(this.songListTimer);
-      }
-      this.songListTimer = setTimeout(() => {
-        this.songListfocus = index
-        this.songListTimer = null
-      }, 10)
-    },
     menuClick(index, i) {
       if (i === 0) {
         this.playNext(index)
@@ -127,8 +122,7 @@ export default {
 
 <style lang="scss" scoped>
   .song-list-container{
-    padding-left: 10px;
-    padding-right: 10px;
+    box-sizing: content-box !important;
     .song-list-wapper {
       display: flex;
       height: 60px;
@@ -151,9 +145,7 @@ export default {
           padding-left: 10px;
           font-weight: 600;
         }
-        img{
-          height: 40px;
-          width: 40px;
+        .image{
           margin-right: 10px;
           border-radius: 2px;
           box-shadow: 0 0 10px rgba(0,0,0,.5);
@@ -175,14 +167,25 @@ export default {
           .song-name-container{
             display: flex;
             align-items: center;
+            span{
+              font-size: 16px;
+            }
           }
           .secondary-info{
             display: flex;
-            color: #b3b3b3;
-            font-size: 14px;
+            span{
+              color: #b3b3b3;
+              font-size: 14px;
+            }
           }
         }
       }
+    }
+    .activeSongBG{
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    .activeSong{
+      color: rgb(105, 240, 174);
     }
   }
 </style>

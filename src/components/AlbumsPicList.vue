@@ -1,13 +1,20 @@
 <template>
   <div class="grid-container">
     <div v-for="item in data" :key="item.id">
-      <div class="list-container" @click="toAlbums(item)">
+      <div class="list-container">
         <div class="list-wapper">
           <div class="image-wapper">
-            <img :src="item.picUrl" :alt="item.topTitle" :title="item.topTitle">
+            <!--<img :src="item.img" :alt="item.name" :title="item.name">-->
+            <v-img
+              :src="item.img"
+              :alt="item.name"
+              :title="item.name"
+              lazy-src="static/img/default.jpeg"
+              @click="toDetail(item.id)"
+            />
           </div>
-          <div class="text-wapper">
-            <span>{{ item.topTitle }}</span>
+          <div class="text-wapper text-truncate">
+            <span>{{ item.name }}</span>
           </div>
         </div>
       </div>
@@ -23,11 +30,15 @@ export default {
       default: () => {
         return []
       }
+    },
+    type: {
+      type: String,
+      default: ''
     }
   },
   methods: {
-    toAlbums(data){
-      this.$router.push({ path: '/albums/' + data.id });
+    toDetail(id){
+      this.$router.push({ path: `/${this.type}/${id}` })
     }
   }
 }
@@ -35,6 +46,7 @@ export default {
 
 <style lang="scss" scoped>
   .grid-container{
+    padding-top: 15px;
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(186px,1fr));
     padding-left: 12px;
@@ -58,27 +70,26 @@ export default {
           border-radius: 5px;
           cursor: pointer;
           overflow: hidden;
-        }
-        img{
-          border-radius: 5px;
-          width: 100%;
-          height: 100%;
-          transition: opacity .3s;
+          div:hover {
+            transition: opacity .3s;
+            opacity: .7;
+          }
+          /*img{*/
+            /*border-radius: 5px;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*transition: opacity .3s;*/
+          /*}*/
         }
         .text-wapper{
           span{
             font-weight: 500;
-            cursor: pointer;
             outline: 0;
             flex: 1;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
           }
         }
       }
     }
-
-    }
+  }
 
 </style>

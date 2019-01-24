@@ -1,12 +1,8 @@
-<!--
- @Author: ganp
- @Date: 2019/1/7 10:16
- @ProjectName: high-material-music
- @title: NotFound
--->
-
 <template>
-  <h1>404</h1>
+  <div class="all">
+    <span class="text">404</span>
+    <router-link :replace="true" to="/browse" tag="u" style="cursor: pointer">回到首页</router-link>
+  </div>
 </template>
 
 <script>
@@ -16,5 +12,16 @@ export default {
 </script>
 
 <style scoped>
-
+.all {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.text {
+  font-size: 80px;
+  font-weight: bolder;
+}
 </style>

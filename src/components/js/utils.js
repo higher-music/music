@@ -9,15 +9,23 @@ export function CHECK_PREV_NEXT(state) {
 export function HAD_THE_SONG(state, songId) {
   let i = -1
   state.list.forEach((item, index) => {
-    if (item.id === songId) {
+    if (item && item.id === songId) {
       i = index
     }
   })
   return i
 }
 
-export const FLAC = 1
+export function formatDate(now) {
+  const date = new Date(parseInt(now * 1000))
+  const minute = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
+  const second = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
+  return minute + ':' + second
+}
 
-export const MP3_320K = 2
-
-export const MP3_128K = 3
+/**
+ * @return {number}
+ */
+export function GET_RANDOM_NUM(begin, end) {
+  return Math.round(Math.random() * (end - begin) + begin)
+}

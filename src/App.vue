@@ -5,6 +5,7 @@
 </template>
 
 <script>
+require('inobounce')
 import { getVKey } from '@/api/song'
 import { mapActions } from 'vuex'
 
@@ -26,13 +27,14 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import url(../static/css/font.css);
-  #app{
-    font: 400 14px/20px Roboto,"Helvetica Neue",sans-serif;
-  }
-  .tool_bar_height{
+  body, html {
     width: 100%;
-    height: 56px;
+    min-height: 100%;
+    overflow: hidden !important;
+    margin: 0;
+    background-color: #303030;
+    color: #fff;
   }
 </style>
