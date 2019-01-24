@@ -3,7 +3,7 @@
     <v-content app>
       <SongList :data="list" :show-menu="false" show-rank/>
     </v-content>
-    <v-footer height="64" app fixed>
+    <v-footer height="100" app fixed>
       <Player :autoplay="autoplay"/>
     </v-footer>
   </v-app>
@@ -33,8 +33,8 @@ export default {
     }
   },
   created() {
-    jsonp2(`http://musicapi.tx114.5644.pw/api/getMusicList.php?id=${this.$route.params.id}`, { name: 'callback' }).then((res) => {
-      res.data.forEach((item) => {
+    jsonp2(`http://musicapi.tx114.5644.pw/api/qq_music/getMusicList.php?id=${this.$route.params.id}`, { name: 'callback' }).then((res) => {
+      res.data[0].songlist.forEach((item) => {
         this.list.push(createSong(item))
         this.playAll()
       })

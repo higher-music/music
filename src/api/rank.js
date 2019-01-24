@@ -1,5 +1,6 @@
 import jsonp, { jsonp2 } from './jsonp'
 import { commonParams, options, options2 } from './config'
+import { hexToRgb } from '../components/js/utils'
 import RGBaster from 'rgbaster'
 
 // 获取Top榜单
@@ -39,26 +40,39 @@ export function getAlbumByID(albummid) {
 // 获取图片主题色
 export function getImageColor(img) {
   return new Promise((resolve, reject) => {
-    // canvas不允许获取跨域资源的数据，利用服务器代理的方法，解决跨域问题。
-    const URl = `http://74.82.206.121:8888/api/img?0=${img}`;
-    RGBaster.colors(URl, {
-      // 调色板大小
-      paletteSize: 20,
-      exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
-      success: function(payload) {
-        const color = {}
-        const c = payload.dominant.match(/\d+/g);
-        color.btnColor = `rgb(${c[0]},${c[1]},${c[2]})`
-        // 转换成灰度值判断颜色深浅
-        const grayLevel = c[0] * 0.299 + c[1] * 0.587 + c[2] * 0.114;
-        if (grayLevel >= 192) {
-          color.diffColor = true
-        } else {
-          color.diffColor = false
-        }
-        resolve(color)
+    const URl = `http://musicapi.tx114.5644.pw/api/img/getPrimaryColor.php?imgUrl=${img}`;
+    jsonp2(URl, { name: 'callback' }).then(res => {
+      const rgb = hexToRgb(res.data)
+      const color = {
+        btnColor: res.data,
+        diffColor: false
       }
-    });
+      if (rgb.r * 0.299 + rgb.g * 0.578 + rgb.b * 0.114 >= 192){ // 浅色
+        color.btnColor = res.data
+        color.diffColor = true
+      }
+      resolve(color)
+    }).catch(err => {
+      reject(err)
+    })
+    // RGBaster.colors(URl, {
+    //   // 调色板大小
+    //   paletteSize: 20,
+    //   exclude: ['rgb(255,255,255)', 'rgb(0,0,0)'],
+    //   success: function(payload) {
+    //     const color = {}
+    //     const c = payload.dominant.match(/\d+/g);
+    //     color.btnColor = `rgb(${c[0]},${c[1]},${c[2]})`
+    //     // 转换成灰度值判断颜色深浅
+    //     const grayLevel = c[0] * 0.299 + c[1] * 0.587 + c[2] * 0.114;
+    //     if (grayLevel >= 192) {
+    //       color.diffColor = true
+    //     } else {
+    //       color.diffColor = false
+    //     }
+    //     resolve(color)
+    //   }
+    // });
   })
 }
 

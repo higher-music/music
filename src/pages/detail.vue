@@ -38,7 +38,7 @@ export default {
       const imgUrl = await this.getDiffMusic(type).catch((err) => {
         console.log(err)
       })
-      // await this.getColor(imgUrl)
+      await this.getColor(imgUrl)
       this.$loading.hide()
     },
     getDiffMusic(type){
