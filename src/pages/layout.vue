@@ -6,13 +6,12 @@
       <PlayList @close-click="dialog = false"/>
     </v-dialog>
     <v-content app>
-      <!--<v-toolbar class="hidden-lg-and-up"/>-->
-      <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"/>
-      </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive"/>
+      <transition name="fade">
+        <keep-alive include="Browse">
+          <router-view/>
+        </keep-alive>
+      </transition>
     </v-content>
-    <!--<div style="width: 100%;height: 100px"></div>-->
     <v-footer height="100" app>
       <player @list-click="toggleDialog"/>
     </v-footer>
@@ -41,3 +40,12 @@ export default {
   }
 }
 </script>
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    /*transition: opacity .9s;*/
+  }
+</style>

@@ -12,7 +12,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import AlbumsPicList from '@/components/AlbumsPicList'
 import { getTopList, getMusicList } from '@/api/rank'
@@ -21,6 +20,7 @@ import { createSong } from '@/components/js/song'
 import { createList } from '@/components/js/album'
 
 export default {
+  name: 'Browse',
   components: { AlbumsPicList, SongList },
   data() {
     return {

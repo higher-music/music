@@ -38,7 +38,7 @@ export default {
       const imgUrl = await this.getDiffMusic(type).catch((err) => {
         console.log(err)
       })
-      await this.getColor(imgUrl)
+      // await this.getColor(imgUrl)
       this.$loading.hide()
     },
     getDiffMusic(type){
@@ -46,7 +46,6 @@ export default {
         const paramsType = {
           'list': () => {
             getMusicList(this.$route.params.id).then(res => {
-              console.log(res)
               this.data.name = res.topinfo.ListName
               this.data.info = res.topinfo.info
               this.data.img = res.topinfo.pic_album
@@ -76,9 +75,7 @@ export default {
             })
           },
           'singer': () => {
-            console.log(this.$route.params.id)
             getSingerDetail(this.$route.params.id).then(res => {
-              console.log(res)
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
               this.data.name = res.data.singer_name
               this.data.img = imgUrl
