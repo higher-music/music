@@ -1,25 +1,20 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import 'babel-polyfill'
 import Vue from 'vue'
+
 import App from './App'
 import router from './router'
-// import Raven from 'raven-js'
-// import RavenVue from 'raven-js/plugins/vue'
-import Vuetify from 'vuetify'
 import store from './vuex/store'
-import FastClick from 'fastclick'
+
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+
+import 'babel-polyfill'
+import '@/style/index.scss' // global css
 import Loading from '@/components/Loading'
-import '@/style/index.scss'
+import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
-FastClick.attach(document.body);
 Vue.use(Vuetify)
 Vue.use(Loading)
-Vue.config.productionTip = false;
-
-// window.$Raven = Raven
-// Raven.config('https://2eff0ea26f4041ccaf115a0a52e50d4c@sentry.io/1376437')
-//   .addPlugin(RavenVue, Vue).install()
 
 /**
  * @param msg 问题
@@ -43,6 +38,8 @@ Vue.config.errorHandler = function(err, vm, info) {
   console.error('error_vm=>', vm);
   console.error('error_info=>', info);
 };
+
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
