@@ -220,12 +220,12 @@ export default {
   background: #ffffff;
   height: 100vh;
   width: 100%;
-  padding: 2vh;
+  padding: 1vh;
   .all {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 96vh;
+    height: 98vh;
     color: #04060c;
     min-width: 365px;
     box-shadow: 0px 0px 5px 5px #888888;
