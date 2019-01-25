@@ -2,11 +2,16 @@
   <div class="all elevation-5">
     <Progress :show="loading" />
     <header class="elevation-1">
-      <v-img
+      <img
+        v-if="currentSong"
         :src="currentSong.image"
-        lazy-src="static/img/default.jpeg"
-        max-width="78"
-        max-height="78"/>
+        width="78"
+        height="78">
+      <img
+        v-else
+        src="static/img/default.jpeg"
+        width="78"
+        height="78">
       <div class="header-right">
         <div class="title-bar">
           <img src="favicon.ico" width="17" height="17">
@@ -34,7 +39,12 @@
       </div>
     </header>
     <div v-show="showList" class="content">
-      <div v-for="(item, index) in list" :key="index" :class="{activeBg:index === currentIndex}" class="list-item">
+      <div
+        v-for="(item, index) in list"
+        :key="index"
+        :style="index === currentIndex ? 'background: #e9e9e9' : ''"
+        class="list-item"
+        @click.stop="playIndex(index)">
         <div v-if="index === currentIndex"/>
         <span :class="{activeSpan: index === currentIndex}" class="span1">
           {{ index + 1 }}
@@ -118,10 +128,14 @@ export default {
   },
   methods: {
     ...mapActions([
+      'addSongToCurrentIndex',
       'replacePlayList',
       'nextSong',
       'prevSong'
     ]),
+    playIndex(index) {
+      this.addSongToCurrentIndex(this.list[index])
+    },
     updateTime(e) {
       this.reverseTime = formatDate(this.duration - e.target.currentTime)
     },
@@ -269,8 +283,8 @@ export default {
       .list-item:nth-child(odd) {
         background: #f7f7f7;
       }
-      .activeBg {
-        background: #e9e9e9;
+      .list-item:hover {
+        background: #eaeaea;
       }
     }
     footer {
