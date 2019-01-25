@@ -67,6 +67,6 @@ export default {
     font-weight: 500;
     padding-left: 20px;
     /*padding-bottom: 10px;*/
-    padding-top: 5px;
+    padding-top: 12px;
   }
 </style>
