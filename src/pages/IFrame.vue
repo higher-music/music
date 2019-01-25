@@ -14,7 +14,7 @@
         height="78">
       <div class="header-right">
         <div class="title-bar">
-          <img src="favicon.ico" width="17" height="17">
+          <v-icon>audiotrack</v-icon>
           <span v-if="currentSong" style="margin-left: 10px;font-size: 14px">{{ currentSong.name }}</span>
           <span v-else style="margin-left: 10px;font-size: 14px">Higher Music</span>
         </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
     <footer v-show="showList">
-      <img src="favicon.ico" width="18" height="18">
+      <v-icon>audiotrack</v-icon>
       <div style="padding-left: 5px">Higher Music</div>
     </footer>
     <v-snackbar v-model="snackbar" :timeout="3000" bottom>
