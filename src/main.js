@@ -16,6 +16,13 @@ import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 Vue.use(Vuetify)
 Vue.use(Loading)
 
+// 全局Promise异常捕获
+window.addEventListener('unhandledrejection', function(e){
+  e.preventDefault()
+  console.warn('promise error=>', e.reason);
+  return true;
+});
+
 /**
  * @param msg 问题
  * @param vm  vm为抛出异常的 Vue 实例

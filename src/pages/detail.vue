@@ -58,9 +58,7 @@ export default {
       return true
     },
     async getMusic(){
-      const imgUrl = await this.getDiffMusic(this.paramsType).catch((err) => {
-        console.log(err)
-      })
+      const imgUrl = await this.getDiffMusic(this.paramsType)
       const { btnColor, diffColor } = await getImageColor(imgUrl)
       this.data = {
         ...this.data,
