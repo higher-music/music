@@ -1,79 +1,81 @@
 <template>
-  <div class="all elevation-5">
-    <Progress :show="loading" />
-    <header class="elevation-1">
-      <img
-        v-if="currentSong"
-        :src="currentSong.image"
-        width="78"
-        height="78">
-      <img
-        v-else
-        src="static/img/default.jpeg"
-        width="78"
-        height="78">
-      <div class="header-right">
-        <div class="title-bar">
-          <v-icon>audiotrack</v-icon>
-          <span v-if="currentSong" style="margin-left: 10px;font-size: 14px">{{ currentSong.name }}</span>
-          <span v-else style="margin-left: 10px;font-size: 14px">Higher Music</span>
-        </div>
-        <div class="controller">
-          <span style="width: 50px;font-size: 11px;color: #999">{{ "- " + reverseTime }}</span>
-          <div>
-            <v-btn icon @click="prevSong">
-              <v-icon color="#898989">skip_previous</v-icon>
-            </v-btn>
-            <v-btn icon @click="play">
-              <v-icon v-if="isPlay" color="#898989">pause</v-icon>
-              <v-icon v-else color="#898989">play_arrow</v-icon>
-            </v-btn>
-            <v-btn icon @click="nextSong">
-              <v-icon color="#898989">skip_next</v-icon>
+  <div class="iframe">
+    <div class="all">
+      <Progress :show="loading" />
+      <header class="elevation-1">
+        <img
+          v-if="currentSong"
+          :src="currentSong.image"
+          width="78"
+          height="78">
+        <img
+          v-else
+          src="static/img/default.jpeg"
+          width="78"
+          height="78">
+        <div class="header-right">
+          <div class="title-bar">
+            <v-icon>audiotrack</v-icon>
+            <span v-if="currentSong" style="margin-left: 10px;font-size: 14px">{{ currentSong.name }}</span>
+            <span v-else style="margin-left: 10px;font-size: 14px">Higher Music</span>
+          </div>
+          <div class="controller">
+            <span style="width: 50px;font-size: 11px;color: #999">{{ "- " + reverseTime }}</span>
+            <div>
+              <v-btn icon @click="prevSong">
+                <v-icon color="#898989">skip_previous</v-icon>
+              </v-btn>
+              <v-btn icon @click="play">
+                <v-icon v-if="isPlay" color="#898989">pause</v-icon>
+                <v-icon v-else color="#898989">play_arrow</v-icon>
+              </v-btn>
+              <v-btn icon @click="nextSong">
+                <v-icon color="#898989">skip_next</v-icon>
+              </v-btn>
+            </div>
+            <v-btn icon @click.stop="showList = !showList">
+              <v-icon color="#898989">list</v-icon>
             </v-btn>
           </div>
-          <v-btn icon @click.stop="showList = !showList">
-            <v-icon color="#898989">list</v-icon>
-          </v-btn>
+        </div>
+      </header>
+      <div v-show="showList" class="content">
+        <div
+          v-for="(item, index) in list"
+          :key="index"
+          :style="index === currentIndex ? 'background: #e9e9e9' : ''"
+          class="list-item"
+          @click.stop="playIndex(index)">
+          <div v-if="index === currentIndex"/>
+          <span :class="{activeSpan: index === currentIndex}" class="span1">
+            {{ index + 1 }}
+          </span>
+          <span class="span2">{{ item.name }}</span>
+          <span class="span3">{{ singerName(item.singer) }}</span>
         </div>
       </div>
-    </header>
-    <div v-show="showList" class="content">
-      <div
-        v-for="(item, index) in list"
-        :key="index"
-        :style="index === currentIndex ? 'background: #e9e9e9' : ''"
-        class="list-item"
-        @click.stop="playIndex(index)">
-        <div v-if="index === currentIndex"/>
-        <span :class="{activeSpan: index === currentIndex}" class="span1">
-          {{ index + 1 }}
-        </span>
-        <span class="span2">{{ item.name }}</span>
-        <span class="span3">{{ singerName(item.singer) }}</span>
-      </div>
+      <footer v-show="showList">
+        <v-icon>audiotrack</v-icon>
+        <div style="padding-left: 5px">Higher Music</div>
+      </footer>
+      <v-snackbar v-model="snackbar" :timeout="3000" bottom>
+        该歌曲没有有效音质源
+        <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
+      <audio
+        id="audio"
+        :src="playUrl"
+        :autoplay="autoplay"
+        @timeupdate="updateTime"
+        @ended="end"
+        @pause="isPlay = false"
+        @play="onPlay"
+        @error="onError"
+        @canplay="onCanPlay">
+        您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
+        EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
+      </audio>
     </div>
-    <footer v-show="showList">
-      <v-icon>audiotrack</v-icon>
-      <div style="padding-left: 5px">Higher Music</div>
-    </footer>
-    <v-snackbar v-model="snackbar" :timeout="3000" bottom>
-      该歌曲没有有效音质源
-      <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
-    </v-snackbar>
-    <audio
-      id="audio"
-      :src="playUrl"
-      :autoplay="autoplay"
-      @timeupdate="updateTime"
-      @ended="end"
-      @pause="isPlay = false"
-      @play="onPlay"
-      @error="onError"
-      @canplay="onCanPlay">
-      您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
-      EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
-    </audio>
   </div>
 </template>
 
@@ -214,14 +216,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.iframe {
+  background: #ffffff;
+  height: 100vh;
+  width: 100%;
+  padding: 2vh;
   .all {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     width: 100%;
-    background: #ffffff;
+    height: 96vh;
     color: #04060c;
     min-width: 365px;
+    box-shadow: 0px 0px 5px 5px #888888;
     header {
       height: 78px;
       display: flex;
@@ -294,4 +301,5 @@ export default {
       height: 40px;
     }
   }
+}
 </style>
