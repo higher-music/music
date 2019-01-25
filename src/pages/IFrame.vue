@@ -2,7 +2,7 @@
   <div class="iframe">
     <div class="all">
       <Progress :show="loading" />
-      <header class="elevation-1">
+      <header>
         <img
           v-if="currentSong"
           :src="currentSong.image"
@@ -56,7 +56,13 @@
       </div>
       <footer v-show="showList">
         <v-icon>audiotrack</v-icon>
-        <div style="padding-left: 5px">Higher Music</div>
+        <div style="padding-left: 5px;cursor: pointer">
+          <a target="_blank" href="http://cyixlq.gitee.io/music/#/browse">Higher Music</a>
+        </div>
+        <v-spacer />
+        <div style="cursor: pointer;padding-right: 10px">
+          <a target="_blank" href="https://gitee.com/cyixlq/music">使用说明</a>
+        </div>
       </footer>
       <v-snackbar v-model="snackbar" :timeout="3000" bottom>
         该歌曲没有有效音质源
@@ -220,18 +226,19 @@ export default {
   background: #ffffff;
   height: 100vh;
   width: 100%;
-  padding: 1vh;
+  padding: 2vh;
   .all {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 98vh;
+    height: 96vh;
     color: #04060c;
     min-width: 365px;
-    box-shadow: 0px 0px 5px 5px #888888;
+    border-radius: 1vh;
     header {
       height: 78px;
       display: flex;
+      box-shadow: 0px 0px 1px 1px #ccc;
       .header-right {
         flex: 1;
         display: flex;
@@ -253,6 +260,7 @@ export default {
       flex: 1;
       overflow-y: scroll;
       margin-top: 2px;
+      box-shadow: 0px 1px 1px 1px #ccc;
       .list-item {
         display: flex;
         height: 30px;
@@ -295,10 +303,15 @@ export default {
       }
     }
     footer {
+      box-shadow: 0px 1px 1px 1px #ccc;
       display: flex;
       align-items: center;
       background: #f1f1f1;
       height: 40px;
+      a {
+        text-decoration: none;
+        color: #04060c;
+      }
     }
   }
 }
