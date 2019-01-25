@@ -87,8 +87,7 @@ export default {
       isPlay: false,
       showList: true,
       duration: 0,
-      snackbar: false,
-      isFromUser: false
+      snackbar: false
     }
   },
   computed: {
@@ -124,9 +123,7 @@ export default {
       'prevSong'
     ]),
     updateTime(e) {
-      if (!this.isFromUser) {
-        this.reverseTime = formatDate(this.duration - e.target.currentTime)
-      }
+      this.reverseTime = formatDate(this.duration - e.target.currentTime)
     },
     onPlay() {
       let singer = ''
@@ -185,11 +182,6 @@ export default {
         }
       } else {
         this.errorTimes = 0
-      }
-    },
-    slideChange(i) {
-      if (!this.isFromUser) {
-        document.getElementById('audio').currentTime = i
       }
     },
     singerName(singer) {
