@@ -22,16 +22,10 @@
           <div class="controller">
             <span style="width: 50px;font-size: 11px;color: #999">{{ "- " + reverseTime }}</span>
             <div>
-              <v-btn icon @click="prevSong">
-                <v-icon color="#898989">skip_previous</v-icon>
-              </v-btn>
-              <v-btn icon @click="play">
-                <v-icon v-if="isPlay" color="#898989">pause</v-icon>
-                <v-icon v-else color="#898989">play_arrow</v-icon>
-              </v-btn>
-              <v-btn icon @click="nextSong">
-                <v-icon color="#898989">skip_next</v-icon>
-              </v-btn>
+              <v-icon color="#898989" @click.stop="prevSong">skip_previous</v-icon>
+              <v-icon v-if="isPlay" color="#898989" @click="play">pause</v-icon>
+              <v-icon v-else color="#898989" @click="play">play_arrow</v-icon>
+              <v-icon color="#898989" @click="nextSong">skip_next</v-icon>
             </div>
             <v-btn icon @click.stop="showList = !showList">
               <v-icon color="#898989">list</v-icon>
@@ -77,7 +71,7 @@
         @pause="isPlay = false"
         @play="onPlay"
         @error="onError"
-        @canplay="onCanPlay">
+        @durationchange="onDurationChange">
         您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
         EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
       </audio>
@@ -104,8 +98,8 @@ export default {
       reverseTime: '',
       isPlay: false,
       showList: true,
-      duration: 0,
-      snackbar: false
+      snackbar: false,
+      duration: 0
     }
   },
   computed: {
@@ -156,6 +150,9 @@ export default {
       this.isPlay = true
       this.errorTimes = 0
     },
+    onDurationChange() {
+      this.duration = document.getElementById('audio').duration
+    },
     play() {
       if (this.isPlay) {
         document.getElementById('audio').pause()
@@ -173,9 +170,6 @@ export default {
       } else {
         document.getElementById('audio').pause()
       }
-    },
-    onCanPlay() {
-      this.duration = document.getElementById('audio').duration
     },
     onError() {
       this.isPlay = false
@@ -226,14 +220,14 @@ export default {
   background: #ffffff;
   height: 100vh;
   width: 100%;
-  padding: 2vh;
+  padding: 1vh;
   .all {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 96vh;
+    height: 98vh;
     color: #04060c;
-    min-width: 365px;
+    min-width: 290px;
     border-radius: 1vh;
     header {
       height: 78px;

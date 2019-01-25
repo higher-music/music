@@ -53,7 +53,7 @@
     </div>
     <div class="misc-controls hidden-sm-and-down">
       <Sheet class="hidden-md-and-down"/>
-      <v-btn v-if="showListMenu" icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
+      <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
         <v-icon>queue_music</v-icon>
       </v-btn>
       <v-btn icon class="hidden-md-and-down" @click.stop="changePlayMode">
@@ -76,7 +76,6 @@
     <audio
       id="audio"
       :src="playUrl"
-      :autoplay="autoplay"
       :loop="isLoop"
       @timeupdate="updateTime"
       @ended="end"
@@ -85,7 +84,7 @@
       @loadedmetadata="loadEdmetaData"
       @play="onPlay"
       @error="onError"
-      @canplay="onCanPlay">
+      @durationchange="onDurationChange">
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
@@ -105,16 +104,6 @@ import { formatDate } from '@/components/js/utils'
 export default {
   name: 'Player',
   components: { Sheet },
-  props: {
-    autoplay: {
-      type: Boolean,
-      default: true
-    },
-    showListMenu: {
-      type: Boolean,
-      default: true
-    }
-  },
   data() {
     return {
       currentTime: 0,
@@ -124,7 +113,8 @@ export default {
       errorTimes: 0,
       snackbar: false,
       media: 1,
-      loading: true
+      loading: true,
+      timer: null
     }
   },
   computed: {
@@ -175,6 +165,18 @@ export default {
   watch: {
     media() {
       document.getElementById('audio').volume = this.media
+    },
+    currentSong(newSong, oldSong) {
+      if (!newSong.id) {
+        return
+      }
+      if (oldSong && newSong.id === oldSong.id) {
+        return
+      }
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        document.getElementById('audio').play()
+      }, 1000)
     }
   },
   methods: {
@@ -222,7 +224,7 @@ export default {
         document.getElementById('audio').pause()
       }
     },
-    onCanPlay() {
+    onDurationChange() {
       this.duration = document.getElementById('audio').duration
     },
     onError() {

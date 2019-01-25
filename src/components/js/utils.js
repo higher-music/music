@@ -17,7 +17,12 @@ export function HAD_THE_SONG(state, songId) {
 }
 
 export function formatDate(now) {
-  const date = new Date(parseInt(now * 1000))
+  let date
+  if (now > 1000) {
+    date = new Date(now)
+  } else {
+    date = new Date(parseInt(now * 1000))
+  }
   const minute = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
   const second = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
   return minute + ':' + second
