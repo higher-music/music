@@ -10,7 +10,6 @@ import { getAlbumList } from '@/api/rank'
 import { createAlbum } from '@/components/js/album'
 import AlbumsPicList from '@/components/AlbumsPicList'
 export default {
-  name: 'Albums',
   components: { AlbumsPicList },
   data() {
     return {
@@ -19,12 +18,13 @@ export default {
   },
   created() {
     this.$loading.show()
-    getAlbumList().then((res) => {
-      res.new_album.data.list.forEach((item) => {
-        this.browseAlbumsList.push(createAlbum(item))
+    getAlbumList().then(res => {
+      res.new_album.data.list.forEach(t => {
+        this.browseAlbumsList.push(createAlbum(t))
       })
+    }).then(() => {
+      this.$loading.hide()
     })
-    this.$loading.hide()
   }
 }
 </script>
