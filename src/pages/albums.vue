@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="scroll-container">
-      <AlbumsPicList :data="browseAlbumsList" type="album" />
+      <AlbumsPicList :data="newAlbumsList" type="album" />
     </div>
   </div>
 </template>
@@ -13,14 +13,14 @@ export default {
   components: { AlbumsPicList },
   data() {
     return {
-      browseAlbumsList: []
+      newAlbumsList: []
     }
   },
   created() {
     this.$loading.show()
     getAlbumList().then(res => {
       res.new_album.data.list.forEach(t => {
-        this.browseAlbumsList.push(createAlbum(t))
+        this.newAlbumsList.push(createAlbum(t))
       })
     }).then(() => {
       this.$loading.hide()

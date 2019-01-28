@@ -19,7 +19,9 @@ export default {
         $vm.show = true;
       },
       hide() {
-        $vm.show = false;
+        setTimeout(() => {
+          $vm.show = false;
+        }, 100)
       }
     };
 
