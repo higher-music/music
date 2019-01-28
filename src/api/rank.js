@@ -1,7 +1,6 @@
 import jsonp, { jsonp2 } from './jsonp'
 import { commonParams, options, options2 } from './config'
 import { hexToRgb } from '../components/js/utils'
-import RGBaster from 'rgbaster'
 
 // 获取Top榜单
 export function getTopList() {

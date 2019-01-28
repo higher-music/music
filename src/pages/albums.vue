@@ -23,11 +23,8 @@ export default {
       res.new_album.data.list.forEach((item) => {
         this.browseAlbumsList.push(createAlbum(item))
       })
-      this.$loading.hide()
     })
+    this.$loading.hide()
   }
 }
 </script>
-
-<style scoped>
-</style>

@@ -23,13 +23,9 @@ export default {
     getSingerList().then(res => {
       res.data.list.forEach(t => {
         this.singerList.push(createSinger(t))
-        this.$loading.hide()
       })
     })
+    this.$loading.hide()
   }
 }
 </script>
-
-<style scoped>
-
-</style>
