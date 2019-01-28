@@ -7,9 +7,7 @@
     </v-dialog>
     <v-content app>
       <transition name="fade">
-        <keep-alive include="Browse">
-          <router-view :key="key"/>
-        </keep-alive>
+        <router-view :key="key"/>
       </transition>
     </v-content>
     <v-footer height="100" app>

@@ -23,6 +23,7 @@ export default {
       res.data.list.forEach(t => {
         this.hotArtistsList.push(createSinger(t))
       })
+    }).then(() => {
       this.$loading.hide()
     })
   }
