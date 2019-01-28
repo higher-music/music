@@ -4,6 +4,11 @@
 //.v-overlay--active:before{
 //  opacity: 1 !important;
 //}
+
+.v-content{
+  background-image: linear-gradient(#1e3264, #04060c 130%) !important;
+}
+
 .theme--dark.v-label{
   color: #fff !important;
 }
@@ -17,10 +22,7 @@
 .theme--dark.v-list {
   padding: 0 !important;
 }
-.application--wrap {
-  background-image: linear-gradient(#1e3264, #04060c 130%);
-}
-.navSide-wapper {
+.nav-side-container {
   .v-list__tile__action, .v-list__tile__avatar {
     min-width: 32px !important;
   }

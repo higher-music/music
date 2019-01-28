@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="visible" fixed class="navSide-wapper" width="220" app>
+  <v-navigation-drawer v-model="visible" fixed class="nav-side-container" width="220" app>
     <v-list>
       <v-list-tile v-for="i in topItems" :key="i.icon" :to="{name: i.title}" ripple active-class="active-link">
         <v-list-tile-action>
@@ -22,9 +22,7 @@
       </v-list-tile>
     </v-list>
   </v-navigation-drawer>
-
 </template>
-
 <script>
 export default {
   data() {
