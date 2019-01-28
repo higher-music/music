@@ -31,6 +31,7 @@ export default {
   created() {
     this.$loading.show()
     getNewSong().then(res => {
+      console.log(res)
       res.new_song.data.song_list.forEach(t => {
         this.songList.push(createSong2(t))
         this.$loading.hide()

@@ -42,14 +42,16 @@
         </v-menu>
       </div>
     </div>
+    <Sheet ref="downloadSheet" type="download"/>
   </div>
 </template>
 
 <script>
-import Progress from '@/components/Progress.vue'
+import Progress from '@/components/Progress'
+import Sheet from '@/components/Sheet'
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  components: { Progress },
+  components: { Progress, Sheet },
   props: {
     showRank: {
       type: Boolean,
@@ -78,7 +80,8 @@ export default {
     return {
       items: [
         { title: 'Play Next' },
-        { title: 'Play Later' }
+        { title: 'Play Later' },
+        { title: 'Download' }
       ]
     }
   },
@@ -106,8 +109,11 @@ export default {
     menuClick(index, i) {
       if (i === 0) {
         this.playNext(index)
-      } else {
+      } else if (i === 1){
         this.playLatter(index)
+      } else {
+        this.$refs.downloadSheet.sheet = true
+        this.$refs.downloadSheet.resource = this.data[index]
       }
     },
     playNext(index) {

@@ -1,14 +1,18 @@
 <template>
   <v-bottom-sheet v-model="sheet">
     <v-btn
+      v-if="type!=='download'"
       slot="activator"
       icon>
       <v-icon>settings</v-icon>
     </v-btn>
-
     <v-list class="sheet-container">
-      <div class="bitrate-text">Bitrate</div>
-      <v-radio-group v-model="radioGroup">
+      <div class="sheet-header">
+        <div class="text">{{ type==='download'?'Select':'Bitrate' }}</div>
+        <v-btn v-if="type==='download'" small color="success" @click="download">Download</v-btn>
+      </div>
+      <!--eslint-disable vue/valid-v-model-->
+      <v-radio-group v-model="type==='download'?1:radioGroup">
         <v-radio
           v-for="r in radioGroupData"
           :key="r.val"
@@ -18,7 +22,6 @@
         />
       </v-radio-group>
     </v-list>
-
   </v-bottom-sheet>
 </template>
 
@@ -29,9 +32,13 @@ import store from '@/vuex/store'
 
 export default {
   name: 'Sheet',
+  props: {
+    type: String
+  },
   data() {
     return {
       sheet: false,
+      resource: null,
       radioGroup: store.state.playList.type,
       radioGroupData: [
         { val: FLAC, text: 'Flac (550 kbps)' },
@@ -48,12 +55,16 @@ export default {
   methods: {
     ...mapActions([
       'changeType'
-    ])
+    ]),
+    download() {
+      this.sheet = false
+      window.open(this.resource.mp3_128k);
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .sheet-container {
     padding: 8px 16px !important;
     min-width: 100vw;
@@ -62,10 +73,15 @@ export default {
     outline: 0;
     max-height: 80vh;
     overflow: auto;
+    .sheet-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .text {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
   }
 
-  .bitrate-text {
-    font-size: 18px;
-    font-weight: 500;
-  }
 </style>
