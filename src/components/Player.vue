@@ -77,6 +77,7 @@
       id="audio"
       :src="playUrl"
       :loop="isLoop"
+      autoplay
       @timeupdate="updateTime"
       @ended="end"
       @pause="isPlay = false"
@@ -113,8 +114,7 @@ export default {
       errorTimes: 0,
       snackbar: false,
       media: 1,
-      loading: true,
-      timer: null
+      loading: true
     }
   },
   computed: {
@@ -165,18 +165,6 @@ export default {
   watch: {
     media() {
       document.getElementById('audio').volume = this.media
-    },
-    currentSong(newSong, oldSong) {
-      if (!newSong.id) {
-        return
-      }
-      if (oldSong && newSong.id === oldSong.id) {
-        return
-      }
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => {
-        document.getElementById('audio').play()
-      }, 1000)
     }
   },
   methods: {
