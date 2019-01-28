@@ -45,7 +45,7 @@
             {{ index + 1 }}
           </span>
           <span class="span2">{{ item.name }}</span>
-          <span class="span3">{{ singerName(item.singer) }}</span>
+          <span class="span3">{{ item.singer }}</span>
         </div>
       </div>
       <footer v-show="showList">
@@ -80,11 +80,11 @@
 </template>
 
 <script>
-import { createSong } from '@/components/js/song'
+import { createSong3 } from '../components/js/song'
 import { mapGetters, mapActions } from 'vuex'
-import { jsonp2 } from '@/api/jsonp'
 import Progress from '@/components/Progress.vue'
 import { formatDate } from '../components/js/utils'
+import axios from 'axios'
 
 export default {
   name: 'Iframe',
@@ -120,12 +120,14 @@ export default {
     }
   },
   created() {
-    jsonp2(`http://musicapi.tx114.5644.pw/api/qq_music/getMusicList.php?id=${this.$route.params.id}`, { name: 'callback' }).then((res) => {
-      res.data[0].songlist.forEach((item) => {
-        this.list.push(createSong(item))
+    axios.get(`https://api.bzqll.com/music/tencent/songList?key=579621905&id=${this.$route.params.id}`).then(res => {
+      res.data.data.songs.forEach(t => {
+        this.list.push(createSong3(t))
         this.loading = false
         this.replacePlayList(this.list)
       })
+    }).catch(err => {
+      console.log(err)
     })
   },
   methods: {
@@ -142,11 +144,7 @@ export default {
       this.reverseTime = formatDate(this.duration - e.target.currentTime)
     },
     onPlay() {
-      let singer = ''
-      this.currentSong.singer.forEach(t => {
-        singer += t.name + ' '
-      })
-      document.title = `${this.currentSong.name} • ${singer}`
+      document.title = `${this.currentSong.name} • ${this.currentSong.singer}`
       this.isPlay = true
       this.errorTimes = 0
     },
@@ -199,17 +197,6 @@ export default {
       } else {
         this.errorTimes = 0
       }
-    },
-    singerName(singer) {
-      let name = ''
-      for (let i = 0; i < singer.length; i++) {
-        if (i !== singer.length - 1) {
-          name += singer[i].name + ' • '
-        } else {
-          name += singer[i].name
-        }
-      }
-      return name
     }
   }
 }
