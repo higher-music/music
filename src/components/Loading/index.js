@@ -21,7 +21,7 @@ export default {
       hide() {
         setTimeout(() => {
           $vm.show = false;
-        }, 100)
+        }, 200)
       }
     };
 
