@@ -24,7 +24,9 @@ export default {
         this.hotArtistsList.push(createSinger(t))
       })
     }).then(() => {
-      this.$loading.hide()
+      setTimeout(() => {
+        this.$loading.hide()
+      }, 300)
     })
   }
 }
