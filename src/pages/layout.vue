@@ -8,7 +8,7 @@
     <v-content app>
       <transition name="fade">
         <keep-alive include="Browse">
-          <router-view/>
+          <router-view :key="key"/>
         </keep-alive>
       </transition>
     </v-content>
@@ -28,6 +28,11 @@ export default {
   data() {
     return {
       dialog: false
+    }
+  },
+  computed: {
+    key() {
+      return this.$route.name !== undefined ? this.$route.name + +new Date() : this.$route + +new Date()
     }
   },
   methods: {
