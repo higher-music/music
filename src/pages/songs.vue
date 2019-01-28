@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <div class="main-container">
     <div class="section-title">
       New Songs
       <v-spacer/>
@@ -8,8 +8,10 @@
       </v-btn>
     </div>
     <hr>
-    <SongList :data="songList" type="list" show-rank/>
-  </v-app>
+    <div class="scroll-container2">
+      <SongList :data="songList" type="list" show-rank/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -54,5 +56,13 @@ export default {
     font-size: 24px;
     font-weight: 500;
     padding: 10px;
+  }
+  .scroll-container2{
+    position: relative;
+    z-index: 1;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    height:  calc(100% - 60px);
+    overflow: auto;
   }
 </style>
