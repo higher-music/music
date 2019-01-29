@@ -27,7 +27,7 @@
             </span>
           </div>
         </div>
-        <v-menu v-if="showMenu" :class="menuClassName" offset-y>
+        <v-menu v-if="showMenu" :class="menuClassName" offset-y left>
           <v-btn slot="activator" dark icon>
             <v-icon>more_vert</v-icon>
           </v-btn>

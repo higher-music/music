@@ -26,6 +26,7 @@
 </template>
 
 <script>
+var downloadJS = require('downloadjs');
 import { FLAC, MP3_320K, MP3_128K } from '@/api/config'
 import { mapActions } from 'vuex'
 import store from '@/vuex/store'
@@ -58,7 +59,13 @@ export default {
     ]),
     download() {
       this.sheet = false
-      window.open(this.resource.mp3_128k);
+      console.log(this.resource)
+      const { mp3_128k, name } = this.resource
+      var x = new XMLHttpRequest();
+      x.open('GET', mp3_128k, true);
+      x.responseType = 'blob';
+      x.onload = function(e){ downloadJS(e.target.response, `${name}.mp3`, 'audio/mpeg'); };
+      x.send();
     }
   }
 }
