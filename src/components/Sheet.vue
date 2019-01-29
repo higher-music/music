@@ -11,8 +11,7 @@
         <div class="text">{{ type==='download'?'Select':'Bitrate' }}</div>
         <v-btn v-if="type==='download'" small color="success" @click="download">Download</v-btn>
       </div>
-      <!--eslint-disable vue/valid-v-model-->
-      <v-radio-group v-model="type==='download'?1:radioGroup">
+      <v-radio-group v-model="radioGroup">
         <v-radio
           v-for="r in radioGroupData"
           :key="r.val"
@@ -26,9 +25,9 @@
 </template>
 
 <script>
-var downloadJS = require('downloadjs');
+// var downloadJS = require('downloadjs');
 import { FLAC, MP3_320K, MP3_128K } from '@/api/config'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import store from '@/vuex/store'
 
 export default {
@@ -40,7 +39,7 @@ export default {
     return {
       sheet: false,
       resource: null,
-      radioGroup: store.state.playList.type,
+      radioGroup: this.type === 'download' ? 1 : store.state.playList.type,
       radioGroupData: [
         { val: FLAC, text: 'Flac (550 kbps)' },
         { val: MP3_320K, text: 'High (320 kbps)' },
@@ -48,8 +47,17 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters([
+      'getType',
+      'getPlayType'
+    ])
+  },
   watch: {
     radioGroup() {
+      if (this.type === 'download'){
+        return false
+      }
       this.changeType(this.radioGroup)
     }
   },
@@ -59,15 +67,45 @@ export default {
     ]),
     download() {
       this.sheet = false
-      const { mp3_128k, name } = this.resource
-      var x = new XMLHttpRequest();
-      x.open('GET', mp3_128k, true);
-      x.responseType = 'blob';
-      x.onload = function(e){
-        downloadJS(e.target.response, `${name}.mp3`, 'audio/mpeg');
-      };
-      x.send();
-    }
+      // this.$emit('download')
+      // this.validateSource()
+      // if (this.validateSource()){
+      // if (this.radioGroup === this.FLAC && this.validateSource()){
+      //   window.open(this.getDiffSource())
+      // }
+      // const { name } = this.resource
+      // var x = new XMLHttpRequest();
+      // x.open('POST', this.getDiffSource(), true);
+      // x.responseType = 'blob';
+      // if (x.response.type === 'audio/mpeg'){
+      //   console.log(13333)
+      //   x.onload = function(e){
+      //     downloadJS(e.target.response, `${name}.mp3`, 'audio/mpeg');
+      //   }
+      // } else {
+      //   console.log(23333)
+      //   window.open(this.getDiffSource())
+      // }
+      // x.send(null);
+      // }
+    },
+    // getDiffSource(){
+    //   const { flac, mp3_320k, mp3_128k } = this.resource
+    //   if (this.radioGroup === this.FLAC){
+    //     return flac
+    //   } else if (this.radioGroup === this.MP3_320K){
+    //     return mp3_320k
+    //   } else if (this.radioGroup === this.MP3_128K){
+    //     return mp3_128k
+    //   }
+    // }
+    // validateSource(){
+    //   const audioElement = document.createElement('audio')
+    //   audioElement.setAttribute('src', this.getDiffSource())
+    //   audioElement.audioElement = function() {
+    //     console.log(2333)
+    //   }
+    // }
   }
 }
 </script>
