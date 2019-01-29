@@ -59,12 +59,13 @@ export default {
     ]),
     download() {
       this.sheet = false
-      console.log(this.resource)
       const { mp3_128k, name } = this.resource
       var x = new XMLHttpRequest();
       x.open('GET', mp3_128k, true);
       x.responseType = 'blob';
-      x.onload = function(e){ downloadJS(e.target.response, `${name}.mp3`, 'audio/mpeg'); };
+      x.onload = function(e){
+        downloadJS(e.target.response, `${name}.mp3`, 'audio/mpeg');
+      };
       x.send();
     }
   }
