@@ -28,8 +28,9 @@ export default {
 };
 </script>
 <style lang="scss">
-  @import url(../static/css/font.css);
+  /*@import url(../static/css/font.css);*/
   body, html {
+    font-family: 'Roboto', sans-serif;
     width: 100%;
     min-height: 100%;
     overflow: hidden !important;

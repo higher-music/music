@@ -33,7 +33,7 @@ export default {
         { title: 'For You', icon: 'favorite' }
       ],
       bottomItems: [
-        // { title: 'PlayLists', icon: 'playlist_play' },
+        { title: 'Recently Added', icon: 'calendar_today' },
         { title: 'Hot Artists', icon: 'person' },
         { title: 'New Albums', icon: 'album' },
         { title: 'New Songs', icon: 'music_note' }
