@@ -89,10 +89,6 @@
       您的垃圾浏览器不支持audio标签，赶紧换了吧，还想听中国好声音么？
       EN:Your fuck browser does not support audio tags, please replace them. Want to hear the good voice of China?
     </audio>
-    <v-snackbar v-model="snackbar" :timeout="3000" bottom>
-      该歌曲没有有效音质源
-      <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
-    </v-snackbar>
   </div>
 </template>
 
@@ -112,7 +108,6 @@ export default {
       isPlay: false,
       isFromUser: false,
       errorTimes: 0,
-      snackbar: false,
       media: 1,
       loading: true
     }
@@ -236,7 +231,7 @@ export default {
             this.errorTimes = 3
             break
           default:
-            this.snackbar = true
+            this.$noResources.show()
             this.end()
             break
         }

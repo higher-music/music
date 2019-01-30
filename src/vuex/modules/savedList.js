@@ -1,4 +1,5 @@
 const state = {
+  // 已播放过的singer/list/album
   singer: new Map(),
   list: new Map(),
   album: new Map()

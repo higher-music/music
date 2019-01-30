@@ -11,10 +11,12 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import 'babel-polyfill'
 import '@/style/index.scss' // global css
 import Loading from '@/components/Loading'
+import noResources from '@/components/noResources'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 Vue.use(Vuetify)
 Vue.use(Loading)
+Vue.use(noResources)
 
 // 全局Promise异常捕获
 window.addEventListener('unhandledrejection', function(e){
