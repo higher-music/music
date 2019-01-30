@@ -1,7 +1,7 @@
 <template>
   <div class="main-container" style="padding: 20px">
-    <form action="javascript:getSearchList">
-      <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable @keydown.enter="getSearchList"/>
+    <form action="javascript:void(0)" @keydown.enter="getSearchList">
+      <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable/>
     </form>
     <div v-if="showHotKeys" class="search-scroll-container" style="padding-bottom: 5px">
       <span style="font-size: large;font-weight: bolder">HotKeys:</span>
