@@ -87,7 +87,7 @@ export default {
       return new Promise((resolve, reject) => {
         const source = {}
         const { flac, mp3_320k, mp3_128k, name } = this.resource
-        source.name = name
+        source.name = `${name}-${this.resource.singer[0].name}`
         if (this.radioGroup === FLAC){
           source.src = flac
         } else if (this.radioGroup === MP3_320K){
