@@ -19,7 +19,7 @@ Vue.use(Loading)
 Vue.use(noResources)
 
 // 全局Promise异常捕获
-window.addEventListener('unhandledrejection', function(e){
+window.addEventListener('unhandledrejection', (e) => {
   e.preventDefault()
   console.warn('promise error=>', e.reason);
   return true;
