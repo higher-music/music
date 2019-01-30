@@ -3,11 +3,11 @@
     <form action="javascript:void(0)" @keydown.enter="getSearchList">
       <v-text-field v-model="text" label="Search" color="#7b1fa2" clearable/>
     </form>
-    <div v-if="showHotKeys" class="search-scroll-container" style="padding-bottom: 5px">
+    <template v-if="showHotKeys" style="padding-bottom: 5px">
       <span style="font-size: large;font-weight: bolder">HotKeys:</span>
       <v-chip v-for="(item, index) in hotKeys" :key="index" outline text-color="#fff" @click="searchHotKey(item.k)">{{ item.k }}</v-chip>
-    </div>
-    <div class="search-scroll-container">
+    </template>
+    <div class="scroll-container" style="height: calc(100% - 64px);">
       <SongList :data="songList" :loading="loading"/>
     </div>
   </div>
@@ -64,13 +64,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .search-scroll-container{
-    position: relative;
-    z-index: 1;
-    display: block;
-    -webkit-overflow-scrolling: touch;
-    height: calc(100% - 64px);
-    overflow: auto;
-  }
-</style>
