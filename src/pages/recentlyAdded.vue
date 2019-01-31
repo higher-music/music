@@ -1,5 +1,13 @@
 <template>
   <div v-show="newAlbumsList.length!==0" class="main-container">
+    <!--<IScroll>-->
+    <!--<div class="section-title">Albums Lists</div>-->
+    <!--<AlbumsPicList :data="newAlbumsList" type="album" />-->
+    <!--<div class="section-title">Songs Lists</div>-->
+    <!--<div class="top-songs-container">-->
+    <!--<SongList :data="newSongList" type="list" show-rank/>-->
+    <!--</div>-->
+    <!--</IScroll>-->
     <div class="scroll-container">
       <div class="section-title">Albums Lists</div>
       <AlbumsPicList :data="newAlbumsList" type="album" />
@@ -13,6 +21,7 @@
 <script>
 import AlbumsPicList from '@/components/AlbumsPicList'
 import { getAlbumList } from '@/api/rank'
+import IScroll from '@/components/IScroll'
 import { createAlbum } from '@/components/js/album'
 import { createSong2 } from '@/components/js/song'
 import SongList from '@/components/SongList'
@@ -20,7 +29,7 @@ import { getNewSong } from '@/api/song'
 
 export default {
   name: 'RecentlyAdded',
-  components: { AlbumsPicList, SongList },
+  components: { AlbumsPicList, SongList, IScroll },
   data() {
     return {
       newSongList: [],
