@@ -194,13 +194,6 @@ export default {
               font-size: 18px;
               font-weight: 500;
             }
-            .linkable{
-              cursor: pointer;
-              outline: 0;
-            }
-            .linkable:hover{
-              text-decoration: underline;
-            }
             .album-detail {
               color: #b3b3b3;
               padding-top: 3px;

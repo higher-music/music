@@ -12,7 +12,7 @@
         <div v-else class="track-title">
           Higher Music
         </div>
-        <div v-if="currentSong" class="track-artist">
+        <div v-if="currentSong" class="track-artist linkable">
           <span v-for="(one, i) in currentSong.singer" :key="i" @click.stop="toSinger(one)">
             {{ one.name }}
             <span v-if="i !== currentSong.singer.length - 1">•&nbsp;</span>

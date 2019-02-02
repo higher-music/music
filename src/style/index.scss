@@ -3,7 +3,13 @@
 .active-link{
   color: #69f0ae !important;
 }
-
+.linkable{
+  cursor: pointer;
+  outline: 0;
+}
+.linkable:hover{
+  text-decoration: underline;
+}
 .main-container{
   height: calc(100vh - 100px);
 }
