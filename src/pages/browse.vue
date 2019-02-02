@@ -50,20 +50,21 @@ export default {
     this.getBrowseData()
   },
   methods: {
-    getBrowseData() {
-      Promise.all([getTopList(), getMusicList(26)]).then(result => {
-        result[0][0].List.forEach(t => {
-          this.browseSummitList.push(createList(t))
-        })
-        result[0][1].List.forEach(t => {
-          this.browseGlobalList.push(createList(t))
-        })
-        const songList = result[1].songlist.slice(0, 100)
-        songList.forEach(t => {
-          this.browseSongList.push(createSong(t.data))
-        })
-        this.$loading.hide()
+    async getBrowseData() {
+      const data = await Promise.all([getTopList(), getMusicList(26)])
+      const [topList, musicList] = data
+      const [browseSummitList, browseGlobalList] = topList
+      browseSummitList.List.forEach(t => {
+        this.browseSummitList.push(createList(t))
       })
+      browseGlobalList.List.forEach(t => {
+        this.browseGlobalList.push(createList(t))
+      })
+      const songList = musicList.songlist.slice(0, 100)
+      songList.forEach(t => {
+        this.browseSongList.push(createSong(t.data))
+      })
+      this.$loading.hide()
     }
   }
 }
