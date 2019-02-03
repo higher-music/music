@@ -1,7 +1,7 @@
 <template>
   <div v-show="show" class="loading__container">
     <div class="modal"/>
-    <div class="progress-container">
+    <div :class="diffDisplay" class="progress-container">
       <v-progress-circular
         :size="100"
         :width="10"
@@ -16,6 +16,15 @@
 export default {
   props: {
     show: Boolean
+  },
+  computed: {
+    diffDisplay() {
+      console.log(this.$vuetify.breakpoint.name)
+      switch (this.$vuetify.breakpoint.name) {
+        case 'lg': return 'diffLoading'
+        default: return null
+      }
+    }
   }
 };
 </script>
@@ -43,6 +52,9 @@ export default {
       position: absolute;
       top: calc(50% - 50px);
       left: calc(50% - 50px);
+    }
+    .diffLoading{
+      left: calc(57% - 50px);
     }
   }
 </style>

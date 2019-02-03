@@ -51,11 +51,11 @@
       </section>
     </div>
     <v-dialog v-model="dialog" width="700">
-      <v-card>
+      <v-card :class="{'black--text': data.diffColor}" :color="data.btnColor">
         <v-card-title style="padding-bottom: 0">
           <span class="headline">{{ data.name }}</span>
         </v-card-title>
-        <div style="padding: 24px" v-html="data.info"/>
+        <div style="padding: 24px;" v-html="data.info"/>
       </v-card>
     </v-dialog>
     <v-snackbar v-model="copySnackBar" :timeout="1500" bottom>
