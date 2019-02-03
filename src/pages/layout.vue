@@ -10,7 +10,7 @@
         <router-view :key="key"/>
       </transition>
     </v-content>
-    <v-footer height="100" app>
+    <v-footer height="100" fixed app>
       <player @list-click="toggleDialog"/>
     </v-footer>
   </v-app>

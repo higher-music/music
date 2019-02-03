@@ -36,6 +36,9 @@
 }
 
 @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape){
+  .song-list:hover{
+    background-color: transparent !important;
+  }
   .header{
     padding-left: 10px;
     padding-right: 10px;
