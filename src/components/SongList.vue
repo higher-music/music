@@ -21,7 +21,7 @@
             <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
-            <span v-for="(one, i) in item.singer" :key="i">
+            <span v-for="(one, i) in item.singer" :key="i" class="text-truncate">
               {{ one.name }}
               <span v-if="i !== item.singer.length - 1">•&nbsp;</span>
             </span>
