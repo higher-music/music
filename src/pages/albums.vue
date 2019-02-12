@@ -1,8 +1,10 @@
 <template>
   <div class="main-container">
-    <div class="scroll-container">
-      <AlbumsPicList :data="newAlbumsList" type="album" />
-    </div>
+    <Scroll>
+      <div class="scroll-container">
+        <AlbumsPicList :data="newAlbumsList" type="album" />
+      </div>
+    </Scroll>
   </div>
 </template>
 <script>

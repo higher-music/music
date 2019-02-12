@@ -1,55 +1,53 @@
 <template>
-  <v-app dark>
-    <div v-show="data.songList.length&&data.btnColor" class="main-container albums-container">
-      <header>
-        <div class="header-image-container">
-          <img :src="data.img" :alt="data.name" class="header-image">
-        </div>
-        <div class="header">
-          <div :style="{backgroundImage:`url(${data.img})`}" class="artwork"/>
-          <div class="album-extras">
-            <div class="track-text">
-              <span class="album-name">{{ data.name }}</span>
-              <div>
-                <span :class="{ linkable:data.singername}" class="artist-name" @click="toSinger(data)">{{ data.singername }}</span>
-              </div>
-            </div>
-            <div class="album-button-container">
-              <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
-              <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
-              <v-menu offset-y transition="scale-transition">
-                <v-btn
-                  slot="activator"
-                  :class="{'black--text': data.diffColor}"
-                  :color="data.btnColor"
-                  dark
-                >
-                  <v-icon>more_horiz</v-icon>
-                </v-btn>
-                <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
-                  <v-list-tile
-                    v-for="(item, i) in items"
-                    :key="i"
-                    @click="menuClick(item)">
-                    <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-                <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
-                  <v-list-tile ref="copy" @click="copyLink">
-                    <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
+  <div v-show="data.songList.length&&data.btnColor" class="main-container detail-container">
+    <header>
+      <div class="header-image-container">
+        <img :src="data.img" :alt="data.name" class="header-image">
+      </div>
+      <div class="header">
+        <div :style="{backgroundImage:`url(${data.img})`}" class="artwork"/>
+        <div class="album-extras">
+          <div class="track-text">
+            <span class="album-name">{{ data.name }}</span>
+            <div>
+              <span :class="{ linkable:data.singername}" class="artist-name" @click="toSinger(data)">{{ data.singername }}</span>
             </div>
           </div>
+          <div class="album-button-container">
+            <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
+            <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
+            <v-menu offset-y transition="scale-transition">
+              <v-btn
+                slot="activator"
+                :class="{'black--text': data.diffColor}"
+                :color="data.btnColor"
+                dark
+              >
+                <v-icon>more_horiz</v-icon>
+              </v-btn>
+              <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
+                <v-list-tile
+                  v-for="(item, i) in items"
+                  :key="i"
+                  @click="menuClick(item)">
+                  <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+              <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
+                <v-list-tile ref="copy" @click="copyLink">
+                  <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </div>
         </div>
-      </header>
-      <section :style="{backgroundImage:`linear-gradient(rgb(4, 6, 12), ${data.btnColor} 180%)` }">
-        <div class="tracklist">
-          <SongList :data="data.songList" show-rank/>
-        </div>
-      </section>
-    </div>
+      </div>
+    </header>
+    <section :style="{backgroundImage:`linear-gradient(rgb(4, 6, 12), ${data.btnColor} 180%)` }">
+      <div class="tracklist">
+        <SongList :data="data.songList" show-rank/>
+      </div>
+    </section>
     <v-dialog v-model="dialog" width="700">
       <v-card :class="{'black--text': data.diffColor}" :color="data.btnColor">
         <v-card-title style="padding-bottom: 0">
@@ -61,7 +59,7 @@
     <v-snackbar v-model="copySnackBar" :timeout="1500" bottom>
       Link copied to clipboard
     </v-snackbar>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -132,7 +130,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .albums-container {
+  .detail-container {
     background-color: #000;
     overflow-x: hidden;
     perspective: 1px;

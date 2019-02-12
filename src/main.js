@@ -11,18 +11,20 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import '@/style/index.scss' // global css
 import Loading from '@/components/Loading'
+import Scroll from '@/components/Scroll'
 import noResources from '@/components/noResources'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 Vue.use(Vuetify)
 Vue.use(Loading)
 Vue.use(noResources)
+Vue.use(Scroll)
 
 // 全局Promise异常捕获
 window.addEventListener('unhandledrejection', (e) => {
   e.preventDefault()
   console.warn('promise error=>', e.reason);
-  return true;
+  return false;
 });
 
 /**

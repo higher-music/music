@@ -1,33 +1,21 @@
 <template>
-  <!--<div class="main-container">-->
-  <!--<IScroll>-->
-  <!--<div class="section-title">Summit Lists</div>-->
-  <!--<AlbumsPicList :data="browseSummitList" type="list"/>-->
-  <!--<div class="section-title">Global Lists</div>-->
-  <!--<AlbumsPicList :data="browseGlobalList" type="list"/>-->
-  <!--<div class="section-title">Top Songs</div>-->
-  <!--<div class="top-songs-container">-->
-  <!--<SongList ref="songList" :data="browseSongList" show-rank/>-->
-  <!--</div>-->
-  <!--</IScroll>-->
-  <!--</div>-->
-
   <div v-show="browseSummitList.length!==0&&browseGlobalList.length!==0&&browseSongList.length!==0" class="main-container">
-    <div class="scroll-container">
-      <div class="section-title">Summit Lists</div>
-      <AlbumsPicList :data="browseSummitList" type="list"/>
-      <div class="section-title">Global Lists</div>
-      <AlbumsPicList :data="browseGlobalList" type="list"/>
-      <div class="section-title">Top Songs</div>
-      <div class="top-songs-container">
-        <SongList ref="songList" :data="browseSongList" show-rank/>
+    <Scroll>
+      <div class="scroll-container">
+        <div class="section-title">Summit Lists</div>
+        <AlbumsPicList :data="browseSummitList" type="list"/>
+        <div class="section-title">Global Lists</div>
+        <AlbumsPicList :data="browseGlobalList" type="list"/>
+        <div class="section-title">Top Songs</div>
+        <div class="top-songs-container">
+          <SongList ref="songList" :data="browseSongList" show-rank/>
+        </div>
       </div>
-    </div>
+    </Scroll>
   </div>
 </template>
 <script>
 import AlbumsPicList from '@/components/AlbumsPicList'
-import IScroll from '@/components/IScroll'
 import { getTopList, getMusicList } from '@/api/rank'
 import SongList from '@/components/SongList'
 import { createSong } from '@/components/js/song'
@@ -35,7 +23,7 @@ import { createList } from '@/components/js/album'
 
 export default {
   name: 'Browse',
-  components: { AlbumsPicList, SongList, IScroll },
+  components: { AlbumsPicList, SongList },
   data() {
     return {
       loading: true,
