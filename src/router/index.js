@@ -38,11 +38,6 @@ export const constantRouterMap = [
         component: () => import('@/pages/detail.vue')
       },
       {
-        path: '/new_albums',
-        name: 'New Albums',
-        component: () => import('@/pages/albums.vue')
-      },
-      {
         path: '/for_you',
         name: 'For You',
         component: () => import('@/pages/forYou.vue')
@@ -51,11 +46,6 @@ export const constantRouterMap = [
         path: '/hot_artists',
         name: 'Hot Artists',
         component: () => import('@/pages/artists.vue')
-      },
-      {
-        path: '/new_songs',
-        name: 'New Songs',
-        component: () => import('@/pages/songs.vue')
       },
       {
         path: '/recently_added',

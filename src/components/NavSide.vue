@@ -34,9 +34,7 @@ export default {
       ],
       bottomItems: [
         { title: 'Recently Added', icon: 'calendar_today' },
-        { title: 'Hot Artists', icon: 'person' },
-        { title: 'New Albums', icon: 'album' },
-        { title: 'New Songs', icon: 'music_note' }
+        { title: 'Hot Artists', icon: 'person' }
       ],
       visible: null
     }

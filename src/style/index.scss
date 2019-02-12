@@ -24,13 +24,16 @@ body, html {
 }
 
 .main-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
   height: calc(100vh - 100px);
 }
 
 @media screen and (max-width: 1264px) {
   .main-container {
-    margin-top: 56px;
-    height: calc(100vh - 156px);
+    top: 56px !important;
+    height: calc(100vh - 156px) !important;
   }
   .main-iframe {
     height: calc(100vh - 100px);
