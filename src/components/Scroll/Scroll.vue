@@ -11,7 +11,7 @@ export default {
   props: {
     listenScroll: {
       type: Boolean,
-      default: false
+      default: true
     },
     data: {
       type: Array,
@@ -60,6 +60,11 @@ export default {
       if (this.listenScroll) {
         const me = this
         this.scroll.on('scroll', (pos) => {
+          const a = document.getElementsByClassName('v-menu__content')
+          const b = Array.from(a)
+          for (let i = 0; i < b.length; i++){
+            b[i].style.display = 'none'
+          }
           me.$emit('scroll', pos)
         })
       }
