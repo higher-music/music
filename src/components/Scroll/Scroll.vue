@@ -53,6 +53,7 @@ export default {
           fade: false,
           interactive: true
         },
+        click: true,
         dblclick: true,
         probeType: 3
       })
