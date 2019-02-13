@@ -4,6 +4,7 @@
     <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank">
+          {{ $store.state.menuState.menu }}
           <div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
           <div v-else class="rank">{{ index + 1 }}</div>
         </div>
@@ -37,7 +38,7 @@
       v-if="showMenu"
       :position-x="x"
       :position-y="y"
-      v-model="menu"
+      v-model="$store.state.menuState.menu"
       offset-x
       left
       absolute
@@ -97,8 +98,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'currentSong',
-      'menu'
+      'currentSong'
     ]),
     menuClassName() {
       switch (this.$vuetify.breakpoint.name) {
