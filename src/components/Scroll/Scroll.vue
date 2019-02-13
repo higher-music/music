@@ -66,6 +66,7 @@ export default {
           for (let i = 0; i < b.length; i++){
             b[i].style.display = 'none'
           }
+          this.$store.dispatch('setMenu', false)
           me.$emit('scroll', pos)
         })
       }

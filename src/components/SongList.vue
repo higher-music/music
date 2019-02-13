@@ -27,22 +27,30 @@
             </span>
           </div>
         </div>
-        <v-menu v-if="showMenu" :class="menuClassName" offset-y left>
-          <v-btn slot="activator" dark icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-tile
-              v-for="(item, i) in items"
-              :key="i"
-              @click="menuClick(index, i)">
-              <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
+        <v-btn slot="activator" :class="menuClassName" dark icon @click="menuBtnClick($event)">
+          <v-icon>more_vert</v-icon>
+        </v-btn>
       </div>
     </div>
     <Sheet ref="downloadSheet" type="download"/>
+    <v-menu
+      v-if="showMenu"
+      :position-x="x"
+      :position-y="y"
+      v-model="menu"
+      offset-x
+      left
+      absolute
+    >
+      <v-list>
+        <v-list-tile
+          v-for="(item, i) in items"
+          :key="i"
+          @click="menuClick(index, i)">
+          <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
   </div>
 </template>
 
@@ -78,6 +86,8 @@ export default {
   },
   data(){
     return {
+      x: 0,
+      y: 0,
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' },
@@ -87,7 +97,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'currentSong'
+      'currentSong',
+      'menu'
     ]),
     menuClassName() {
       switch (this.$vuetify.breakpoint.name) {
@@ -101,10 +112,17 @@ export default {
     ...mapActions([
       'addSongToCurrentIndex',
       'addSongToNext',
-      'addSongToLast'
+      'addSongToLast',
+      'setMenu'
     ]),
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
+    },
+    menuBtnClick(e){
+      e.preventDefault()
+      this.x = e.clientX
+      this.y = e.clientY
+      this.setMenu(true)
     },
     menuClick(index, i) {
       if (i === 0) {
