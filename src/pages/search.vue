@@ -82,7 +82,7 @@ export default {
       overflow: hidden;
       position: absolute;
       width: 100%;
-      height: calc(100% - 100px);
+      height: calc(100% - 84px);
     }
   }
 
