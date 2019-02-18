@@ -27,7 +27,7 @@
             </span>
           </div>
         </div>
-        <v-btn slot="activator" :class="menuClassName" dark icon @click="menuBtnClick($event)">
+        <v-btn slot="activator" :class="menuClassName" dark icon @click="menuBtnClick($event, index)">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </div>
@@ -46,7 +46,7 @@
         <v-list-tile
           v-for="(item, i) in items"
           :key="i"
-          @click="menuClick(index, i)">
+          @click="menuClick(i)">
           <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -88,6 +88,7 @@ export default {
     return {
       x: 0,
       y: 0,
+      index: -1,
       items: [
         { title: 'Play Next' },
         { title: 'Play Later' },
@@ -117,27 +118,31 @@ export default {
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
     },
-    menuBtnClick(e){
+    menuBtnClick(e, index){
       e.preventDefault()
       this.x = e.clientX
       this.y = e.clientY
       this.setMenu(true)
+      this.index = index
     },
-    menuClick(index, i) {
+    menuClick(i) {
       if (i === 0) {
-        this.playNext(index)
+        this.playNext()
       } else if (i === 1){
-        this.playLatter(index)
+        this.playLatter()
       } else {
+        if (this.index < 0) {
+          return
+        }
         this.$refs.downloadSheet.sheet = true
-        this.$refs.downloadSheet.resource = this.data[index]
+        this.$refs.downloadSheet.resource = this.data[this.index]
       }
     },
-    playNext(index) {
-      this.addSongToNext(this.data[index])
+    playNext() {
+      this.addSongToNext(this.data[this.index])
     },
-    playLatter(index) {
-      this.addSongToLast(this.data[index])
+    playLatter() {
+      this.addSongToLast(this.data[this.index])
     }
   }
 }
