@@ -35,7 +35,7 @@ export const constantRouterMap = [
       },
       {
         path: '/:type/:id',
-        component: () => import('@/pages/detail.vue')
+        component: () => import('@/pages/details.vue')
       },
       {
         path: '/for_you',
@@ -50,7 +50,7 @@ export const constantRouterMap = [
       {
         path: '/recently_added',
         name: 'Recently Added',
-        component: () => import('@/pages/RecentlyAdded.vue')
+        component: () => import('@/pages/recentlyAdded.vue')
       }
     ]
   }
