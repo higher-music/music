@@ -10,6 +10,7 @@ import { getSingerDetail } from '../api/singer'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'Detail',
   components: { Detail },
   data() {
     return {

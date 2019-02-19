@@ -2,18 +2,19 @@
   <div class="main-container">
     <Scroll>
       <div class="scroll-container">
-        <AlbumsPicList :data="hotArtistsList" type="singer"/>
+        <PicList :data="hotArtistsList" type="singer"/>
       </div>
     </Scroll>
   </div>
 </template>
 <script>
-import AlbumsPicList from '@/components/AlbumsPicList'
+import PicList from '@/components/PicList'
 import { getSingerList } from '@/api/singer'
 import { createSinger } from '@/components/js/album'
 
 export default {
-  components: { AlbumsPicList },
+  name: 'Artists',
+  components: { PicList },
   data() {
     return {
       hotArtistsList: []

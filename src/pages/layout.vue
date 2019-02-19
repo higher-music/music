@@ -22,6 +22,7 @@ import ToolBar from '@/components/ToolBar'
 import Player from '@/components/Player'
 import PlayList from '@/components/PlayList'
 export default {
+  name: 'Layout',
   components: { NavSide, ToolBar, Player, PlayList },
   data() {
     return {

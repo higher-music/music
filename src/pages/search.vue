@@ -25,6 +25,7 @@ import { createSong2 } from '@/components/js/song'
 import Progress from '@/components/Progress'
 
 export default {
+  name: 'Search',
   components: { SongList, Progress },
   data() {
     return {

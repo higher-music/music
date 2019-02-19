@@ -3,7 +3,7 @@
     <Scroll>
       <div class="scroll-container">
         <div class="section-title">Albums Lists</div>
-        <AlbumsPicList :data="newAlbumsList" type="album" />
+        <PicList :data="newAlbumsList" type="album" />
         <div class="section-title">Songs Lists</div>
         <div class="top-songs-container">
           <SongList :data="newSongList" type="list"/>
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import AlbumsPicList from '@/components/AlbumsPicList'
+import PicList from '@/components/PicList'
 import { getAlbumList } from '@/api/rank'
 import { createAlbum } from '@/components/js/album'
 import { createSong2 } from '@/components/js/song'
@@ -22,7 +22,7 @@ import { getNewSong } from '@/api/song'
 
 export default {
   name: 'RecentlyAdded',
-  components: { AlbumsPicList, SongList },
+  components: { PicList, SongList },
   data() {
     return {
       newSongList: [],

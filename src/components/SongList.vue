@@ -69,6 +69,7 @@ import Sheet from '@/components/Sheet'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'SongList',
   components: { Progress, Sheet },
   props: {
     showRank: {

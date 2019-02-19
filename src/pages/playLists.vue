@@ -1,16 +1,16 @@
 <template>
   <v-app dark>
-    <AlbumsPicList :data="playLists" type="album" style="margin-top: 20px"/>
+    <PicList :data="playLists" type="album" style="margin-top: 20px"/>
   </v-app>
 </template>
 <script>
-import AlbumsPicList from '@/components/AlbumsPicList'
+import PicList from '@/components/PicList'
 import { getPlayList } from '@/api/rank'
 import { createPlayList } from '@/components/js/album'
 
 export default {
   name: 'PlayLists',
-  components: { AlbumsPicList },
+  components: { PicList },
   data() {
     return {
       playLists: []

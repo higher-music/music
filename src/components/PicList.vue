@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'PicList',
   props: {
     data: {
       type: Array,

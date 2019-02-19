@@ -73,6 +73,7 @@ import Clipboard from 'clipboard'
 import { RANDOM } from '../api/config'
 
 export default {
+  name: 'Detail',
   components: { SongList },
   props: {
     data: Object
