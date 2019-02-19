@@ -17,6 +17,7 @@
           v-if="showAlbum"
           :src="item.image"
           :alt="item.name"
+          :title="item.name"
           :max-width="40"
           :max-height="40"
           class="image"

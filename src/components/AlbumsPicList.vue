@@ -5,10 +5,10 @@
         <div class="list-wapper">
           <div class="image-wapper">
             <v-img
-              class="img"
               :title="item.name"
               :src="item.img"
               :alt="item.name"
+              class="img"
               lazy-src="static/img/default.jpeg"
               @click="toDetail(item.id)"/>
           </div>
