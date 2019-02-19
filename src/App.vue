@@ -5,14 +5,13 @@
 </template>
 
 <script>
-require('inobounce')
 import { getVKey } from '@/api/song'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   created() {
-    getVKey().then((res) => {
+    getVKey().then(res => {
       if (res.code === 0) {
         this.setVKey(res.data.items[0].vkey)
       } else {

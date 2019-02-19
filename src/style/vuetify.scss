@@ -1,19 +1,20 @@
-//.v-content{
-//  background-image: linear-gradient(#1e3264, #04060c 130%) !important;
-//}
-.theme--dark.v-label{
+.theme--dark.v-label {
   color: #fff !important;
 }
-.v-input--slider{
+
+.v-input--slider {
   margin-top: 19px !important;
   padding: 0 10px 0 12px;
 }
+
 .theme--dark.v-navigation-drawer {
   background-color: #000 !important;
 }
+
 .theme--dark.v-list {
   padding: 0 !important;
 }
+
 .nav-side-container {
   .v-list__tile__action, .v-list__tile__avatar {
     min-width: 32px !important;

@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 
+require('inobounce')
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import '@/style/index.scss' // global css
