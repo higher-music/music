@@ -4,7 +4,13 @@
       <div class="list-container">
         <div class="list-wapper">
           <div class="image-wapper">
-            <img :src="item.img" :alt="item.name" :title="item.name" @click="toDetail(item.id)">
+            <v-img
+              class="img"
+              :title="item.name"
+              :src="item.img"
+              :alt="item.name"
+              lazy-src="static/img/default.jpeg"
+              @click="toDetail(item.id)"/>
           </div>
           <div class="text-wapper text-truncate">
             <span>{{ item.name }}</span>
@@ -65,11 +71,11 @@ export default {
           cursor: pointer;
           overflow: hidden;
           box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
-          img:hover {
+          .img:hover {
             transition: opacity .3s;
             opacity: .7;
           }
-          img{
+          .img{
             border-radius: 5px;
             width: 100%;
             height: 100%;

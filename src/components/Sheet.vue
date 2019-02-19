@@ -129,6 +129,9 @@ export default {
         font-weight: 700;
       }
     }
+    .v-input--selection-controls{
+      margin-top: 6px;
+    }
     /deep/ .v-input__slot{
       margin-bottom: 0;
     }
