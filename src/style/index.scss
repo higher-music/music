@@ -39,6 +39,11 @@ body, html {
   .main-iframe {
     height: calc(100vh - 100px);
   }
+  .detail-container {
+    section {
+      min-height: calc(100vh - 456px) !important;
+    }
+  }
 }
 
 @media screen and (max-width: 599.99px) and (orientation: portrait), (max-width: 959.99px) and (orientation: landscape) {
