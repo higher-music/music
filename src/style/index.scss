@@ -5,6 +5,7 @@ body, html {
   width: 100%;
   min-height: 100%;
   overflow: hidden !important;
+  -webkit-font-smoothing: subpixel-antialiased !important;
   margin: 0;
   background-color: #303030;
   color: #fff;
