@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet v-model="sheet">
+  <v-bottom-sheet v-model="sheet" inset max-width="512px">
     <v-btn
       v-if="type!=='download'"
       slot="activator"
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      snackbar: true,
+      snackbar: false,
       sheet: false,
       resource: null,
       radioGroup: this.type === 'download' ? 1 : store.state.playList.type,
@@ -74,7 +74,6 @@ export default {
       const source = await this.getDiffSource()
       if (this.radioGroup === FLAC) {
         fetch(source.src).then(res => {
-          console.log(res, 111)
           return res.blob()
         }).then(blob => {
           downloadjs(blob, `${source.name}.flac`);
@@ -116,7 +115,6 @@ export default {
 <style lang="scss" scoped>
   .sheet-container {
     padding: 8px 16px !important;
-    min-width: 100vw;
     box-sizing: border-box;
     display: block;
     outline: 0;
