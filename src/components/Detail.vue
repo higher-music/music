@@ -136,7 +136,7 @@ export default {
 <style lang="scss" scoped>
   .detail-container {
     background-color: #000;
-    overflow-x: hidden;
+    overflow: hidden;
     perspective: 1px;
     /*-webkit-overflow-scrolling: touch;*/
     perspective-origin: center top;
@@ -219,7 +219,7 @@ export default {
       box-shadow: 0 0 20px 0 #000;
       background-image: linear-gradient(#04060c, #1e3264 120%);
       transform: translateZ(0);
-      min-height: calc(100% - 300px);
+      min-height: calc(100vh - 400px);
       .tracklist {
         padding: 10px;
       }

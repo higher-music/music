@@ -50,6 +50,7 @@ export default {
       'addList',
       'addAlbum'
     ]),
+    // 判断界面之前是否打过
     checkSavedMusic(){
       if (this[this.paramsType].has(this.mapKey)) {
         this.data = this[this.paramsType].get(this.mapKey)
@@ -57,6 +58,7 @@ export default {
       }
       return true
     },
+    // 获取音乐数据
     async getMusic(){
       const imgUrl = await this.getDiffMusic(this.paramsType)
       const { btnColor, diffColor } = await getImageColor(imgUrl)
@@ -70,6 +72,7 @@ export default {
       this[`add${this.firstWordUpperCase(this.paramsType)}`]([this.mapKey, this.data])
       this.$loading.hide()
     },
+    // 获取不同音乐资源
     getDiffMusic(){
       return new Promise((resolve, reject) => {
         const paramsType = {
@@ -120,6 +123,7 @@ export default {
         paramsType[this.paramsType]()
       })
     },
+    // 第一个单词转换为大写
     firstWordUpperCase(str){
       return str.toLowerCase().replace(/(\s|^)[a-z]/g, char => char.toUpperCase())
     }

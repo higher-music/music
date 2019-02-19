@@ -28,6 +28,7 @@ body, html {
   top: 0;
   width: 100%;
   height: calc(100vh - 100px);
+  background-image: linear-gradient(#1e3264, #04060c 130%) !important;
 }
 
 @media screen and (max-width: 1264px) {
@@ -54,6 +55,9 @@ body, html {
     header {
       transform: none !important;
       height: calc(50vh - 56px) !important;
+    }
+    section{
+      min-height:calc(50vh - 100px) !important;
     }
   }
   .header {

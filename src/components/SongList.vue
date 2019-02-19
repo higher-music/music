@@ -1,10 +1,16 @@
 <template>
   <div class="song-list-container">
     <Progress :show="loading"/>
-    <div v-for="(item,index) in data" :class="{activeSongBG:currentSong && item.id === currentSong.id}" :key="index" class="song-list-wapper">
+    <div
+      v-for="(item,index) in data"
+      :class="{activeSongBG:currentSong && item.id === currentSong.id}"
+      :key="index"
+      class="song-list-wapper">
       <div class="song-list">
         <div v-if="showRank">
-          <div v-if="currentSong && item.id === currentSong.id" class="rank"><v-icon>play_circle_outline</v-icon></div>
+          <div v-if="currentSong && item.id === currentSong.id" class="rank">
+            <v-icon>play_circle_outline</v-icon>
+          </div>
           <div v-else class="rank">{{ index + 1 }}</div>
         </div>
         <v-img
@@ -15,10 +21,12 @@
           :max-height="40"
           class="image"
           lazy-src="static/img/default.jpeg"
-          @click="playIndex(index)" />
+          @click="playIndex(index)"/>
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
-            <span :class="{activeSong:currentSong && item.id === currentSong.id}" class="text-truncate">{{ item.name }}</span>
+            <span
+              :class="{activeSong:currentSong && item.id === currentSong.id}"
+              class="text-truncate">{{ item.name }}</span>
           </div>
           <div class="secondary-info">
             <span v-for="(one, i) in item.singer" :key="i" class="text-truncate">
@@ -27,7 +35,7 @@
             </span>
           </div>
         </div>
-        <v-btn slot="activator" :class="menuClassName" dark icon @click="menuBtnClick($event, index)">
+        <v-btn slot="activator" :class="menuClassName" dark icon @click="menuBtnClick($event,index)">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </div>
@@ -58,6 +66,7 @@
 import Progress from '@/components/Progress'
 import Sheet from '@/components/Sheet'
 import { mapGetters, mapActions } from 'vuex'
+
 export default {
   components: { Progress, Sheet },
   props: {
@@ -84,7 +93,7 @@ export default {
       }
     }
   },
-  data(){
+  data() {
     return {
       x: 0,
       y: 0,
@@ -102,9 +111,12 @@ export default {
     ]),
     menuClassName() {
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return 'menu_flex'
-        case 'sm': return 'menu_flex'
-        default: return 'menu'
+        case 'xs':
+          return 'menu_flex'
+        case 'sm':
+          return 'menu_flex'
+        default:
+          return 'menu'
       }
     }
   },
@@ -118,7 +130,7 @@ export default {
     playIndex(index) {
       this.addSongToCurrentIndex(this.data[index])
     },
-    menuBtnClick(e, index){
+    menuBtnClick(e, index) {
       e.preventDefault()
       this.x = e.clientX
       this.y = e.clientY
@@ -128,7 +140,7 @@ export default {
     menuClick(i) {
       if (i === 0) {
         this.playNext()
-      } else if (i === 1){
+      } else if (i === 1) {
         this.playLatter()
       } else {
         if (this.index < 0) {
@@ -149,34 +161,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .song-list-container{
+  .song-list-container {
     box-sizing: content-box !important;
     .song-list-wapper {
       display: flex;
       height: 60px;
       border-radius: 5px;
       cursor: pointer;
-      .song-list{
+      .song-list {
         overflow: hidden;
         display: flex;
         flex: 1;
         align-items: center;
-        &:hover{
-          background-color: rgba(255,255,255,.04);
-          .menu{
+        &:hover {
+          background-color: rgba(255, 255, 255, .04);
+          .menu {
             display: flex;
           }
         }
-        .rank{
+        .rank {
           text-align: center;
           width: 20px;
           padding-left: 10px;
           font-weight: 600;
         }
-        .image{
+        .image {
           margin-right: 10px;
           border-radius: 2px;
-          box-shadow: 0 0 10px rgba(0,0,0,.5);
+          box-shadow: 0 0 10px rgba(0, 0, 0, .5);
           margin-left: 10px;
         }
         .menu {
@@ -185,23 +197,23 @@ export default {
         .menu_flex {
           display: flex;
         }
-        .track-info{
+        .track-info {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           flex: 1;
           display: flex;
           flex-direction: column;
-          .song-name-container{
+          .song-name-container {
             display: flex;
             align-items: center;
-            span{
+            span {
               font-size: 16px;
             }
           }
-          .secondary-info{
+          .secondary-info {
             display: flex;
-            span{
+            span {
               color: #b3b3b3;
               font-size: 14px;
             }
@@ -209,10 +221,10 @@ export default {
         }
       }
     }
-    .activeSongBG{
+    .activeSongBG {
       background-color: rgba(0, 0, 0, 0.3);
     }
-    .activeSong{
+    .activeSong {
       color: rgb(105, 240, 174);
     }
   }

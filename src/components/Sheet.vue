@@ -21,6 +21,10 @@
         />
       </v-radio-group>
     </v-list>
+    <v-snackbar v-model="snackbar" :timeout="0" right>
+      <v-progress-linear :indeterminate="true"/>
+      <v-btn color="pink" flat @click="show = false">Close</v-btn>
+    </v-snackbar>
   </v-bottom-sheet>
 </template>
 <script>
@@ -28,6 +32,7 @@ const downloadjs = require('downloadjs');
 import { FLAC, MP3_320K, MP3_128K } from '@/api/config'
 import { mapActions, mapGetters } from 'vuex'
 import store from '@/vuex/store'
+
 export default {
   name: 'Sheet',
   props: {
@@ -35,6 +40,7 @@ export default {
   },
   data() {
     return {
+      snackbar: true,
       sheet: false,
       resource: null,
       radioGroup: this.type === 'download' ? 1 : store.state.playList.type,
@@ -53,7 +59,7 @@ export default {
   },
   watch: {
     radioGroup() {
-      if (this.type === 'download'){
+      if (this.type === 'download') {
         return false
       }
       this.changeType(this.radioGroup)
@@ -68,10 +74,13 @@ export default {
       const source = await this.getDiffSource()
       if (this.radioGroup === FLAC) {
         fetch(source.src).then(res => {
+          console.log(res, 111)
           return res.blob()
         }).then(blob => {
           downloadjs(blob, `${source.name}.flac`);
-        }).catch(() => { this.$noResources.show() })
+        }).catch(() => {
+          this.$noResources.show()
+        })
       } else {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', source.src, true);
@@ -79,20 +88,22 @@ export default {
         xhr.onload = (e) => {
           downloadjs(e.target.response, `${source.name}.mp3`);
         }
-        xhr.onerror = () => { this.$noResources.show() }
+        xhr.onerror = () => {
+          this.$noResources.show()
+        }
         xhr.send(null);
       }
     },
-    getDiffSource(){
+    getDiffSource() {
       return new Promise((resolve, reject) => {
         const source = {}
         const { flac, mp3_320k, mp3_128k, name } = this.resource
         source.name = `${name}-${this.resource.singer[0].name}`
-        if (this.radioGroup === FLAC){
+        if (this.radioGroup === FLAC) {
           source.src = flac
-        } else if (this.radioGroup === MP3_320K){
+        } else if (this.radioGroup === MP3_320K) {
           source.src = mp3_320k
-        } else if (this.radioGroup === MP3_128K){
+        } else if (this.radioGroup === MP3_128K) {
           source.src = mp3_128k
         }
         resolve(source)
