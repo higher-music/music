@@ -144,7 +144,7 @@ export default {
         this.playLatter()
       } else {
         if (this.index < 0) {
-          return
+          return false
         }
         this.$refs.downloadSheet.sheet = true
         this.$refs.downloadSheet.resource = this.data[this.index]
