@@ -52,7 +52,7 @@
     >
       <v-list>
         <v-list-tile
-          v-for="(item, i) in items"
+          v-for="(item, i) in diffItems"
           :key="i"
           @click="menuClick(i)">
           <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
@@ -109,6 +109,12 @@ export default {
     ...mapGetters([
       'currentSong'
     ]),
+    diffItems(){
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return [{ title: 'Play Next' }, { title: 'Play Later' }]
+        default: return this.items
+      }
+    },
     menuClassName() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
