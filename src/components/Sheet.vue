@@ -126,8 +126,11 @@ export default {
       justify-content: space-between;
       .text {
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 700;
       }
+    }
+    /deep/ .v-input__slot{
+      margin-bottom: 0;
     }
   }
 
