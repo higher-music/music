@@ -79,6 +79,7 @@ export default {
         const paramsType = {
           'list': () => {
             getMusicList(this.paramsId).then(res => {
+              console.log(res, 'list')
               this.data.name = res.topinfo.ListName
               this.data.info = res.topinfo.info
               this.data.img = res.topinfo.pic_album
@@ -93,6 +94,7 @@ export default {
           },
           'album': () => {
             getAlbumByID(this.paramsId).then(res => {
+              console.log(res, 'album')
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${res.data.mid}.jpg?max_age=2592000`
               this.data.name = res.data.name
               this.data.singermid = res.data.singermid
@@ -109,6 +111,7 @@ export default {
           },
           'singer': () => {
             getSingerDetail(this.paramsId).then(res => {
+              console.log(res, 'singer')
               const imgUrl = `http://y.gtimg.cn/music/photo_new/T001R300x300M000${res.data.singer_mid}.jpg?max_age=2592000`
               this.data.name = res.data.singer_name
               this.data.img = imgUrl

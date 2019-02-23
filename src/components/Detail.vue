@@ -18,7 +18,7 @@
               <div class="album-button-container">
                 <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
                 <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
-                <v-menu offset-y transition="scale-transition">
+                <v-menu offset-y transition="slide-x-transition">
                   <v-btn
                     slot="activator"
                     :class="{'black--text': data.diffColor}"
@@ -139,7 +139,6 @@ export default {
     background-color: #000;
     overflow: hidden;
     perspective: 1px;
-    /*-webkit-overflow-scrolling: touch;*/
     perspective-origin: center top;
     transform-style: preserve-3d;
     animation: .7s fadein;
@@ -202,9 +201,13 @@ export default {
           }
           .album-button-container{
             .v-btn{
+              width: 100px;
               margin: 0 8px 0 0;
               min-width: 68px;
               box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+            }
+            .v-btn:last-child{
+              width: 50px;
             }
             .v-menu__activator{
               .v-btn{

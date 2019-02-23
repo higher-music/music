@@ -47,6 +47,8 @@
       :position-x="x"
       :position-y="y"
       v-model="$store.state.menuState.menu"
+      min-width="110px"
+      transition="slide-y-transition"
       offset-x
       left
       absolute
