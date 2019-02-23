@@ -9,7 +9,7 @@
     <v-list class="sheet-container">
       <div class="sheet-header">
         <div class="text">{{ type==='download'?'Select':'Bitrate' }}</div>
-        <v-btn v-if="type==='download'" small color="success" @click="download">Download</v-btn>
+        <v-btn v-if="type==='download'" round @click="download">Download</v-btn>
       </div>
       <v-radio-group v-model="radioGroup">
         <v-radio
@@ -20,11 +20,8 @@
           color="green accent-2"
         />
       </v-radio-group>
+      <v-progress-linear v-show="progress" :indeterminate="indeterminate" v-model="valueDeterminate" color="green accent-2"/>
     </v-list>
-    <v-snackbar v-model="snackbar" :timeout="0" right>
-      <v-progress-linear :indeterminate="true"/>
-      <v-btn color="pink" flat @click="show = false">Close</v-btn>
-    </v-snackbar>
   </v-bottom-sheet>
 </template>
 <script>
@@ -40,10 +37,12 @@ export default {
   },
   data() {
     return {
-      snackbar: false,
       sheet: false,
+      progress: false,
+      valueDeterminate: 0,
       resource: null,
-      radioGroup: this.type === 'download' ? 1 : store.state.playList.type,
+      indeterminate: false,
+      radioGroup: this.type === 'download' ? 3 : store.state.playList.type,
       radioGroupData: [
         { val: FLAC, text: 'Flac (550 kbps)' },
         { val: MP3_320K, text: 'High (320 kbps)' },
@@ -63,6 +62,12 @@ export default {
         return false
       }
       this.changeType(this.radioGroup)
+    },
+    sheet(newValue, oldValue){
+      if (!newValue){
+        this.progress = false,
+        this.valueDeterminate = 0
+      }
     }
   },
   methods: {
@@ -70,20 +75,25 @@ export default {
       'changeType'
     ]),
     async download() {
-      this.sheet = false
+      this.progress = true
       const source = await this.getDiffSource()
       if (this.radioGroup === FLAC) {
-        fetch(source.src).then(res => {
-          return res.blob()
-        }).then(blob => {
+        this.indeterminate = true
+        fetch(source.src).then(res => res.blob()).then(blob => {
           downloadjs(blob, `${source.name}.flac`);
         }).catch(() => {
           this.$noResources.show()
         })
       } else {
+        this.indeterminate = false
         var xhr = new XMLHttpRequest();
         xhr.open('POST', source.src, true);
         xhr.responseType = 'blob';
+        xhr.addEventListener('progress', (ev) => {
+          var max = ev.total;
+          var value = ev.loaded;
+          this.valueDeterminate = (value / max) * 100
+        });
         xhr.onload = (e) => {
           downloadjs(e.target.response, `${source.name}.mp3`);
         }

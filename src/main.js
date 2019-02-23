@@ -7,7 +7,6 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 
-require('inobounce')
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import '@/style/index.scss' // global css
@@ -16,6 +15,7 @@ import Scroll from '@/components/Scroll'
 import noResources from '@/components/noResources'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+require('inobounce')
 Vue.use(Vuetify)
 Vue.use(Loading)
 Vue.use(noResources)
