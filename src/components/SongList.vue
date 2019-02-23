@@ -13,16 +13,12 @@
           </div>
           <div v-else class="rank">{{ index + 1 }}</div>
         </div>
-        <v-img
+        <img
+          v-lazy="item.image"
           v-if="showAlbum"
-          :src="item.image"
           :alt="item.name"
           :title="item.name"
-          :max-width="40"
-          :max-height="40"
-          class="image"
-          lazy-src="static/img/default.jpeg"
-          @click="playIndex(index)"/>
+          @click="playIndex(index)">
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
             <span
@@ -195,8 +191,10 @@ export default {
           padding-left: 10px;
           font-weight: 600;
         }
-        .image {
+        img {
           margin-right: 10px;
+          height: 40px;
+          width: 40px;
           border-radius: 2px;
           box-shadow: 0 0 10px rgba(0, 0, 0, .5);
           margin-left: 10px;
@@ -208,12 +206,14 @@ export default {
           display: flex;
         }
         .track-info {
+          height: 40px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           flex: 1;
           display: flex;
           flex-direction: column;
+          justify-content: space-around;
           .song-name-container {
             display: flex;
             align-items: center;

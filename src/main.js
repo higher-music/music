@@ -14,12 +14,19 @@ import Loading from '@/components/Loading'
 import Scroll from '@/components/Scroll'
 import noResources from '@/components/noResources'
 import Vuetify from 'vuetify'
+import VueLazyload from 'vue-lazyload'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 require('inobounce')
 Vue.use(Vuetify)
 Vue.use(Loading)
 Vue.use(noResources)
 Vue.use(Scroll)
+
+Vue.use(VueLazyload, {
+  error: 'static/img/default.jpeg', // 图像的加载失败时 显示的error图标
+  loading: 'static/img/default.jpeg', // 图像正常加载时 显示的loading图标
+  attempt: 2 // 图像尝试加载 次数
+})
 
 // 全局Promise异常捕获
 window.addEventListener('unhandledrejection', (e) => {

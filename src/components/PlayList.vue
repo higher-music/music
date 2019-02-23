@@ -13,15 +13,12 @@
       <div v-for="(item,index) in playList" :key="index" :class="{activeSongBG:index === currentIndex}" class="song-list">
         <div v-if="index !== currentIndex" class="rank">{{ index + 1 }}</div>
         <div v-else class="rank"><v-icon>play_circle_outline</v-icon></div>
-        <v-img
-          :src="item.image"
+        <img
+          v-lazy="item.image"
           :alt="item.name"
           :title="item.name"
-          :max-width="40"
-          :max-height="40"
           class="image"
-          lazy-src="static/img/default.jpeg"
-          @click="playIndex(index)" />
+          @click="playIndex(index)" >
         <div class="track-info" @click="playIndex(index)">
           <div class="song-name-container">
             <span :class="{activeSong:index === currentIndex}">{{ item.name }}</span>
@@ -115,7 +112,9 @@ export default {
           text-overflow: ellipsis;
           font-weight: 600;
         }
-        .image{
+        img{
+          width: 40px;
+          height: 40px;
           margin-right: 10px;
           border-radius: 2px;
           box-shadow: 0 0 10px rgba(0,0,0,.5);
