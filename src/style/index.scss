@@ -31,7 +31,7 @@ body, html {
   height: calc(100vh - 100px);
 }
 
-.scroll-container{
+.scroll-container {
   background-image: linear-gradient(#1e3264, #04060c 130%) !important;
 }
 
@@ -85,26 +85,5 @@ body, html {
   .image-wapper {
     width: 150px !important;
     height: 150px !important;
-  }
-}
-
-/* 刘海屏问题处理*/
-
-/* 竖屏底下的查询 */
-@media screen and (orientation: portrait) {
-  body {
-    /* 防止页面被刘海遮住 */
-    padding-top: constant(safe-area-inset-top);
-  }
-}
-/* 横屏底下的查询 */
-@media screen and (orientation: landscape) {
-  body {
-    /* IOS 11支持*/
-    padding-right: constant(safe-area-inset-right);
-    padding-left: constant(safe-area-inset-left);
-    /*IOS 11.2版本版本支持*/
-    padding-right: env(safe-area-inset-right);
-    padding-left: env(safe-area-inset-left);
   }
 }
