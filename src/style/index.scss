@@ -3,7 +3,7 @@
 body, html {
   font-family: 'Roboto', sans-serif;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   overflow: hidden !important;
   -webkit-font-smoothing: subpixel-antialiased !important;
   margin: 0;
@@ -82,5 +82,26 @@ body, html {
   .image-wapper {
     width: 150px !important;
     height: 150px !important;
+  }
+}
+
+/* 刘海屏问题处理*/
+
+/* 竖屏底下的查询 */
+@media screen and (orientation: portrait) {
+  body {
+    /* 防止页面被刘海遮住 */
+    padding-top: constant(safe-area-inset-top);
+  }
+}
+/* 横屏底下的查询 */
+@media screen and (orientation: landscape) {
+  body {
+    /* IOS 11支持*/
+    padding-right: constant(safe-area-inset-right);
+    padding-left: constant(safe-area-inset-left);
+    /*IOS 11.2版本版本支持*/
+    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left);
   }
 }
