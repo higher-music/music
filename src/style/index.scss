@@ -4,7 +4,7 @@ body, html {
   font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
   -webkit-font-smoothing: subpixel-antialiased !important;
   margin: 0;
   background-color: #303030;
@@ -29,6 +29,9 @@ body, html {
   top: 0;
   width: 100%;
   height: calc(100vh - 100px);
+}
+
+.scroll-container{
   background-image: linear-gradient(#1e3264, #04060c 130%) !important;
 }
 
