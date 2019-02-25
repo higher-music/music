@@ -141,7 +141,6 @@ export default {
     perspective: 1px;
     perspective-origin: center top;
     transform-style: preserve-3d;
-    animation: .7s fadein;
     header {
       height: 300px;
       position: relative;
