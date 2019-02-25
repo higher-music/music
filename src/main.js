@@ -16,6 +16,7 @@ import noResources from '@/components/noResources'
 import Vuetify from 'vuetify'
 import VueLazyload from 'vue-lazyload'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import $import from './utils/addCssJS'
 require('inobounce')
 Vue.use(Vuetify)
 Vue.use(Loading)
@@ -27,6 +28,29 @@ Vue.use(VueLazyload, {
   loading: 'static/img/default.jpeg', // 图像正常加载时 显示的loading图标
   attempt: 2 // 图像尝试加载 次数
 })
+
+// 是否是原生Safari
+function isMobileSafari() {
+  var ua = navigator.userAgent;
+  // IOS系统
+  if (/ OS \d/.test(ua)) {
+    // 不是Chrome
+    if (!~ua.indexOf('CriOS')) {
+      // 开头必须为Mozilla
+      if (!ua.indexOf('Mozilla')) {
+        // 结尾需为：Safari/xxx.xx
+        if (/Safari\/[\d\.]+$/.test(ua)) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+if (isMobileSafari()){
+  $import('src/style/safari.css', 'css')
+}
 
 // 全局Promise异常捕获
 window.addEventListener('unhandledrejection', (e) => {

@@ -48,7 +48,7 @@ export default {
       browseGlobalList.List.forEach(t => {
         this.browseGlobalList.push(createList(t))
       })
-      const songList = musicList.songlist.slice(0, 100)
+      const songList = musicList.songlist.slice(0, 10)
       songList.forEach(t => {
         this.browseSongList.push(createSong(t.data))
       })

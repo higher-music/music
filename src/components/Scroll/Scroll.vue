@@ -50,7 +50,7 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         mouseWheel: true,
         scrollbar: {
-          fade: false,
+          fade: true,
           interactive: true
         },
         click: true,

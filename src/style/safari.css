@@ -1,0 +1,6 @@
+@media screen and (max-width: 1264px) {
+  .main-container {
+    top: 56px !important;
+    height: calc(100vh - 256px) !important;
+  }
+}
