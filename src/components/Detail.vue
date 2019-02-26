@@ -58,11 +58,11 @@
             <div style="padding: 24px;" v-html="data.info"/>
           </v-card>
         </v-dialog>
-        <v-snackbar v-model="copySnackBar" :timeout="1500" bottom>
-          Link copied to clipboard
-        </v-snackbar>
       </div>
     </Scroll>
+    <v-snackbar v-model="copySnackBar" :timeout="1500" bottom>
+      Link copied to clipboard
+    </v-snackbar>
   </div>
 </template>
 
