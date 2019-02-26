@@ -29,7 +29,7 @@
                   </v-btn>
                   <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
                     <v-list-tile
-                      v-for="(item, i) in items"
+                      v-for="(item, i) in diffItems"
                       :key="i"
                       @click="menuClick(item)">
                       <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
@@ -86,6 +86,14 @@ export default {
         { title: 'Play Later' },
         { title: 'Get Info' }
       ]
+    }
+  },
+  computed: {
+    diffItems(){
+      if (this.data.info){
+        return this.items
+      }
+      return [{ title: 'Play Later' }]
     }
   },
   methods: {

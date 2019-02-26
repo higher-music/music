@@ -41,13 +41,17 @@ export function getImageColor(img) {
   return new Promise((resolve, reject) => {
     const URl = `http://musicapi.tx114.5644.pw/api/img/getPrimaryColor.php?imgUrl=${img}`;
     jsonp2(URl, { name: 'callback' }).then(res => {
-      const rgb = hexToRgb(res.data)
+      const oldRgb = hexToRgb(res.data)
+      const rgb = {
+        r: oldRgb.r + 103,
+        g: oldRgb.g + 115,
+        b: oldRgb.b + 130
+      }
       const color = {
-        btnColor: res.data,
+        btnColor: `rgb(${rgb.r},${rgb.g},${rgb.b})`,
         diffColor: false
       }
-      if (rgb.r * 0.299 + rgb.g * 0.578 + rgb.b * 0.114 >= 192){ // 浅色
-        color.btnColor = res.data
+      if (rgb.r * 0.299 + rgb.g * 0.578 + rgb.b * 0.114 >= 192) { // 浅色
         color.diffColor = true
       }
       resolve(color)

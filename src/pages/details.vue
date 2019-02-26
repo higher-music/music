@@ -39,6 +39,10 @@ export default {
   created() {
     this.paramsType = this.$route.params.type
     this.paramsId = this.$route.params.id
+    if (this.paramsType === 'list' && this.paramsId === '201') {
+      this.$router.push('/')
+      return false
+    }
     this.mapKey = location.href
     if (this.checkSavedMusic()) {
       this.$loading.show()
