@@ -76,7 +76,10 @@ export default {
   name: 'Detail',
   components: { SongList },
   props: {
-    data: Object
+    data: {
+      type: Object,
+      default: () => {}
+    }
   },
   data() {
     return {
