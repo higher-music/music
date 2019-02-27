@@ -88,9 +88,7 @@ export default {
     },
     data: {
       type: Array,
-      default: () => {
-        return []
-      }
+      default: () => []
     }
   },
   data() {
