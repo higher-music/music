@@ -71,6 +71,7 @@ import SongList from '../components/SongList'
 import { mapActions } from 'vuex'
 import Clipboard from 'clipboard'
 import { RANDOM } from '../api/config'
+import {GET_RANDOM_NUM} from './js/utils'
 
 export default {
   name: 'Detail',
@@ -103,7 +104,9 @@ export default {
     ...mapActions([
       'replacePlayList',
       'contactPlayList',
-      'changePlayType'
+      'changePlayType',
+      'changeIndex',
+      'playAllRandom'
     ]),
     toSinger(item) {
       this.$router.push('/singer/' + item.singermid)
@@ -136,9 +139,10 @@ export default {
       }
     },
     playAll(isShuffle) {
-      this.replacePlayList(this.data.songList)
-      if (isShuffle) {
-        this.changePlayType(RANDOM)
+      if (!isShuffle) {
+        this.replacePlayList(this.data.songList)
+      } else {
+        this.playAllRandom(this.data.songList)
       }
     }
   }

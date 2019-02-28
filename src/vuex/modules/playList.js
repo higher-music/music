@@ -42,9 +42,13 @@ const actions = {
   delSong({ commit }, index) {
     commit('DEL_SONG', index)
   },
-  // 替换播放列表
+  // 按顺序播放全部
   replacePlayList({ commit }, list) {
     commit('REPLACE_PLAY_LIST', list)
+  },
+  //
+  playAllRandom({ commit }, list) {
+    commit('PLAY_ALL_RANDOM', list)
   },
   // 连接播放列表，即播放列表PlayLatter
   contactPlayList({ commit }, list) {
@@ -136,6 +140,12 @@ const mutations = {
   REPLACE_PLAY_LIST(state, list) {
     state.list = [].concat(list)
     state.index = 0
+    CHECK_PREV_NEXT(state)
+  },
+  PLAY_ALL_RANDOM(state, list) {
+    state.list = [].concat(list)
+    state.index = GET_RANDOM_NUM(0, list.length - 1)
+    state.playType = RANDOM
     CHECK_PREV_NEXT(state)
   },
   CONCAT_PLAY_LIST(state, list) {
