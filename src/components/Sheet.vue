@@ -20,7 +20,11 @@
           color="green accent-2"
         />
       </v-radio-group>
-      <v-progress-linear v-show="progress" :indeterminate="indeterminate" v-model="valueDeterminate" color="green accent-2"/>
+      <v-progress-linear
+        v-show="progress"
+        :indeterminate="indeterminate"
+        v-model="valueDeterminate"
+        color="green accent-2"/>
     </v-list>
   </v-bottom-sheet>
 </template>
@@ -37,8 +41,8 @@ export default {
   },
   data() {
     return {
-      sheet: false,
-      progress: false,
+      sheet: null,
+      progress: null,
       valueDeterminate: 0,
       resource: null,
       indeterminate: false,
@@ -63,9 +67,9 @@ export default {
       }
       this.changeType(this.radioGroup)
     },
-    sheet(newValue, oldValue){
-      if (!newValue){
-        this.progress = false,
+    sheet(newValue, oldValue) {
+      if (!newValue) {
+        this.progress = false
         this.valueDeterminate = 0
       }
     }
@@ -75,16 +79,23 @@ export default {
       'changeType'
     ]),
     async download() {
-      this.progress = true
       const source = await this.getDiffSource()
       if (this.radioGroup === FLAC) {
-        this.indeterminate = true
         fetch(source.src).then(res => res.blob()).then(blob => {
+          this.indeterminate = true
+          this.progress = true
           downloadjs(blob, `${source.name}.flac`);
+        }).then(() => {
+          this.progress = false
+          this.sheet = false
         }).catch(() => {
+          this.progress = false
           this.$noResources.show()
         })
+      } else if (this.radioGroup === MP3_320K) {
+        this.$noResources.show()
       } else {
+        this.progress = true
         this.indeterminate = false
         var xhr = new XMLHttpRequest();
         xhr.open('POST', source.src, true);
@@ -95,9 +106,11 @@ export default {
           this.valueDeterminate = (value / max) * 100
         });
         xhr.onload = (e) => {
-          downloadjs(e.target.response, `${source.name}.mp3`);
+          downloadjs(e.target.response, `${source.name}.mp3`)
+          this.sheet = false
         }
         xhr.onerror = () => {
+          this.progress = false
           this.$noResources.show()
         }
         xhr.send(null);
@@ -139,10 +152,10 @@ export default {
         font-weight: 700;
       }
     }
-    .v-input--selection-controls{
+    .v-input--selection-controls {
       margin-top: 6px;
     }
-    /deep/ .v-input__slot{
+    /deep/ .v-input__slot {
       margin-bottom: 0;
     }
   }
