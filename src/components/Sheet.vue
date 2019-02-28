@@ -79,11 +79,11 @@ export default {
       'changeType'
     ]),
     async download() {
+      this.progress = true
       const source = await this.getDiffSource()
       if (this.radioGroup === FLAC) {
+        this.indeterminate = true
         fetch(source.src).then(res => res.blob()).then(blob => {
-          this.indeterminate = true
-          this.progress = true
           downloadjs(blob, `${source.name}.flac`);
         }).then(() => {
           this.progress = false
@@ -92,11 +92,9 @@ export default {
           this.progress = false
           this.$noResources.show()
         })
-      } else if (this.radioGroup === MP3_320K) {
-        this.$noResources.show()
       } else {
-        this.progress = true
         this.indeterminate = false
+        this.progress = true
         var xhr = new XMLHttpRequest();
         xhr.open('POST', source.src, true);
         xhr.responseType = 'blob';
