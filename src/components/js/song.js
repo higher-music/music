@@ -57,21 +57,6 @@ export function createSong2(musicData) {
   })
 }
 
-export function createSong3(musicData) {
-  return new Song({
-    id: null,
-    mid: musicData.id,
-    singer: musicData.singer,
-    name: musicData.name,
-    album: null,
-    duration: musicData.time,
-    image: musicData.pic,
-    mp3_128k: musicData.url,
-    mp3_320k: musicData.url,
-    flac: musicData.url
-  })
-}
-
 function filterSinger(singer) {
   const ret = []
   singer.forEach((s) => {
