@@ -3,17 +3,17 @@ import { getLyric } from '@/api/song'
 import { Base64 } from 'js-base64'
 
 export default class Song {
-  constructor({ id, mid, singer, name, album, duration, image, mp3_128k, mp3_320k, flac }) {
+  constructor({ id, mid, singer, name, album, duration, albummid }) {
     this.id = id
     this.mid = mid
     this.singer = singer
     this.name = name
     this.album = album
     this.duration = duration
-    this.image = image
-    this.mp3_128k = mp3_128k
-    this.mp3_320k = mp3_320k
-    this.flac = flac
+    this.image = `https://y.gtimg.cn/music/photo_new/T002R300x300M000${albummid}.jpg?max_age=2592000`
+    this.mp3_128k = `http://mobileoc.music.tc.qq.com/M500${mid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=8`
+    this.mp3_320k = `http://mobileoc.music.tc.qq.com/M800${mid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=8`
+    this.flac = `http://mobileoc.music.tc.qq.com/F000${mid}.flac?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=53`
   }
 
   getLyric() {
@@ -41,10 +41,7 @@ export function createSong(musicData) {
     name: musicData.songname,
     album: musicData.albumname,
     duration: musicData.interval,
-    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    mp3_128k: `http://dl.stream.qqmusic.qq.com/M500${musicData.songmid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
-    mp3_320k: `http://dl.stream.qqmusic.qq.com/M800${musicData.songmid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
-    flac: `http://streamoc.music.tc.qq.com/F000${musicData.songmid}.flac?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&&uin=0&fromtag=8`
+    albummid: musicData.albummid
   })
 }
 
@@ -56,10 +53,7 @@ export function createSong2(musicData) {
     name: musicData.name,
     album: musicData.album.name,
     duration: 0,
-    image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.album.mid}.jpg?max_age=2592000`,
-    mp3_128k: `http://dl.stream.qqmusic.qq.com/M500${musicData.mid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
-    mp3_320k: `http://dl.stream.qqmusic.qq.com/M800${musicData.mid}.mp3?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&uin=0&fromtag=64`,
-    flac: `http://streamoc.music.tc.qq.com/F000${musicData.mid}.flac?vkey=${store.state.playList.vkey}&guid=${store.state.playList.guid}&&uin=0&fromtag=8`
+    albummid: musicData.album.mid
   })
 }
 

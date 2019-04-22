@@ -10,11 +10,6 @@ export const constantRouterMap = [
     component: () => import('@/pages/NotFound.vue')
   },
   {
-    path: '/iframe/:id/:autoplay',
-    name: 'IFrame',
-    component: () => import('@/pages/IFrame.vue')
-  },
-  {
     path: '/',
     component: () => import('@/pages/layout.vue'),
     children: [
