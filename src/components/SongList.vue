@@ -32,26 +32,24 @@
             </span>
           </div>
         </div>
-        <v-btn slot="activator" :class="menuClassName" dark icon @click="menuBtnClick($event,index)">
+        <v-btn slot="activator" :class="menu.class" dark icon @click="menuBtnClick($event,index)">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </div>
     </div>
     <Sheet ref="downloadSheet" type="download"/>
     <v-menu
-      v-if="showMenu"
       :position-x="x"
       :position-y="y"
-      v-model="$store.state.menuState.menu"
+      v-model="show"
       min-width="110px"
-      transition="slide-y-transition"
       offset-x
       left
       absolute
     >
       <v-list>
         <v-list-tile
-          v-for="(item, i) in diffItems"
+          v-for="(item, i) in menu.items"
           :key="i"
           @click="menuClick(i)">
           <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
@@ -78,10 +76,6 @@ export default {
       type: Boolean,
       default: true
     },
-    showMenu: {
-      type: Boolean,
-      default: true
-    },
     loading: {
       type: Boolean,
       default: false
@@ -93,6 +87,7 @@ export default {
   },
   data() {
     return {
+      show: false,
       x: 0,
       y: 0,
       index: -1,
@@ -107,21 +102,19 @@ export default {
     ...mapGetters([
       'currentSong'
     ]),
-    diffItems(){
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs': return [{ title: 'Play Next' }, { title: 'Play Later' }]
-        default: return this.items
+    menu() {
+      const menu = {};
+      // const tempArr = this.items.slice(0)
+      menu.class = 'menu';
+      menu.items = this.items;
+      if (this.$vuetify.breakpoint.name === 'xs'){
+        menu.class = 'menu_flex'
+        // menu.items = tempArr.pop()
+      } else if (this.$vuetify.breakpoint.name === 'sm'){
+        menu.class = 'menu_flex'
       }
-    },
-    menuClassName() {
-      switch (this.$vuetify.breakpoint.name) {
-        case 'xs':
-          return 'menu_flex'
-        case 'sm':
-          return 'menu_flex'
-        default:
-          return 'menu'
-      }
+      console.log(menu, 'menu');
+      return menu
     }
   },
   methods: {
@@ -135,10 +128,14 @@ export default {
       this.addSongToCurrentIndex(this.data[index])
     },
     menuBtnClick(e, index) {
-      e.preventDefault()
-      this.x = e.clientX
-      this.y = e.clientY
-      this.setMenu(true)
+      // console.log(e.isTrusted)
+      // e.isTrusted = true
+      e.preventDefault();
+      console.log(e);
+      this.x = e.clientX;
+      this.y = e.clientY;
+      this.show = true;
+      // this.setMenu(true)
       this.index = index
     },
     menuClick(i) {
@@ -150,7 +147,7 @@ export default {
         if (this.index < 0) {
           return false
         }
-        this.$refs.downloadSheet.sheet = true
+        this.$refs.downloadSheet.sheet = true;
         this.$refs.downloadSheet.resource = this.data[this.index]
       }
     },

@@ -56,17 +56,17 @@ export default {
         click: true,
         dblclick: true,
         probeType: 3
-      })
+      });
 
       if (this.listenScroll) {
-        const me = this
+        const me = this;
         this.scroll.on('scroll', (pos) => {
-          const a = document.getElementsByClassName('v-menu__content')
-          const b = Array.from(a)
-          for (let i = 0; i < b.length; i++){
-            b[i].style.display = 'none'
-          }
-          this.$store.dispatch('setMenu', false)
+          // const a = document.getElementsByClassName('v-menu__content')
+          // const b = Array.from(a)
+          // for (let i = 0; i < b.length; i++){
+          //   b[i].style.display = 'none'
+          // }
+          // this.$store.dispatch('setMenu', false)
           me.$emit('scroll', pos)
         })
       }

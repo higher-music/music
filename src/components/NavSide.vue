@@ -30,8 +30,8 @@ export default {
     return {
       topItems: [
         { title: 'Search', icon: 'search' },
-        { title: 'Browse', icon: 'library_music' },
-        { title: 'For You', icon: 'favorite' }
+        { title: 'Browse', icon: 'library_music' }
+        // { title: 'For You', icon: 'favorite' }
       ],
       bottomItems: [
         { title: 'Recently Added', icon: 'calendar_today' },
