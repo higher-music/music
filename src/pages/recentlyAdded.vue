@@ -1,5 +1,5 @@
 <template>
-  <div v-show="newAlbumsList.length!==0" class="main-container">
+  <div class="main-container">
     <div class="section-title">Albums Lists</div>
     <PicList :data="newAlbumsList" type="album" />
     <div class="section-title">Songs Lists</div>
