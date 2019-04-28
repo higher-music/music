@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <div v-show="data.songList.length&&data.btnColor" class="detail-container">
+    <div class="detail-container">
       <header>
         <div class="header-image-container">
           <img :src="data.img" :alt="data.name" class="header-image">
