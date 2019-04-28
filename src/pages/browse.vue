@@ -1,5 +1,5 @@
 <template>
-  <div v-show="browseSummitList.length!==0&&browseGlobalList.length!==0&&browseSongList.length!==0" class="main-container">
+  <div class="main-container">
     <div class="section-title">Summit Lists</div>
     <PicList :data="browseSummitList" type="list"/>
     <div class="section-title">Global Lists</div>
