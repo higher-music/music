@@ -5,7 +5,6 @@ import store from './vuex/store'
 
 import '@/style/index.scss' // global css
 
-import './plugins/vuetify'
 import './plugins/lazyload'
 import './plugins/registration'
 
