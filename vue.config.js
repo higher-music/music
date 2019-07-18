@@ -7,6 +7,16 @@ function resolve(dir) {
 module.exports = {
   productionSourceMap: false,
   publicPath: './',
+  configureWebpack: {
+    externals: {
+      'vue': 'Vue',
+      'vuex': 'Vuex',
+      'axios': 'axios',
+      'vue-router': 'VueRouter',
+      'vuetify': 'vuetify'
+    }
+  },
+  transpileDependencies: [/node_modules[/\\\\]vuetify[/\\\\]/],
   chainWebpack: (config) => {
     config.resolve.alias
       .set('static', resolve('public/static'))
