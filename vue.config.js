@@ -1,34 +1,40 @@
 const path = require('path');
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV);
+const productionPath = '/yourProjectPath/'
 module.exports = {
+  parallel: require('os').cpus().length > 1,
   productionSourceMap: false,
-  publicPath: './',
-  configureWebpack: {
-    externals: {
-      'vue': 'Vue',
-      'vuex': 'Vuex',
-      'axios': 'axios',
+  publicPath: IS_PROD ? productionPath : '/',
+  transpileDependencies: [/node_modules[/\\\\]vuetify[/\\\\]/],
+  configureWebpack: config => {
+    config.externals = {
+      vue: 'Vue',
+      'vuetify': 'vuetify',
       'vue-router': 'VueRouter',
-      'vuetify': 'vuetify'
+      vuex: 'Vuex',
+      axios: 'axios'
     }
   },
-  transpileDependencies: [/node_modules[/\\\\]vuetify[/\\\\]/],
-  chainWebpack: (config) => {
-    config.resolve.alias
-      .set('static', resolve('public/static'))
-    /* 添加分析工具*/
-    if (process.env.NODE_ENV === 'production') {
-      if (process.env.npm_config_report) {
-        config
-          .plugin('webpack-bundle-analyzer')
-          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-          .end();
-        config.plugins.delete('prefetch')
-      }
-    }
+  chainWebpack: config => {
+    const cdn = {
+      // css: ['//unpkg.com/element-ui@2.10.1/lib/theme-chalk/index.css'],
+      js: [
+        '//cdn.bootcss.com/vue/2.6.10/vue.min.js', // 访问https://unpkg.com/vue/dist/vue.min.js获取最新版本
+        '//cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js',
+        '//cdn.bootcss.com/vuex/3.0.1/vuex.min.js',
+        '//cdn.bootcss.com/axios/0.15.2/axios.min.js',
+        '//cdn.bootcss.com/vuetify/1.5.16/vuetify.min.js'
+      ]
+    };
+    // html中添加cdn
+    config.plugin('html').tap(args => {
+      args[0].cdn = cdn
+      return args
+    })
   }
 };
