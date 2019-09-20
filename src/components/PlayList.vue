@@ -91,6 +91,7 @@ export default {
       align-items: center;
     }
     .content {
+      padding: 0 10px;
       flex: 1;
       overflow-y: scroll;
       .song-list{

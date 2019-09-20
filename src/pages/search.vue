@@ -26,6 +26,7 @@ import SongList from '@/components/SongList'
 import { search, getHotKey } from '@/api/search'
 import { createSong2 } from '@/components/js/song'
 import Progress from '@/components/Progress'
+import merge from 'webpack-merge'
 
 export default {
   name: 'Search',
