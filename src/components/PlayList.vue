@@ -82,7 +82,7 @@ export default {
     display:flex;
     flex-direction: column;
     height: 100vh;
-    background: #212121;
+    background: linear-gradient(to top, #414345, #232526) !important;
     .head {
       background: #212121;
       height: 50px;

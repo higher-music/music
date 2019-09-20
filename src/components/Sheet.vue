@@ -3,6 +3,7 @@
     <v-btn
       v-if="type!=='download'"
       slot="activator"
+      :ripple="false"
       icon>
       <v-icon>settings</v-icon>
     </v-btn>
@@ -132,30 +133,33 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
-  .sheet-container {
-    padding: 8px 16px !important;
-    box-sizing: border-box;
-    display: block;
-    outline: 0;
-    max-height: 80vh;
-    overflow: auto;
-    .sheet-header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      .text {
-        font-size: 18px;
-        font-weight: 700;
-      }
-    }
-    .v-input--selection-controls {
-      margin-top: 6px;
-    }
-    /deep/ .v-input__slot {
-      margin-bottom: 0;
-    }
-  }
+    .sheet-container {
+      background: linear-gradient(to bottom, #414345, #232526) !important;
+      padding: 8px 16px !important;
+        box-sizing: border-box;
+        display: block;
+        outline: 0;
+        max-height: 80vh;
+        overflow: auto;
 
+        .sheet-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .text {
+                font-size: 18px;
+                font-weight: 700;
+            }
+        }
+
+        .v-input--selection-controls {
+            margin-top: 6px;
+        }
+
+        /deep/ .v-input__slot {
+            margin-bottom: 0;
+        }
+    }
 </style>

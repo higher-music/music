@@ -1,14 +1,12 @@
 <template>
-  <div v-show="browseSummitList.length!==0&&browseGlobalList.length!==0&&browseSongList.length!==0" class="main-container">
-    <div class="section-title">Summit Lists</div>
+  <main v-show="show" class="main-container">
+    <section class="section-title">Summit Lists</section>
     <PicList :data="browseSummitList" type="list"/>
-    <div class="section-title">Global Lists</div>
+    <section class="section-title">Global Lists</section>
     <PicList :data="browseGlobalList" type="list"/>
-    <div class="section-title">Top Songs</div>
-    <div class="top-songs-container">
-      <SongList ref="songList" :data="browseSongList" show-rank/>
-    </div>
-  </div>
+    <section class="section-title">Top Songs</section>
+    <SongList :data="browseSongList" style="padding: 0 20px" show-rank/>
+  </main>
 </template>
 <script>
 import PicList from '@/components/PicList'
@@ -22,11 +20,14 @@ export default {
   components: { PicList, SongList },
   data() {
     return {
-      loading: true,
       browseSummitList: [],
       browseGlobalList: [],
-      browseSongList: [],
-      show: true
+      browseSongList: []
+    }
+  },
+  computed: {
+    show(){
+      return this.browseSummitList.length !== 0 && this.browseGlobalList.length !== 0 && this.browseSongList.length !== 0
     }
   },
   beforeCreate(){
@@ -55,18 +56,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .top-songs-container{
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .section-title {
-    cursor: default;
-    line-height: normal;
-    font-size: 24px;
-    font-weight: 500;
-    padding-left: 20px;
-    padding-top: 12px;
-  }
-</style>

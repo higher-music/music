@@ -33,11 +33,6 @@ export const constantRouterMap = [
         component: () => import('@/pages/details.vue')
       },
       {
-        path: '/for_you',
-        name: 'For You',
-        component: () => import('@/pages/forYou.vue')
-      },
-      {
         path: '/hot_artists',
         name: 'Hot Artists',
         component: () => import('@/pages/artists.vue')

@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <div v-show="data.songList.length&&data.btnColor" class="detail-container">
+    <div v-show="data.songList.length" class="detail-container">
       <header>
         <div class="header-image-container">
           <img :src="data.img" :alt="data.name" class="header-image">
@@ -15,18 +15,16 @@
               </div>
             </div>
             <div class="album-button-container">
-              <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
-              <v-btn :class="{'black--text': data.diffColor}" :color="data.btnColor" class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
+              <v-btn class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
+              <v-btn class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
               <v-menu offset-y transition="slide-x-transition">
                 <v-btn
                   slot="activator"
-                  :class="{'black--text': data.diffColor}"
-                  :color="data.btnColor"
                   dark
                 >
                   <v-icon>more_horiz</v-icon>
                 </v-btn>
-                <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
+                <v-list>
                   <v-list-tile
                     v-for="(item, i) in diffItems"
                     :key="i"
@@ -34,7 +32,7 @@
                     <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
-                <v-list :class="{'black--text': data.diffColor}" :style="{backgroundColor: `${data.btnColor}`}">
+                <v-list>
                   <v-list-tile ref="copy" @click="copyLink">
                     <v-list-tile-title class="body-2">Copy Link</v-list-tile-title>
                   </v-list-tile>
@@ -44,13 +42,13 @@
           </div>
         </div>
       </header>
-      <section :style="{backgroundImage:`linear-gradient(rgb(4, 6, 12), ${data.btnColor} 180%)` }">
+      <section :style="{backgroundImage:`linear-gradient(rgb(4, 6, 12) 180%)` }">
         <div class="tracklist">
           <SongList :data="data.songList" show-rank/>
         </div>
       </section>
       <v-dialog v-model="dialog" width="700">
-        <v-card :class="{'black--text': data.diffColor}" :color="data.btnColor">
+        <v-card color="#000000">
           <v-card-title style="padding-bottom: 0">
             <span class="headline">{{ data.name }}</span>
           </v-card-title>

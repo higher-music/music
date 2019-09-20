@@ -1,9 +1,9 @@
 <template>
-  <v-toolbar :clipped-left="true" height="56" class="hidden-lg-and-up" fixed>
-    <v-toolbar-side-icon @click.stop="menuClick"/>
+  <v-toolbar :clipped-left="true" flat height="56" class="hidden-lg-and-up" fixed>
+    <v-toolbar-side-icon :ripple="false" @click.stop="menuClick"/>
     <v-spacer/>
     <Sheet/>
-    <v-btn icon @click.stop="listClick">
+    <v-btn :ripple="false" icon @click.stop="listClick">
       <v-icon>queue_music</v-icon>
     </v-btn>
   </v-toolbar>

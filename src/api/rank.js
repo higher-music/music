@@ -1,6 +1,5 @@
 import jsonp, { jsonp2 } from './jsonp'
 import { commonParams, options, options2 } from './config'
-import { hexToRgb } from '../components/js/utils'
 
 // 获取Top榜单
 export function getTopList() {
@@ -34,31 +33,6 @@ export function getAlbumList() {
 export function getAlbumByID(albummid) {
   const url = `https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg?ct=24&albummid=${albummid}&_tk=37988991&loginUin=0&hostUin=0&format=jsonp&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0`
   return jsonp2(url, options)
-}
-
-// 获取图片主题色
-export function getImageColor(img) {
-  return new Promise((resolve, reject) => {
-    const URl = `http://musicapi.tx114.5644.pw/api/img/getPrimaryColor.php?imgUrl=${img}`;
-    jsonp2(URl, { name: 'callback' }).then(res => {
-      const oldRgb = hexToRgb(res.data)
-      const rgb = {
-        r: oldRgb.r + 103,
-        g: oldRgb.g + 115,
-        b: oldRgb.b + 130
-      }
-      const color = {
-        btnColor: `rgb(${rgb.r},${rgb.g},${rgb.b})`,
-        diffColor: false
-      }
-      if (rgb.r * 0.299 + rgb.g * 0.578 + rgb.b * 0.114 >= 192) { // 浅色
-        color.diffColor = true
-      }
-      resolve(color)
-    }).catch(err => {
-      reject(err)
-    })
-  })
 }
 
 // 获取推荐用户歌单

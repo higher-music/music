@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 .all {
+  background: linear-gradient(to top, #414345, #232526) !important;
   display: flex;
   height: 100vh;
   width: 100%;

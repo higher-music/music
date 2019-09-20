@@ -1,12 +1,10 @@
 <template>
-  <div v-show="newAlbumsList.length!==0" class="main-container">
-    <div class="section-title">Albums Lists</div>
+  <main v-show="newAlbumsList.length!==0" class="main-container">
+    <section class="section-title">Albums Lists</section>
     <PicList :data="newAlbumsList" type="album" />
-    <div class="section-title">Songs Lists</div>
-    <div class="top-songs-container">
-      <SongList :data="newSongList" type="list"/>
-    </div>
-  </div>
+    <section class="section-title">Songs Lists</section>
+    <SongList :data="newSongList" style="padding: 0 20px" type="list"/>
+  </main>
 </template>
 <script>
 import PicList from '@/components/PicList'
@@ -49,18 +47,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .top-songs-container{
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .section-title {
-    cursor: default;
-    line-height: normal;
-    font-size: 24px;
-    font-weight: 500;
-    padding-left: 20px;
-    padding-top: 12px;
-  }
-</style>
