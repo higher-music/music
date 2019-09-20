@@ -2,17 +2,15 @@
   <v-app dark>
     <navSide ref="nav"/>
     <tool-bar @menu-click="toggleNav" @list-click="toggleDialog"/>
-    <v-dialog v-model="dialog" transition="dialog-bottom-transition" fullscreen>
-      <PlayList @close-click="dialog = false"/>
-    </v-dialog>
-    <v-content app>
-      <transition>
-        <router-view :key="key"/>
-      </transition>
+    <v-content>
+      <router-view :key="key"/>
     </v-content>
     <v-footer height="100" fixed app>
       <player @list-click="toggleDialog"/>
     </v-footer>
+    <v-dialog v-model="dialog" transition="dialog-bottom-transition" fullscreen>
+      <PlayList @close-click="dialog = false"/>
+    </v-dialog>
   </v-app>
 </template>
 

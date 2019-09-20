@@ -85,6 +85,9 @@ export default {
         .search-scroll {
             padding: 0 16px;
             overflow-y: scroll;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            overflow-scrolling: touch;
             position: absolute;
             width: 100%;
             height: calc(100% - 84px);

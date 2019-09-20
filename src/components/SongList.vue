@@ -154,6 +154,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .v-list{
+    background: #000000 !important;
+  }
   .song-list-container {
     box-sizing: content-box !important;
     .song-list-wapper {

@@ -1,15 +1,10 @@
 @import "vuetify";
 
-body, html {
-  font-family: 'Roboto', sans-serif;
-  width: 100%;
+html{
+  font-family: Roboto, BlinkMacSystemFont, segoe ui, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
   height: 100%;
-  overflow: hidden !important;
-  -webkit-font-smoothing: subpixel-antialiased !important;
-  margin: 0;
-  background-color: #303030;
-  color: #fff;
 }
+
 
 .active-link {
   color: #69f0ae !important;
@@ -26,29 +21,23 @@ body, html {
 
 .main-container {
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
   position: absolute;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
   top: 0;
   width: 100%;
   height: calc(100vh - 100px);
-  background-image: linear-gradient(#1e3264, #04060c 130%) !important;
-
 }
 
-.scroll-container {
-  background-image: linear-gradient(#1e3264, #04060c 130%) !important;
+.section-title {
+  cursor: default;
+  line-height: normal;
+  font-size: 24px;
+  font-weight: 500;
+  padding-left: 20px;
+  padding-top: 12px;
 }
-
- .section-title {
-   cursor: default;
-   line-height: normal;
-   font-size: 24px;
-   font-weight: 500;
-   padding-left: 20px;
-   padding-top: 12px;
- }
-
-
 
 
 @media screen and (max-width: 1264px) {

@@ -23,9 +23,6 @@ export default {
       newAlbumsList: []
     }
   },
-  beforeCreate(){
-    this.$loading.show()
-  },
   created() {
     this.getNewData()
   },
@@ -42,7 +39,6 @@ export default {
       songs.new_song.data.song_list.forEach(t => {
         this.newSongList.push(createSong2(t))
       })
-      this.$loading.hide()
     }
   }
 }
