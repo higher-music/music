@@ -32,7 +32,7 @@
             </span>
           </div>
         </div>
-        <v-btn :ripple="false" slot="activator" :class="menu.class" dark icon @click="menuBtnClick($event,index)">
+        <v-btn slot="activator" :ripple="false" :class="menu.class" dark icon @click="menuBtnClick($event,index)">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </div>

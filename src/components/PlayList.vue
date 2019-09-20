@@ -1,11 +1,11 @@
 <template>
   <div class="all">
     <div class="head">
-      <v-btn icon dark @click="$emit('close-click')">
+      <v-btn :ripple="false" icon dark @click="$emit('close-click')">
         <v-icon>close</v-icon>
       </v-btn>
       <v-spacer/>
-      <v-btn dark flat small @click="clearAllSong">
+      <v-btn :ripple="false" dark flat small @click="clearAllSong">
         ClearAll
       </v-btn>
     </div>
@@ -30,7 +30,7 @@
             </span>
           </div>
         </div>
-        <v-btn slot="activator" :class="menuClassName" dark icon @click="deleteSong(index)">
+        <v-btn slot="activator" :ripple="false" :class="menuClassName" dark icon @click="deleteSong(index)">
           <v-icon>delete</v-icon>
         </v-btn>
       </div>

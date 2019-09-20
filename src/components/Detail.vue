@@ -15,11 +15,12 @@
               </div>
             </div>
             <div class="album-button-container">
-              <v-btn class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
-              <v-btn class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
+              <v-btn :ripple="false" class="text-capitalize" @click.stop="playAll(false)"> play </v-btn>
+              <v-btn :ripple="false" class="text-capitalize" @click.stop="playAll(true)"> shuffle</v-btn>
               <v-menu offset-y transition="slide-x-transition">
                 <v-btn
                   slot="activator"
+                  :ripple="false"
                   dark
                 >
                   <v-icon>more_horiz</v-icon>

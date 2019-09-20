@@ -22,18 +22,18 @@
     </div>
     <div class="playback-controls">
       <div class="playback-buttons">
-        <v-btn icon class="hidden-sm-and-down" @click="prevSong">
+        <v-btn :ripple="false" icon class="hidden-sm-and-down" @click="prevSong">
           <v-icon>skip_previous</v-icon>
         </v-btn>
-        <v-btn v-if="currentSong" :loading="loading" icon @click="play">
+        <v-btn v-if="currentSong" :ripple="false" :loading="loading" icon @click="play">
           <v-icon v-if="isPlay">pause</v-icon>
           <v-icon v-else>play_arrow</v-icon>
         </v-btn>
-        <v-btn v-else icon @click="play">
+        <v-btn v-else :ripple="false" icon @click="play">
           <v-icon v-if="isPlay">pause</v-icon>
           <v-icon v-else>play_arrow</v-icon>
         </v-btn>
-        <v-btn icon @click="nextSong">
+        <v-btn :ripple="false" icon @click="nextSong">
           <v-icon>skip_next</v-icon>
         </v-btn>
       </div>
@@ -53,16 +53,16 @@
     </div>
     <div class="misc-controls hidden-sm-and-down">
       <Sheet class="hidden-md-and-down"/>
-      <v-btn icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
+      <v-btn :ripple="false" icon class="hidden-md-and-down" @click.stop="$emit('list-click')">
         <v-icon>queue_music</v-icon>
       </v-btn>
-      <v-btn icon class="hidden-sm-and-down" @click.stop="changePlayMode">
+      <v-btn :ripple="false" icon class="hidden-sm-and-down" @click.stop="changePlayMode">
         <v-icon v-if="getPlayType === 1">repeat</v-icon>
         <v-icon v-else-if="getPlayType === 2">shuffle</v-icon>
         <v-icon v-else>repeat_one</v-icon>
       </v-btn>
       <v-flex xs6 class="hidden-sm-and-down" style="display: flex;align-items: center">
-        <v-btn icon @click.stop="media = media === 0 ? 1 : 0">
+        <v-btn :ripple="false" icon @click.stop="media = media === 0 ? 1 : 0">
           <v-icon v-if="media > 0">volume_up</v-icon>
           <v-icon v-else>volume_off</v-icon>
         </v-btn>
