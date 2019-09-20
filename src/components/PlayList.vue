@@ -88,6 +88,7 @@ export default {
       height: 50px;
       display: flex;
       justify-content: space-around;
+      align-items: center;
     }
     .content {
       flex: 1;
