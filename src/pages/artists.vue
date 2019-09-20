@@ -1,7 +1,7 @@
 <template>
-  <div class="main-container">
+  <main class="main-container">
     <PicList :data="hotArtistsList" type="singer"/>
-  </div>
+  </main>
 </template>
 <script>
 import PicList from '@/components/PicList'
@@ -16,17 +16,16 @@ export default {
       hotArtistsList: []
     }
   },
-  beforeCreate(){
-    this.$loading.show()
-  },
   created() {
-    getSingerList().then(res => {
-      res.data.list.forEach(t => {
+    this.getData()
+  },
+  methods: {
+    async getData(){
+      const { data } = await getSingerList()
+      data.list.forEach(t => {
         this.hotArtistsList.push(createSinger(t))
       })
-    }).then(() => {
-      this.$loading.hide()
-    })
+    }
   }
 }
 </script>
