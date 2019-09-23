@@ -1,8 +1,15 @@
 @import "vuetify";
 
-html{
+html {
   font-family: Roboto, BlinkMacSystemFont, segoe ui, Helvetica, Arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
   height: 100%;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 350px) and (orientation: portrait) {
+  html {
+    font-size: 12px;
+  }
 }
 
 
@@ -28,6 +35,16 @@ html{
   top: 0;
   width: 100%;
   height: calc(100vh - 100px);
+  animation: .7s fadein;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .section-title {
