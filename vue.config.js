@@ -13,7 +13,6 @@ module.exports = {
   },
   chainWebpack: config => {
     const cdn = {
-      // css: ['//unpkg.com/element-ui@2.10.1/lib/theme-chalk/index.css'],
       js: [
         'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
         'https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js',
