@@ -4,7 +4,6 @@ import router from './router'
 import store from './vuex/store'
 
 import '@/style/index.scss' // global css
-
 import './plugins/lazyload'
 import './plugins/registration'
 
@@ -13,7 +12,6 @@ import './plugins/registration'
 window.addEventListener('unhandledrejection', (e) => {
   e.preventDefault()
   console.warn('promise error=>', e.reason);
-  return false;
 });
 
 /**
