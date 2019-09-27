@@ -30,11 +30,11 @@
   </v-bottom-sheet>
 </template>
 <script>
-  import {FLAC, MP3_128K, MP3_320K} from '@/api/config'
-  import {mapActions, mapGetters} from 'vuex'
-  import store from '@/vuex/store'
+    import {FLAC, MP3_128K, MP3_320K} from '@/api/config'
+    import {mapActions, mapGetters} from 'vuex'
+    import store from '@/vuex/store'
 
-  export default {
+    export default {
   name: 'Sheet',
   props: {
     type: String
