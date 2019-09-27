@@ -10,7 +10,7 @@
     <v-list class="sheet-container">
       <div class="sheet-header">
         <div class="text">{{ type==='download'?'Select':'Bitrate' }}</div>
-        <v-btn v-if="type==='download'" round @click="download">Download</v-btn>
+        <v-btn v-if="type==='download'" :ripple="false" round @click="download">Download</v-btn>
       </div>
       <v-progress-linear
         v-show="progress"
