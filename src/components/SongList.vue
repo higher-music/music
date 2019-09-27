@@ -32,7 +32,7 @@
             </span>
           </div>
         </div>
-        <v-btn slot="activator" :ripple="false" :class="menu.class" dark icon @click="menuBtnClick($event,index)">
+        <v-btn slot="activator" :ripple="false" :class="menuClass" dark icon @click="menuBtnClick($event,index)">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </div>
@@ -49,7 +49,7 @@
     >
       <v-list>
         <v-list-tile
-          v-for="(item, i) in menu.items"
+          v-for="(item, i) in menu"
           :key="i"
           @click="menuClick(i)">
           <v-list-tile-title class="body-2">{{ item.title }}</v-list-tile-title>
@@ -60,11 +60,11 @@
 </template>
 
 <script>
-import Progress from '@/components/Progress'
-import Sheet from '@/components/Sheet'
-import { mapGetters, mapActions } from 'vuex'
+  import Progress from '@/components/Progress'
+  import Sheet from '@/components/Sheet'
+  import {mapActions, mapGetters} from 'vuex'
 
-export default {
+  export default {
   name: 'SongList',
   components: { Progress, Sheet },
   props: {
@@ -91,9 +91,10 @@ export default {
       x: 0,
       y: 0,
       index: -1,
-      items: [
+      menu: [
         { title: 'Play Next' },
-        { title: 'Play Later' }
+        { title: 'Play Later' },
+        { title: 'Download' }
       ]
     }
   },
@@ -101,17 +102,9 @@ export default {
     ...mapGetters([
       'currentSong'
     ]),
-    menu() {
-      const menu = {};
-      menu.class = 'menu';
-      menu.items = this.items;
-      if (this.$vuetify.breakpoint.name === 'xs'){
-        menu.class = 'menu_flex'
-      } else {
-        menu.items = this.items.concat({ title: 'Download' })
-        menu.class = 'menu'
-      }
-      return menu
+    menuClass(){
+      if (this.$vuetify.breakpoint.name === 'xs') return 'menu_flex'
+      else return 'menu'
     }
   },
   methods: {
@@ -141,6 +134,7 @@ export default {
         }
         this.$refs.downloadSheet.sheet = true;
         this.$refs.downloadSheet.resource = this.data[this.index]
+        this.$refs.downloadSheet.initDownload()
       }
     },
     playNext() {

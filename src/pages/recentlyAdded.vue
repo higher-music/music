@@ -7,14 +7,14 @@
   </main>
 </template>
 <script>
-import PicList from '@/components/PicList'
-import { getAlbumList } from '@/api/rank'
-import { createAlbum } from '@/components/js/album'
-import { createSong2 } from '@/components/js/song'
-import SongList from '@/components/SongList'
-import { getNewSong } from '@/api/song'
+  import PicList from '@/components/PicList'
+  import {getAlbumList} from '@/api/rank'
+  import {createAlbum} from '@/components/js/album'
+  import {createSong2} from '@/components/js/song'
+  import SongList from '@/components/SongList'
+  import {getNewSong} from '@/api/song'
 
-export default {
+  export default {
   name: 'RecentlyAdded',
   components: { PicList, SongList },
   data() {
@@ -25,6 +25,9 @@ export default {
   },
   created() {
     this.getNewData()
+  },
+  beforeCreate(){
+    this.$loading.show()
   },
   methods: {
     async getNewData(){
@@ -39,6 +42,7 @@ export default {
       songs.new_song.data.song_list.forEach(t => {
         this.newSongList.push(createSong2(t))
       })
+      this.$loading.hide()
     }
   }
 }

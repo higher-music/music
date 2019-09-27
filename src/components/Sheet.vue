@@ -12,7 +12,12 @@
         <div class="text">{{ type==='download'?'Select':'Bitrate' }}</div>
         <v-btn v-if="type==='download'" round @click="download">Download</v-btn>
       </div>
-      <v-radio-group v-model="radioGroup">
+      <v-progress-linear
+        v-show="progress"
+        v-model="valueDeterminate"
+        indeterminate
+        color="green accent-2"/>
+      <v-radio-group v-show="!progress" v-model="radioGroup">
         <v-radio
           v-for="r in radioGroupData"
           :key="r.val"
@@ -21,21 +26,15 @@
           color="green accent-2"
         />
       </v-radio-group>
-      <v-progress-linear
-        v-show="progress"
-        :indeterminate="indeterminate"
-        v-model="valueDeterminate"
-        color="green accent-2"/>
     </v-list>
   </v-bottom-sheet>
 </template>
 <script>
-const downloadjs = require('downloadjs');
-import { FLAC, MP3_320K, MP3_128K } from '@/api/config'
-import { mapActions, mapGetters } from 'vuex'
-import store from '@/vuex/store'
+  import {FLAC, MP3_128K, MP3_320K} from '@/api/config'
+  import {mapActions, mapGetters} from 'vuex'
+  import store from '@/vuex/store'
 
-export default {
+  export default {
   name: 'Sheet',
   props: {
     type: String
@@ -43,16 +42,13 @@ export default {
   data() {
     return {
       sheet: null,
-      progress: null,
+      progress: true,
       valueDeterminate: 0,
       resource: null,
-      indeterminate: false,
       radioGroup: this.type === 'download' ? 3 : store.state.playList.type,
-      radioGroupData: [
-        { val: FLAC, text: 'Flac (550 kbps)' },
-        { val: MP3_320K, text: 'High (320 kbps)' },
-        { val: MP3_128K, text: 'Standard (128 kbps)' }
-      ]
+      key: [FLAC, MP3_320K, MP3_128K],
+      radioGroupData: [],
+      data: []
     }
   },
   computed: {
@@ -70,63 +66,60 @@ export default {
     },
     sheet(newValue, oldValue) {
       if (!newValue) {
+        this.setRadioGroupData()
         this.progress = false
         this.valueDeterminate = 0
       }
     }
   },
+  mounted(){
+    this.setRadioGroupData()
+  },
   methods: {
+    // 初始化按钮数据
+    setRadioGroupData(){
+      this.radioGroupData = [
+        { val: FLAC, text: 'Flac (550 kbps)' },
+        { val: MP3_320K, text: 'High (320 kbps)' },
+        { val: MP3_128K, text: 'Standard (128 kbps)' }
+      ]
+    },
     ...mapActions([
       'changeType'
     ]),
-    async download() {
+    async initDownload(){
       this.progress = true
-      const source = await this.getDiffSource()
-      if (this.radioGroup === FLAC) {
-        this.indeterminate = true
-        fetch(source.src).then(res => res.blob()).then(blob => {
-          downloadjs(blob, `${source.name}.flac`);
-        }).then(() => {
-          this.progress = false
-          this.sheet = false
-        }).catch(() => {
-          this.progress = false
-          this.$noResources.show()
-        })
-      } else {
-        this.indeterminate = false
-        this.progress = true
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', source.src, true);
-        xhr.responseType = 'blob';
-        xhr.addEventListener('progress', (ev) => {
-          var max = ev.total;
-          var value = ev.loaded;
-          this.valueDeterminate = (value / max) * 100
-        });
+      const source = await this.getSource()
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      for (let i = 0; i < 3; i++) {
+        xhr.open('POST', source[i][this.key[i]], true);
         xhr.onload = (e) => {
-          downloadjs(e.target.response, `${source.name}.mp3`)
-          this.sheet = false
+          if (e.target.status === 200) {
+            const temp = []
+            temp.push(this.radioGroupData[i])
+            this.radioGroupData = temp
+            this.data.src = source[i][this.key[i]]
+            this.data.name = source.name
+            this.progress = false
+          }
         }
-        xhr.onerror = () => {
-          this.progress = false
-          this.$noResources.show()
-        }
-        xhr.send(null);
       }
+      xhr.send(null);
     },
-    getDiffSource() {
+    async download() {
+      var a = document.createElement('a')
+      var event = new MouseEvent('click')
+      a.download = this.data.name
+      a.href = this.data.src
+      a.dispatchEvent(event)
+    },
+    getSource() {
       return new Promise((resolve, reject) => {
-        const source = {}
+        const source = []
         const { flac, mp3_320k, mp3_128k, name } = this.resource
         source.name = `${name}-${this.resource.singer[0].name}`
-        if (this.radioGroup === FLAC) {
-          source.src = flac
-        } else if (this.radioGroup === MP3_320K) {
-          source.src = mp3_320k
-        } else if (this.radioGroup === MP3_128K) {
-          source.src = mp3_128k
-        }
+        source.push({ 1: flac }, { 2: mp3_320k }, { 3: mp3_128k })
         resolve(source)
       })
     }
@@ -135,8 +128,8 @@ export default {
 </script>
 <style lang="scss" scoped>
     .sheet-container {
-      background: linear-gradient(to bottom, #414345, #232526) !important;
-      padding: 8px 16px !important;
+        background: linear-gradient(to bottom, #414345, #232526) !important;
+        padding: 8px 16px !important;
         box-sizing: border-box;
         display: block;
         outline: 0;

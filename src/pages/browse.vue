@@ -9,13 +9,13 @@
   </main>
 </template>
 <script>
-import PicList from '@/components/PicList'
-import { getTopList, getMusicList } from '@/api/rank'
-import SongList from '@/components/SongList'
-import { createSong } from '@/components/js/song'
-import { createList } from '@/components/js/album'
+  import PicList from '@/components/PicList'
+  import {getMusicList, getTopList} from '@/api/rank'
+  import SongList from '@/components/SongList'
+  import {createSong} from '@/components/js/song'
+  import {createList} from '@/components/js/album'
 
-export default {
+  export default {
   name: 'Browse',
   components: { PicList, SongList },
   data() {
@@ -29,9 +29,6 @@ export default {
     show(){
       return this.browseSummitList.length !== 0 && this.browseGlobalList.length !== 0 && this.browseSongList.length !== 0
     }
-  },
-  beforeCreate(){
-    this.$loading.show()
   },
   created() {
     this.getBrowseData()
@@ -51,7 +48,6 @@ export default {
       songList.forEach(t => {
         this.browseSongList.push(createSong(t.data))
       })
-      this.$loading.hide()
     }
   }
 }
