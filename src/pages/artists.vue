@@ -4,11 +4,11 @@
   </main>
 </template>
 <script>
-  import PicList from '@/components/PicList'
-  import {getSingerList} from '@/api/singer'
-  import {createSinger} from '@/components/js/album'
+import PicList from '@/components/PicList'
+import { getSingerList } from '@/api/singer'
+import { createSinger } from '@/components/js/album'
 
-  export default {
+export default {
   name: 'Artists',
   components: { PicList },
   data() {
@@ -19,16 +19,12 @@
   created() {
     this.getData()
   },
-  beforeCreate(){
-    this.$loading.show()
-  },
   methods: {
     async getData(){
       const { data } = await getSingerList()
       data.list.forEach(t => {
         this.hotArtistsList.push(createSinger(t))
       })
-      this.$loading.hide()
     }
   }
 }
