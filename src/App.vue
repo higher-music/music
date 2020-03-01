@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -14,9 +14,11 @@ export default {
     this.init()
   },
   methods: {
-    async init(){
+    // 初始化vkey
+    async init() {
       const { data: { items: [item] }} = await getVKey()
-      this.setVKey(item.vkey)
+      const { vkey } = item
+      this.setVKey(vkey)
     },
     ...mapActions([
       'setVKey'
