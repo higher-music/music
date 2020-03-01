@@ -26,7 +26,6 @@ export const constantRouterMap = [
         path: '/browse',
         name: 'Browse',
         component: () => import('@/pages/browse.vue')
-        // meta: { keepAlive: true }
       },
       {
         path: '/:type/:id',

@@ -60,11 +60,11 @@
 </template>
 
 <script>
-  import Progress from '@/components/Progress'
-  import Sheet from '@/components/Sheet'
-  import {mapActions, mapGetters} from 'vuex'
+import Progress from '@/components/Progress'
+import Sheet from '@/components/Sheet'
+import { mapActions, mapGetters } from 'vuex'
 
-  export default {
+export default {
   name: 'SongList',
   components: { Progress, Sheet },
   props: {
@@ -134,7 +134,7 @@
         }
         this.$refs.downloadSheet.sheet = true;
         this.$refs.downloadSheet.resource = this.data[this.index]
-        this.$refs.downloadSheet.initDownload()
+        // this.$refs.downloadSheet.initDownload()
       }
     },
     playNext() {

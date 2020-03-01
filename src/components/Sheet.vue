@@ -10,14 +10,9 @@
     <v-list class="sheet-container">
       <div class="sheet-header">
         <div class="text">{{ type==='download'?'Select':'Bitrate' }}</div>
-        <v-btn v-if="type==='download'" :ripple="false" round @click="download">Download</v-btn>
+        <v-btn v-show="type==='download'" :ripple="false" round @click="download">Download</v-btn>
       </div>
-      <v-progress-linear
-        v-show="progress"
-        v-model="valueDeterminate"
-        indeterminate
-        color="green accent-2"/>
-      <v-radio-group v-show="!progress" v-model="radioGroup">
+      <v-radio-group v-model="radioGroup">
         <v-radio
           v-for="r in radioGroupData"
           :key="r.val"
@@ -30,11 +25,11 @@
   </v-bottom-sheet>
 </template>
 <script>
-    import {FLAC, MP3_128K, MP3_320K} from '@/api/config'
-    import {mapActions, mapGetters} from 'vuex'
-    import store from '@/vuex/store'
+import { FLAC, MP3_128K, MP3_320K } from '@/api/config'
+import { mapActions, mapGetters } from 'vuex'
+import store from '@/vuex/store'
 
-    export default {
+export default {
   name: 'Sheet',
   props: {
     type: String
@@ -43,12 +38,13 @@
     return {
       sheet: null,
       progress: true,
-      valueDeterminate: 0,
       resource: null,
       radioGroup: this.type === 'download' ? 3 : store.state.playList.type,
-      key: [FLAC, MP3_320K, MP3_128K],
-      radioGroupData: [],
-      data: []
+      radioGroupData: [
+        { val: FLAC, text: 'Flac (550 kbps)' },
+        { val: MP3_320K, text: 'High (320 kbps)' },
+        { val: MP3_128K, text: 'Standard (128 kbps)' }
+      ]
     }
   },
   computed: {
@@ -64,62 +60,36 @@
       }
       this.changeType(this.radioGroup)
     },
-    sheet(newValue, oldValue) {
-      if (!newValue) {
-        this.setRadioGroupData()
+    sheet(val) {
+      if (!val) {
         this.progress = false
-        this.valueDeterminate = 0
       }
     }
   },
-  mounted(){
-    this.setRadioGroupData()
-  },
   methods: {
-    // 初始化按钮数据
-    setRadioGroupData(){
-      this.radioGroupData = [
-        { val: FLAC, text: 'Flac (550 kbps)' },
-        { val: MP3_320K, text: 'High (320 kbps)' },
-        { val: MP3_128K, text: 'Standard (128 kbps)' }
-      ]
-    },
     ...mapActions([
       'changeType'
     ]),
-    async initDownload(){
-      this.progress = true
-      const source = await this.getSource()
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      for (let i = 0; i < 3; i++) {
-        xhr.open('POST', source[i][this.key[i]], true);
-        xhr.onload = (e) => {
-          if (e.target.status === 200) {
-            const temp = []
-            temp.push(this.radioGroupData[i])
-            this.radioGroupData = temp
-            this.data.src = source[i][this.key[i]]
-            this.data.name = source.name
-            this.progress = false
-          }
-        }
-      }
-      xhr.send(null);
-    },
+    // 点击下载
     async download() {
+      const { name, src } = await this.getMusicDetailInfo()
       var a = document.createElement('a')
       var event = new MouseEvent('click')
-      a.download = this.data.name
-      a.href = this.data.src
+      a.download = name
+      a.href = src[this.radioGroup]
       a.dispatchEvent(event)
     },
-    getSource() {
+    // 获取下载歌曲URL，歌曲名字，歌手名
+    getMusicDetailInfo() {
       return new Promise((resolve, reject) => {
-        const source = []
+        const source = {}
         const { flac, mp3_320k, mp3_128k, name } = this.resource
         source.name = `${name}-${this.resource.singer[0].name}`
-        source.push({ 1: flac }, { 2: mp3_320k }, { 3: mp3_128k })
+        source.src = {
+          1: flac,
+          2: mp3_320k,
+          3: mp3_128k
+        }
         resolve(source)
       })
     }
