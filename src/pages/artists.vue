@@ -1,6 +1,6 @@
 <template>
   <main class="main-container">
-    <PicList :data="hotArtistsList" type="singer"/>
+    <PicList :data="data" type="singer"/>
   </main>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
   components: { PicList },
   data() {
     return {
-      hotArtistsList: []
+      data: []
     }
   },
   created() {
@@ -21,10 +21,11 @@ export default {
   },
   methods: {
     async getData(){
-      const { data } = await getSingerList()
-      data.list.forEach(t => {
-        this.hotArtistsList.push(createSinger(t))
-      })
+      const { data: { list = [] }} = await getSingerList()
+      let j, len;
+      for (j = 0, len = list.length; j < len; j++) {
+        this.data.push(createSinger(list[j]))
+      }
     }
   }
 }
