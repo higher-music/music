@@ -34,7 +34,6 @@ export default class Song {
 }
 
 export function createSong(musicData) {
-  console.log(filterSinger(musicData.singer), 'filterSinger(musicData.singer)-----')
   return new Song({
     id: musicData.songid,
     mid: musicData.songmid,
@@ -47,7 +46,6 @@ export function createSong(musicData) {
 }
 
 export function createSong2(musicData) {
-  console.log(filterSinger(musicData.singer), 'filterSinger(musicData.singer)++++++')
   return new Song({
     id: musicData.id,
     mid: musicData.mid,
