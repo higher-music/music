@@ -34,6 +34,7 @@ export default class Song {
 }
 
 export function createSong(musicData) {
+  console.log(filterSinger(musicData.singer), 'filterSinger(musicData.singer)-----')
   return new Song({
     id: musicData.songid,
     mid: musicData.songmid,
@@ -46,6 +47,7 @@ export function createSong(musicData) {
 }
 
 export function createSong2(musicData) {
+  console.log(filterSinger(musicData.singer), 'filterSinger(musicData.singer)++++++')
   return new Song({
     id: musicData.id,
     mid: musicData.mid,
@@ -58,13 +60,7 @@ export function createSong2(musicData) {
 }
 
 function filterSinger(singer) {
-  const ret = []
-  singer.forEach((s) => {
-    const singer = {
-      name: s.name,
-      mid: s.mid
-    }
-    ret.push(singer)
+  return singer.map(v => {
+    return { name: v.name, mid: v.mid }
   })
-  return ret
 }
