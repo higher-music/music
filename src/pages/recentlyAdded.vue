@@ -9,8 +9,8 @@
 <script>
 import PicList from '@/components/PicList'
 import { getAlbumList } from '@/api/rank'
-import { createAlbum } from '@/components/js/album'
-import { createSong2 } from '@/components/js/song'
+import { createAlbum } from '@/api/format/album'
+import { createSong2 } from '@/api/format/song'
 import SongList from '@/components/SongList'
 import { getNewSong } from '@/api/song'
 

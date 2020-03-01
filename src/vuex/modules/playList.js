@@ -1,4 +1,4 @@
-import { CHECK_PREV_NEXT, HAD_THE_SONG, GET_RANDOM_NUM } from '@/components/js/utils'
+import { CHECK_PREV_NEXT, HAD_THE_SONG, GET_RANDOM_NUM } from '@/api/format/utils'
 import { MP3_128K, ORDER, RANDOM } from '@/api/config'
 
 const state = {

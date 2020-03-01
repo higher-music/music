@@ -6,7 +6,7 @@
 <script>
 import PicList from '@/components/PicList'
 import { getSingerList } from '@/api/singer'
-import { createSinger } from '@/components/js/album'
+import { createSinger } from '@/api/format/album'
 
 export default {
   name: 'Artists',

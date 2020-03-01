@@ -12,8 +12,8 @@
   import PicList from '@/components/PicList'
   import {getMusicList, getTopList} from '@/api/rank'
   import SongList from '@/components/SongList'
-  import {createSong} from '@/components/js/song'
-  import {createList} from '@/components/js/album'
+  import {createSong} from '@/api/format/song'
+  import {createList} from '@/api/format/album'
 
   export default {
   name: 'Browse',

@@ -5,7 +5,7 @@
 <script>
 import Detail from '@/components/Detail'
 import { getMusicList, getAlbumByID } from '@/api/rank'
-import { createSong } from '@/components/js/song'
+import { createSong } from '@/api/format/song'
 import { getSingerDetail } from '../api/singer'
 import { mapGetters, mapActions } from 'vuex'
 
