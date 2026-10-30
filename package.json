@@ -13,6 +13,7 @@
     "clipboard": "^2.0.4",
     "core-js": "^2.6.5",
     "jsonp": "^0.2.1",
+    "regenerator-runtime": "^0.13.11",
     "vue": "^2.6.10",
     "vue-lazyload": "^1.2.6",
     "vuetify": "^1.5.16"
@@ -24,8 +25,8 @@
     "eslint": "4.19.1",
     "eslint-loader": "2.0.0",
     "eslint-plugin-vue": "4.7.1",
-    "node-sass": "^4.9.0",
     "postcss-pxtorem": "^4.0.1",
+    "sass": "^1.32.13",
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
