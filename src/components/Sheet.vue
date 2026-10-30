@@ -121,7 +121,7 @@ export default {
             margin-top: 6px;
         }
 
-        /deep/ .v-input__slot {
+        ::v-deep .v-input__slot {
             margin-bottom: 0;
         }
     }
